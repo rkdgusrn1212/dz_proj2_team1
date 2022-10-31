@@ -17,7 +17,7 @@
 
 ## 2.1. Maven Dependencies
 	
-- Spring Web 5.3.23
+- Spring Web MVC 5.3.23
     - 최신 버전
 
 - MyBatis Spring 2.0.7
@@ -29,6 +29,9 @@
 	
 - Lombok 1.18.24
     - 서버 개발 환경에 설치된 버전.
+    
+- Spring JDBC 5.1.3
+    - ojdbc8 19.3.0 연동 가능
 
 ## 2.2. 서버 런타임 라이브러리
 
