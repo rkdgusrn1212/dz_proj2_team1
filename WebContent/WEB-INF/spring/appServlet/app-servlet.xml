@@ -14,5 +14,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
     
+    <context:annotation-config />
+    
     <context:component-scan base-package="team1.mini2.dz3"/>
 </beans>
