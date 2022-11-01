@@ -11,4 +11,14 @@ public class AboutController {
 	public String about(Model model) {
 		return "about/jsp/aboutUs"; //자동 조립
 	}
+	
+	@RequestMapping("/about/team")
+	public String about1(Model model) {
+		return "about/jsp/FeaturedServices"; //자동 조립
+	}
+	
+	@RequestMapping("/about/service")
+	public String about2(Model model) {
+		return "about/jsp/TastyWayIntroduce"; //자동 조립
+	}
 }

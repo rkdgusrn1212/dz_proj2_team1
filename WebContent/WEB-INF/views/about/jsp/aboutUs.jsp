@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
 <!-- css 연결 -->
-<link href="/css/jjh.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jjh.css">
 
 <!-- 부트스트랩 연결 -->
 <link
@@ -30,15 +30,15 @@
 </head>
 <body>
 
-	<img class="mainphoto" src="../images/mainPhoto.PNG">
+	<img class="mainphoto" src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG"> <!-- 서버경로 WEBCONTENT기준 / 상대경로 X ㅈ -->
 
 	<div class="mainfontsize">전세계 맛집을 공유하는 플랫폼</div>
 	<div class="basicfontsize">Tasty way의 다양한 서비스를 사용해보세요!</div>
 
-    <img class="subphoto1" src="../images/굿.PNG">
-	<img class="subphoto1" src="../images/가방.PNG">
-	<img class="subphoto1" src="../images/카톡.PNG">
-	<img class="subphoto1" src="../images/지구본.PNG">
+    <img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/good.PNG">
+	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/bag.PNG">
+	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/kakaotalk.PNG">
+	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/earth.PNG">
 
 	<div class="textbox">
 		<div class="basicfontsize">

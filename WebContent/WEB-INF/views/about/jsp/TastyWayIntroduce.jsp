@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
 <!-- css 연결 -->
-<link href="../css/jjh.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jjh.css">
 
 <!-- 부트스트랩 연결 -->
 <link
@@ -34,7 +34,7 @@
 	<div class="mainfontsize">Tasty way 소개</div><br>
 	
 	
-	<img class="subphoto2" src="../images/mainPhoto2.PNG">
+	<img class="subphoto2" src="${pageContext.request.contextPath}/resources/img/mainPhoto2.PNG">
 	</div>
 
 	<div class="textbox2">
