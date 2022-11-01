@@ -47,9 +47,9 @@ public class ManagerNoticeController extends HttpServlet {
 		System.out.println(list);
 		if( list != null ) {
 			request.setAttribute("list", list);  // data save
-			request.getRequestDispatcher("/views/managerNotice.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/managerNotice.jsp").forward(request, response);
 		} else {
-			response.sendRedirect("views/error.jsp");
+			response.sendRedirect("/WEB-INF/views/error.jsp");
 		}
 	} // list end
 		

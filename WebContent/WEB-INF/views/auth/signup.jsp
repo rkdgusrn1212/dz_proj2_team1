@@ -17,7 +17,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/auth.css">
 </head>
-<jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
 <body>
 	<form>
 		<div class="container" style="float: none; margin: 0 auto;">

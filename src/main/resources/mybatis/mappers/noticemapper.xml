@@ -4,11 +4,11 @@
  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="notice">
-	<select id="list" resultType="noticeDto">
+	<select id="list" resultType="team1.mini2.dz3.model.NoticeDTO">
 		select * from notice
 	</select>
 
-	<select id="detailNotice" resultType="noticeDto" parameterType = "int">
+	<select id="detailNotice" resultType="team1.mini2.dz3.model.NoticeDTO" parameterType = "int">
 		select *from notice where notice_no = #{id}
 	</select>
 

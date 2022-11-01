@@ -1,8 +1,6 @@
 package team1.mini2.dz3.model;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ public class NoticeDAO {
 
 	// select all
 	public List<NoticeDTO> noticeList() {
+			
 			return sqlSession.selectList("notice.list");
 	}
 	

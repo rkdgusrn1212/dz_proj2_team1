@@ -6,6 +6,5 @@
 	<!-- Properties 파일 설정 -->	
     <typeAliases>
     <!--여기다 별명 지정-->
-    		<typeAlias  alias="noticeDto"  type="team1.mini2.dz3.model.NoticeDTO"  />
     </typeAliases>
 </configuration>
