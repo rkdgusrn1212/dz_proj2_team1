@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="javascript:location.href='/WEB-INF/views/notice?page=list'  ">게시판 목록</a>
 
 </body>
 </html>
