@@ -7,6 +7,7 @@
 	<properties resource="../jdbc/jdbc.properties" />
     <typeAliases>
     <!--여기다 별명 지정-->
+    		<typeAlias  alias="dto"  type="team1.mini2.dz3.model.NoticeDTO"  />
     </typeAliases>
 
 <!-- DataSource 설정 -->
