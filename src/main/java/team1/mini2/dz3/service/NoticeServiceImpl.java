@@ -2,6 +2,7 @@ package team1.mini2.dz3.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +18,42 @@ public class NoticeServiceImpl implements NoticeService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeDto> getNoticeList(int page) {
+	public List<NoticeDto> getNoticePage(int page) {
+		if(page<=0) {//페이지가 0보다 같거나 작을순 없음.
+			return null;
+		}
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		int rowSize = 10;
 		int cnt = dao.getCount();
 		int start = (page*rowSize)-(rowSize -1);
 		int end = Math.max(cnt, page*rowSize);
+		if(start>cnt) {//시작 행 번호가 행 개수보다 크면 해당 페이지 없음.
+			return null;
+		}
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
 		return dao.getList(map);
 	}
-
+	
 	@Override
-	public void addNotice() {
-		// TODO Auto-generated method stub
-		
+	public NoticeDto getNotice(int noticeNo) {
+		return sqlSession.getMapper(NoticeDao.class).get(noticeNo);
 	}
 
 	@Override
-	public void deleteNotice() {
-		// TODO Auto-generated method stub
-		
+	public void addNotice(Map<String, String> map) {
+		sqlSession.getMapper(NoticeDao.class).add(map);
 	}
 
 	@Override
-	public void updateNotice(String title, String content) {
-		// TODO Auto-generated method stub
-		
+	public void removeNotice(int noticeNo) {
+		sqlSession.getMapper(NoticeDao.class).remove(noticeNo);
+	}
+
+	@Override
+	public void setNotice(Map<String, String> map) {
+		sqlSession.getMapper(NoticeDao.class).set(map);
 	}
 
 	@Override

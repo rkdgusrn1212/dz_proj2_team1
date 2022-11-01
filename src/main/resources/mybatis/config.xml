@@ -4,7 +4,7 @@
 
 <configuration>
     <typeAliases>
-    <!--여기다 별명 지정-->
+    <typeAlias type="team1.mini2.dz3.model.NoticeDto" alias="NoticeDto"/>
     </typeAliases>
 
 
