@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import team1.mini2.dz3.model.NoticeDto;
@@ -25,7 +26,17 @@ public class NoticeApiController {
 	private NoticeServiceImpl noticeService;
 
 	@GetMapping("/page/{pNum}")
-	public List<NoticeDto> getList(@PathVariable(required=true) int pNum){
+	public List<NoticeDto> getList(@PathVariable(required=true) int pNum, @RequestParam(required=false) String opt, @RequestParam(required=false) String key){
+		if(opt!=null&&key!=null) {
+			switch(opt) {
+			case "noticeTitle":
+				return noticeService.getNoticePageWithTitle(pNum, key);
+			case "noticeContent":
+				return noticeService.getNoticePageWithContent(pNum, key);
+			case "noticeRegDate":
+				return noticeService.getNoticePageWithRegDate(pNum, key);
+			}
+		}
 		return noticeService.getNoticePage(pNum);
 	}
 	

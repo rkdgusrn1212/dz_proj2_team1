@@ -4,7 +4,10 @@ import java.util.Map;
 import java.util.List;
 
 public interface NoticeDao {
-	List<NoticeDto> getList(Map<String, Integer> map);
+	List<NoticeDto> getList(Map<String, String> map);
+	List<NoticeDto> getListWithTitle(Map<String, String> map);
+	List<NoticeDto> getListWithContent(Map<String, String> map);
+	List<NoticeDto> getListWithRegDate(Map<String, String> map);
 	NoticeDto get(int noticeNo);
 	int getCount();
 	void add(Map<String, String> map);
