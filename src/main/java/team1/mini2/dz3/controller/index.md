@@ -8,11 +8,11 @@
     
     about us 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
     
-- FAQController
+- FaqController
 
     FAQ 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
     
-- QNAController
+- QnaController
     
     Q&A 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
     
