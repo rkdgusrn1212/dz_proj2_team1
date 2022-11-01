@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
 <!-- css 연결 -->
-<link href="../css/jjh.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jjh.css">
 
 <!-- 부트스트랩 연결 -->
 <link
@@ -29,6 +29,8 @@
 </head>
 <body>
 
+<jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
+
 <font color="#E0E0E0">홈>ABOUT US></font>서비스
 
 	<div class="mainfontsize">FEATURED SERVICES</div><br>
@@ -41,7 +43,7 @@
 	
 	<div class="textbox3">
 		<div id="box3">
-			 <img class="subphoto3" src="../images/twLogo.png">
+			 <img class="subphoto3" src="${pageContext.request.contextPath}/resources/img/twLogo.png">
 		</div>
 
 		<div id="box4">
@@ -53,11 +55,11 @@
 		</div>	
 	</div>
 		
-<img class="subphoto5" src="../images/food1.PNG">
-<img class="subphoto4" src="../images/food2.PNG">
-<img class="subphoto4" src="../images/food3.PNG">
+<img class="subphoto5" src="${pageContext.request.contextPath}/resources/img/food1.PNG">
+<img class="subphoto4" src="${pageContext.request.contextPath}/resources/img/food2.PNG">
+<img class="subphoto4" src="${pageContext.request.contextPath}/resources/img/food3.PNG">
 
-	
+<jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 -->	
 	
 </body>
 </html>
