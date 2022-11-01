@@ -31,14 +31,14 @@
 
 <jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
 
-	<img class="mainphoto" src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG">
+	<img class="mainphoto" src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG"> <!-- 서버경로 WEBCONTENT기준 / 상대경로 X ㅈ -->
 
 	<div class="mainfontsize">전세계 맛집을 공유하는 플랫폼</div>
 	<div class="basicfontsize">Tasty way의 다양한 서비스를 사용해보세요!</div>
 
     <img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/good.PNG">
 	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/bag.PNG">
-	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/kakao.PNG">
+	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/kakaotalk.PNG">
 	<img class="subphoto1" src="${pageContext.request.contextPath}/resources/img/earth.PNG">
 
 	<div class="textbox">

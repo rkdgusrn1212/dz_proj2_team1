@@ -31,6 +31,7 @@
 
 <jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
 
+	
 <font color="#E0E0E0">홈>ABOUT US></font>서비스
 
 	<div class="mainfontsize">FEATURED SERVICES</div><br>
