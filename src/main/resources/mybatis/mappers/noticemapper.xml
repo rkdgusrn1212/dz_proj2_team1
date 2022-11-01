@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- boardmapper.xml DML 명령 처리 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+	<select id="list" resultType="dto">
+		select * from notice
+	</select>
+
+	<select id="detailNotice" resultType="dto" parameterType = "int">
+		select *from notice where notice_no = #{id}
+	</select>
+
+<!-- 	<insert id="insert" parameterType="dto">
+		insert into mybatisboard(seq,
+		title, writer, content, regdate, readcount)
+		values (board_seq.nextval, #{title}, #{writer}, #{content}, sysdate, 0)
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from mybatisBoard where
+		seq = #{seq}
+	</delete>
+
+	<select id="detailList" resultType="dto" parameterType = "int">
+		select *from mybatisBoard where seq = #{seq}
+	</select>
+	
+	<update id="update" parameterType="dto">
+		update mybatisBoard set title = #{title}, writer = #{writer}, content = {content} where seq = #{seq} 
+	</update>
+	 -->
+</mapper>

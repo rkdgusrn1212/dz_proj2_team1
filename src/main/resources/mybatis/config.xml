@@ -3,9 +3,27 @@
      "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<!-- Properties 파일 설정 -->
+	<properties resource="../jdbc/jdbc.properties" />
     <typeAliases>
     <!--여기다 별명 지정-->
     </typeAliases>
 
-
+<!-- DataSource 설정 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- SQL Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappers/noticemapper.xml" />
+	</mappers>
 </configuration>
