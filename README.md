@@ -66,7 +66,7 @@ Tomcat v9.0.65 종속 라이브러리
 ### 3.1.2. Read
 
 
-### 3.1.2.1. 단일 요청
+#### 3.1.2.1. 단일 요청
 
 **Request**
 
@@ -79,7 +79,7 @@ Tomcat v9.0.65 종속 라이브러리
 단일 Notice 표현 Json 객체.
 
 
-### 3.1.2.2. 페이지 단위 요청
+#### 3.1.2.2. 페이지 단위 요청
 
 **Request**
 
@@ -114,6 +114,79 @@ Tomcat v9.0.65 종속 라이브러리
 **Request**
 
 - URL : /notice/{공지 번호}
+
+- Method : delete
+
+## 3.2. FAQ
+
+### 3.2.1. Create
+
+**Request**
+
+- URL : /faq
+
+- Method : post
+
+- Body : 
+     
+    ```json
+    {
+        "faqTitle" : "FAQ 제목",
+        "faqContent" : "FAQ 내용"    
+    }
+    ```
+
+### 3.2.2. Read
+
+
+#### 3.2.2.1. 단일 요청
+
+**Request**
+
+- URL : /faq/{FAQ 번호}
+
+- Method : get
+
+**Response**
+
+단일 FAQ 표현 Json 객체.
+
+
+#### 3.2.2.2. 페이지 단위 요청
+
+**Request**
+
+- URL : /faq/page/{페이지 번호}
+
+- Method : get
+
+**Response**
+
+단일 페이지 내의 FAQ 리스트 표현 Json 객체.
+
+### 3.2.3. Update
+
+**Request**
+
+- URL : /faq/{FAQ 번호}
+
+- Method : patch
+
+- Body : 
+     
+    ```json
+    {
+        "faqTitle" : "FAQ 제목",
+        "faqContent" : "FAQ 내용"    
+    }
+    ```
+
+### 3.2.4. Delete
+
+
+**Request**
+
+- URL : /faq/{FAQ 번호}
 
 - Method : delete
 
