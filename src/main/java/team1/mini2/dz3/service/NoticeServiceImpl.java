@@ -19,21 +19,37 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<NoticeDto> getNoticePage(int page) {
-		if(page<=0) {//페이지가 0보다 같거나 작을순 없음.
-			return null;
-		}
-		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return sqlSession.getMapper(NoticeDao.class).getList(getPageMap(page));
+	}
+	
+	@Override
+	public List<NoticeDto> getNoticePageWithTitle(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(NoticeDao.class).getListWithTitle(map);
+	}
+	@Override
+	public List<NoticeDto> getNoticePageWithContent(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(NoticeDao.class).getListWithContent(map);
+	}
+	@Override
+	public List<NoticeDto> getNoticePageWithRegDate(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(NoticeDao.class).getListWithRegDate(map);
+	}
+	
+	
+	public Map<String, String> getPageMap(int page) {
 		int rowSize = 10;
-		int cnt = dao.getCount();
 		int start = (page*rowSize)-(rowSize -1);
-		int end = Math.max(cnt, page*rowSize);
-		if(start>cnt) {//시작 행 번호가 행 개수보다 크면 해당 페이지 없음.
-			return null;
-		}
-		HashMap<String, Integer> map = new HashMap<>();
-		map.put("start", start);
-		map.put("end", end);
-		return dao.getList(map);
+		int end = page*rowSize;
+		HashMap<String, String> map = new HashMap<>();
+		map.put("start", Integer.toString(start));
+		map.put("end", Integer.toString(end));
+		return map;
 	}
 	
 	@Override
