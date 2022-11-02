@@ -19,21 +19,37 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Override
 	public List<FaqDto> getFaqPage(int page) {
-		if(page<=0) {//페이지가 0보다 같거나 작을순 없음.
-			return null;
-		}
-		FaqDao dao = sqlSession.getMapper(FaqDao.class);
+		return sqlSession.getMapper(FaqDao.class).getList(getPageMap(page));
+	}
+	
+	@Override
+	public List<FaqDto> getFaqPageWithTitle(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(FaqDao.class).getListWithTitle(map);
+	}
+	@Override
+	public List<FaqDto> getFaqPageWithContent(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(FaqDao.class).getListWithContent(map);
+	}
+	@Override
+	public List<FaqDto> getFaqPageWithRegDate(int page, String key){
+		Map<String, String> map = getPageMap(page);
+		map.put("key", key);
+		return sqlSession.getMapper(FaqDao.class).getListWithRegDate(map);
+	}
+	
+	
+	public Map<String, String> getPageMap(int page) {
 		int rowSize = 10;
-		int cnt = dao.getCount();
 		int start = (page*rowSize)-(rowSize -1);
-		int end = Math.max(cnt, page*rowSize);
-		if(start>cnt) {//시작 행 번호가 행 개수보다 크면 해당 페이지 없음.
-			return null;
-		}
-		HashMap<String, Integer> map = new HashMap<>();
-		map.put("start", start);
-		map.put("end", end);
-		return dao.getList(map);
+		int end = page*rowSize;
+		HashMap<String, String> map = new HashMap<>();
+		map.put("start", Integer.toString(start));
+		map.put("end", Integer.toString(end));
+		return map;
 	}
 	
 	@Override
