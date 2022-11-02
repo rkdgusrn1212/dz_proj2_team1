@@ -3,15 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+    href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap-icons.css">
+    href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/prism-okaidia.css">
+    href="${pageContext.request.contextPath}/resources/css/bootstrap-icons.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/custom.min.css">
+    href="${pageContext.request.contextPath}/resources/css/prism-okaidia.css">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/custom.min.css">
 </head>
 <body>
 	<footer id="footer">

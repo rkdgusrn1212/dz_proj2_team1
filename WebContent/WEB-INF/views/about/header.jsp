@@ -3,8 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/bootstrap-icons.css">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/prism-okaidia.css">
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/resources/css/custom.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -28,11 +37,11 @@
 					<li class="nav-item"><a class="nav-link active" href="#">Home
 							<span class="visually-hidden">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
+					<li class="nav-item"><a class="nav-link active" href="#">Features</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
+					<li class="nav-item"><a class="nav-link active" href="#">Pricing</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+					<li class="nav-item"><a class="nav-link active" href="#">About</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
 						href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
