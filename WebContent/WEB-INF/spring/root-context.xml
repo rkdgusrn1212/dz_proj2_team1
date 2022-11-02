@@ -6,7 +6,7 @@
 	<bean
 		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
 		<property name="location"
-			value="classpath:jdbc/jdbc.properties" />
+			value="classpath*:jdbc/jdbc.properties" />
 		<property name="fileEncoding" value="utf-8" />
 	</bean>
 

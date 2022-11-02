@@ -16,7 +16,7 @@ import team1.mini2.dz3.model.NoticeDAO;
 import team1.mini2.dz3.model.NoticeDTO;
 
 
-@WebServlet("/notice")
+@WebServlet("/noticeTest")
 public class NoticeController extends HttpServlet {
 
 	public NoticeController() {
@@ -47,15 +47,17 @@ public class NoticeController extends HttpServlet {
 
 	public void noticeList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("1");
 		NoticeDAO dao = new NoticeDAO();
 		List<NoticeDTO> list = dao.noticeList();
 		if (list != null) {
+			System.out.println("2");
 			request.setAttribute("list", list); // data save
 			request.getRequestDispatcher("/WEB-INF/views/notice/notice.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/WEB-INF/views/notice/error.jsp");
 		}
+		System.out.println("3");
 	} // list end
 
 	public void noticeDetail(HttpServletRequest request, 

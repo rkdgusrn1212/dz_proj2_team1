@@ -13,10 +13,14 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	public NoticeDAO() {
+		System.out.println(sqlSession.toString());
+		System.out.println("constructor ");
+	}
 
 	// select all
 	public List<NoticeDTO> noticeList() {
-			
+			System.out.println("db");
 			return sqlSession.selectList("notice.list");
 	}
 	
