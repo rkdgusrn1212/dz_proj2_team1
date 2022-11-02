@@ -9,12 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
- <c:forEach  var="faqdetail"  items="${ faqdetail }">
+ <c:forEach  var="noticedetail"  items="${ noticedetail }">
 				<br><br><br><br><br><br><br>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ faqdetail.FAQ_TITLE }</div>
+				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ noticedetail.NOTICE_TITLE }</div>
 				<hr>
 				<br><br><br><br><br><br><br><br><br><br><br>
-				<div align="center">${ faqdetail.FAQ_CONTENT}</div>
+				<div align="center">${ noticedetail.NOTICE_CONTENT}</div>
 				
 		
 			

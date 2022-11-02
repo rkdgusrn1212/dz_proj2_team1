@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.FaqDao">
+
+
+	<!-- 글 가져오기 -->
+	<select id="faqgetBoardList" parameterType="hashmap"
+		resultType="team1.mini2.dz3.model.FaqDto">
+		select * from
+	 		(select A.*,ROWNUM r from 
+	 		 	(select * from faq order by FAQ_NO desc) A
+	 	 	)
+ 	 	where r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<!-- 글 하나 가져오기 -->
+	<select id="faqgetdetail" parameterType="Integer"
+		resultType="team1.mini2.dz3.model.FaqDto">
+		select FAQ_TITLE, FAQ_CONTENT from faq where FAQ_NO = #{faq_no}
+	</select>
+
+
+	<select id="faqgetBoardCount" resultType="Integer">
+		select count(*) from faq
+	</select>
+	
+	<select id="faqselectSearchCount" resultType="Integer" parameterType="hashMap">
+ 	
+ 	select count(*) from
+	 		(select A.*,ROWNUM r from 
+	 		 	(select * from faq 
+	 		 	<if test="opt != null">
+    				where ${opt} like '%' || #{key} || '%'    	
+    			</if>
+	 		 	order by FAQ_NO desc) A
+	 	 	)
+ 	 		
+	 </select>
+	 
+	 <!-- 검색 -->
+    <select id="faqgetselectSearch" parameterType="hashMap" resultType="team1.mini2.dz3.model.FaqDto">
+    	
+    	
+    		select * from
+	 		(select A.*,ROWNUM r from 
+	 		 	(select * from faq  
+	 		 	<if test="opt != null">
+    				where ${opt} like '%' || #{key} || '%'    	
+    			</if>
+	 		 	order by FAQ_NO desc) A
+	 	 	)
+ 	 		where r >= #{start} and r &lt;= #{end}
+ 	 		
+ 	 		
+ 	 		
+ 	 		<!-- SELECT * FROM mybatisBoard
+    	where writer like '%김연아%'
+    	<if test="column != null">
+    		where ${column} like '%' || #{keyvalue} || '%'    	
+    	</if> -->
+
+    </select>
+
+
+
+</mapper>

@@ -8,6 +8,7 @@
 </head>
 <body>
 아래에 링크를 달아 각자 페이지를 테스트 하세요~!
-<a href = "faqlist">dsad</a>
+<a href = "faq">FAQ</a>
+<a href = "notice">공지</a>
 </body>
 </html>

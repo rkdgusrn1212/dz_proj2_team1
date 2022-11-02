@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FaqBoardDTO {   // model
+public class NoticeDto {   // model
 
 	private int NOTICE_NO;
 	private String NOTICE_TITLE, NOTICE_CONTENT;
 	private Date NOTICE_REGDATE;
 	
-	public FaqBoardDTO(int NOTICE_NO,String NOTICE_TITLE, String NOTICE_CONTENT) {
+	public NoticeDto(int NOTICE_NO,String NOTICE_TITLE, String NOTICE_CONTENT) {
 		super();
 		this.NOTICE_NO = NOTICE_NO;
 		this.NOTICE_TITLE = NOTICE_TITLE;

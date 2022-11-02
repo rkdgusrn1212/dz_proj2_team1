@@ -13,7 +13,7 @@
 <body>
 <br><br><br><br><br><br><br><br>
 
-<h1 align="center">FAQ</h1>
+<h1 align="center">공지사항</h1>
 <br><br><br><br><br><br>
 
 
@@ -28,10 +28,10 @@
 		
 		 <c:forEach  var="list"  items="${ list }">
 			<tr>
-				<td>${ list.FAQ_NO }</td>
-				<td><a href = "javascript:location.href = 'faqdetail?id=${ list.FAQ_NO }'">${ list.FAQ_TITLE }</a></td>
+				<td>${ list.NOTICE_NO }</td>
+				<td><a href = "javascript:location.href = 'noticedetail?id=${ list.NOTICE_NO }'">${ list.NOTICE_TITLE }</a></td>
 				<td>관리자</td>
-				<td><fmt:formatDate value="${list.FAQ_REGDATE}" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${list.NOTICE_REGDATE}" pattern="yyyy-MM-dd"/></td>
 				
 		
 			</tr>
@@ -50,8 +50,8 @@
 	<td align="center">
 		<!-- 처음 이전 링크 -->
 		<c:if test="${pg>block}">  <!-- 5>10 : false / 15>10 : true -->
-			[<a href= "javascript:location.href = 'faq?page=1&opt=${opt}&key=${key}'">◀◀</a>]
-			[<a href="javascript:location.href = 'faq?page=${fromPage-1}&opt=${opt}&key=${key}'">◀</a>]		
+			[<a href= "javascript:location.href = 'notice?page=1&opt=${opt}&key=${key}'">◀◀</a>]
+			[<a href="javascript:location.href = 'notice?page=${fromPage-1}&opt=${opt}&key=${key}'">◀</a>]		
 		</c:if>
 		<c:if test="${pg<=block}"> <!-- 5<=10 :true / 15<=10:false -->
 			[<span style="color:gray">◀◀</span>]	
@@ -62,14 +62,14 @@
 		<c:forEach begin="${fromPage}" end="${toPage}" var="i">
 			<c:if test="${i==pg}">[${i}]</c:if>
 			<c:if test="${i!=pg}">
-				[<a href="javascript:location.href = 'faq?page=${i}&opt=${opt}&key=${key}'">${i}</a>]
+				[<a href="javascript:location.href = 'notice?page=${i}&opt=${opt}&key=${key}'">${i}</a>]
 			</c:if>
 		</c:forEach>
 		
 		<!-- 다음, 이후 -->
 		<c:if test="${toPage<allPage}"> <!-- 20<21 : true -->
-				[<a href="javascript:location.href = 'faq?page=${toPage+1}&opt=${opt}&key=${key}'">▶</a>]
-				[<a href="javascript:location.href = 'faq?page=${allPage}&opt=${opt}&key=${key}'">▶▶</a>]
+				[<a href="javascript:location.href = 'notice?page=${toPage+1}&opt=${opt}&key=${key}'">▶</a>]
+				[<a href="javascript:location.href = 'notice?page=${allPage}&opt=${opt}&key=${key}'">▶▶</a>]
 		
 		</c:if>	
 		<c:if test="${toPage>=allPage}"> <!-- 21>=21 :true -->
@@ -86,10 +86,10 @@
 <!-- -------------------------------------검색기능-------------------------------------------------- -->
 
 <div align="center">
-<form action="./faq" method="GET" >
+<form action="./notice" method="GET" >
 		<select name="opt" style="width: 120px" >
-		<option value="faq_title">제목</option>
-		<option value="faq_content">내용</option>
+		<option value="notice_title">제목</option>
+		<option value="notice_content">내용</option>
 		
 		</select>
 		<input	type="text" name="key"> 
