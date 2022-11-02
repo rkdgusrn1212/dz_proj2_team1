@@ -5,6 +5,7 @@
 <configuration>
 	<!-- Properties 파일 설정 -->	
     <typeAliases>
-    <!--여기다 별명 지정-->
+    <typeAlias type="team1.mini2.dz3.model.NoticeDto" alias="NoticeDto"/>
+    <typeAlias type="team1.mini2.dz3.model.FaqDto" alias="FaqDto"/>
     </typeAliases>
 </configuration>
