@@ -50,7 +50,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice
+- URL : api/notice
 
 - Method : post
 
@@ -70,7 +70,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : get
 
@@ -83,7 +83,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/page/{페이지 번호}
+- URL : api/notice/page/{페이지 번호}
 
 - Method : get
 
@@ -95,7 +95,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/page/{페이지 번호}?opt={검색옵션}&key={검색어}
+- URL : api/notice/page/{페이지 번호}?opt={검색옵션}&key={검색어}
 
     검색옵션으로는 noticeTitle, noticeContent, noticeRegDate가 가능 검색옵션은 검색 대상이되는 공지사항의 속성을 가리킨다.
 
@@ -109,7 +109,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : patch
 
@@ -127,7 +127,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : delete
 
@@ -137,7 +137,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq
+- URL : api/faq
 
 - Method : post
 
@@ -157,7 +157,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : get
 
@@ -170,7 +170,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/page/{페이지 번호}
+- URL : api/faq/page/{페이지 번호}
 
 - Method : get
 
@@ -182,7 +182,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/page/{페이지 번호}?opt={검색옵션}&key={검색어}
+- URL : api/faq/page/{페이지 번호}?opt={검색옵션}&key={검색어}
 
     검색옵션으로는 faqTitle, faqContent, faqRegDate가 가능 검색옵션은 검색 대상이되는 공지사항의 속성을 가리킨다.
 
@@ -196,7 +196,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : patch
 
@@ -214,7 +214,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : delete
 
