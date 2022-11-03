@@ -77,5 +77,10 @@ public class NoticeServiceImpl implements NoticeService {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		return dao.getCount();
 	}
-
+	
+	@Override
+	public int getNoticePageCount() {
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return (int) Math.ceil(dao.getCount()/10.);
+	}
 }

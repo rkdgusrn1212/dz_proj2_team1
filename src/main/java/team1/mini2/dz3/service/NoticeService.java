@@ -15,4 +15,5 @@ public interface NoticeService {
 	void removeNotice(int noticeNo);
 	void setNotice(Map<String, String> map);
 	int getNoticeCount();
+	int getNoticePageCount();
 }
