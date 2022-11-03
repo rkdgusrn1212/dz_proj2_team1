@@ -59,4 +59,14 @@ public class NoticeApiController {
 	public void putNotice(@PathVariable(required=true)  int noticeNo) {
 		noticeService.removeNotice(noticeNo);
 	}
+
+	@GetMapping("/count")
+	public int getNoticeCount() {
+		return noticeService.getNoticeCount();
+	}
+	
+	@GetMapping("/page/count")
+	public int getNoticePageCount() {
+		return noticeService.getNoticePageCount();
+	}
 }
