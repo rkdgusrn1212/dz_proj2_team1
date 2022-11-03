@@ -77,5 +77,11 @@ public class FaqServiceImpl implements FaqService {
 		FaqDao dao = sqlSession.getMapper(FaqDao.class);
 		return dao.getCount();
 	}
+	
+	@Override
+	public int getFaqPageCount() {
+		FaqDao dao = sqlSession.getMapper(FaqDao.class);
+		return (int) Math.ceil(dao.getCount()/10.);
+	}
 
 }

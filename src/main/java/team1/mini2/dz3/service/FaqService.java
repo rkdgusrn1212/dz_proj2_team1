@@ -15,4 +15,5 @@ public interface FaqService {
 	void removeFaq(int faqNo);
 	void setFaq(Map<String, String> map);
 	int getFaqCount();
+	int getFaqPageCount();
 }
