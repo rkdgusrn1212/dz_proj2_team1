@@ -50,7 +50,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice
+- URL : api/notice
 
 - Method : post
 
@@ -70,7 +70,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : get
 
@@ -83,7 +83,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/page/{페이지 번호}
+- URL : api/notice/page/{페이지 번호}
 
 - Method : get
 
@@ -91,11 +91,25 @@ Tomcat v9.0.65 종속 라이브러리
 
 단일 페이지 내의 Notice 리스트 표현 Json 객체.
 
+### 3.1.2.3. 조건 검색 요청
+
+**Request**
+
+- URL : api/notice/page/{페이지 번호}?opt={검색옵션}&key={검색어}
+
+    검색옵션으로는 noticeTitle, noticeContent, noticeRegDate가 가능 검색옵션은 검색 대상이되는 공지사항의 속성을 가리킨다.
+
+- Method : get
+
+**Response**
+
+{검색옵션} 속성에 {검색어}를 포함하는 공지사항을 검색한 결과의 {페이지 번호}페이지.
+
 ### 3.1.3. Update
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : patch
 
@@ -113,7 +127,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /notice/{공지 번호}
+- URL : api/notice/{공지 번호}
 
 - Method : delete
 
@@ -123,7 +137,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq
+- URL : api/faq
 
 - Method : post
 
@@ -143,7 +157,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : get
 
@@ -156,7 +170,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/page/{페이지 번호}
+- URL : api/faq/page/{페이지 번호}
 
 - Method : get
 
@@ -164,11 +178,25 @@ Tomcat v9.0.65 종속 라이브러리
 
 단일 페이지 내의 FAQ 리스트 표현 Json 객체.
 
+### 3.2.2.3. 조건 검색 요청
+
+**Request**
+
+- URL : api/faq/page/{페이지 번호}?opt={검색옵션}&key={검색어}
+
+    검색옵션으로는 faqTitle, faqContent, faqRegDate가 가능 검색옵션은 검색 대상이되는 공지사항의 속성을 가리킨다.
+
+- Method : get
+
+**Response**
+
+{검색옵션} 속성에 {검색어}를 포함하는 FAQ을 검색한 결과의 {페이지 번호}페이지.
+
 ### 3.2.3. Update
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : patch
 
@@ -186,7 +214,7 @@ Tomcat v9.0.65 종속 라이브러리
 
 **Request**
 
-- URL : /faq/{FAQ 번호}
+- URL : api/faq/{FAQ 번호}
 
 - Method : delete
 

@@ -45,6 +45,6 @@
 		</div>
 	</form>
 </body>
-<jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 -->
+<jsp:include page="/WEB-INF/views/footer.jsp" />  <!-- ROOT로 나옴 -->
 
 </html>

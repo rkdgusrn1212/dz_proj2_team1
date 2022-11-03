@@ -17,8 +17,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/auth.css">
 </head>
-<jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
-<body>
+<jsp:include page="/WEB-INF/views/header.jsp" />  <!-- ROOT로 나옴 -->
+<body> 
 	<form>
 		<div class="container" style="float: none; margin: 0 auto;">
 			<div class="col" style="float: none; margin-top: 0%">
@@ -88,6 +88,6 @@
 		</div>
 	</form>
 </body>
-<jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 -->
+<jsp:include page="/WEB-INF/views/footer.jsp" />  <!-- ROOT로 나옴 -->
 
 </html>
