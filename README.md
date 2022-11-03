@@ -192,6 +192,31 @@ Tomcat v9.0.65 종속 라이브러리
 
 {검색옵션} 속성에 {검색어}를 포함하는 FAQ을 검색한 결과의 {페이지 번호}페이지.
 
+#### 3.2.2.4. faq 전체 개수 요청
+
+**Request**
+
+- URL : api/faq/count
+
+- Method : get
+
+**Response**
+
+전체 faq 개수를 나타내는 JSON 정수 자료형.
+
+#### 3.2.2.5. faq page의 전체 개수 요청
+
+**Request**
+
+- URL : api/faq/page/count
+
+- Method : get
+
+**Response**
+
+전체 faq 페이지 개수를 나타내는 JSON 정수 자료형.
+
+
 ### 3.2.3. Update
 
 **Request**

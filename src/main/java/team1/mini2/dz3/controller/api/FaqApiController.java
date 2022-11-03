@@ -59,4 +59,14 @@ public class FaqApiController {
 	public void putFaq(@PathVariable(required=true)  int faqNo) {
 		faqService.removeFaq(faqNo);
 	}
+	
+	@GetMapping("/count")
+	public int getFaqCount() {
+		return faqService.getFaqCount();
+	}
+	
+	@GetMapping("/page/count")
+	public int getFaqPageCount() {
+		return faqService.getFaqPageCount();
+	}
 }
