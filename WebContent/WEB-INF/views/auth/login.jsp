@@ -20,7 +20,7 @@
 <body>
 	<form>
 		<div class="container" style="float: none; margin: 0 auto;">
-			<div class="col" style="float: none; margin-top: 15%">
+			<div class="col" style="float: none;">
 				<img class="row"
 					src="${pageContext.request.contextPath}/resources/img/TW.png"
 					style="width: 250px; height: 250px; float: none; margin: 0 auto;">
