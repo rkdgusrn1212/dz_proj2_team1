@@ -13,10 +13,28 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
+	<script>
+	$(document).ready(()=>{
+		$.ajax({
+			url : "${pageContext.request.contextPath}/api/notice/page/1",
+            type : "get",
+            dataType : "JSON",
+            contentType : "applicaton/json; charset=utf-8",
+            success: function(response) {
+            	for(idx in response){
+                    $("#notice-list").append("<p>"+JSON.stringify(response[idx])+"</p>");
+            	}
+            }
+		});
+	});
+	</script>
 </head>
 </head>
 <body>
+  <!-- 블록 범위 찍기 -->
+                        <div id="notice-list">
+                        </div>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">
@@ -65,7 +83,6 @@
 							</li>
 						</c:if>
 
-						<!-- 블록 범위 찍기 -->
 						<c:forEach begin="${fromPage}" end="${toPage}" var="i">
 							<c:if test="${i==pg}">
 								<li class="page-item  "><a class="page-link">${i}</a></li>
