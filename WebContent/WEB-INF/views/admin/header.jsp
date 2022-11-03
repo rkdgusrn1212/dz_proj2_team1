@@ -1,24 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/css/reset.css">
+    href="${root}/resources/css/reset.css">
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+    href="${root}/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/css/bootstrap-icons.css">
+    href="${root}/resources/css/bootstrap-icons.css">
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/css/prism-okaidia.css">
+    href="${root}/resources/css/prism-okaidia.css">
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/css/custom.min.css">
+    href="${root}/resources/css/custom.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-lg">
-			<a class="navbar-brand" href="#">TW</a>
+			<a class="navbar-brand" href="#"><img width="60px" height="40px" src="${root}/resources/img/white_logo_trans.png"></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarColor01"
 				aria-controls="navbarColor01" aria-expanded="false"
@@ -26,35 +28,22 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarColor01">
-				
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="text"
-                        placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link active" href="#">Home
-							<span class="visually-hidden">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link active" href="#">Features</a>
+					<li class="nav-item"><a class="nav-link" href="${root}/admin/restaurant">식당 관리</a>
 					</li>
-					<li class="nav-item"><a class="nav-link active" href="#">Pricing</a>
+                    <li class="nav-item"><a class="nav-link" href="${root}/admin/member">회원 관리</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="${root}/admin/report">신고 관리</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="${root}/admin/notice">공지 관리</a>
+                    </li>
+					<li class="nav-item"><a class="nav-link" href="${root}/admin/qna">Q&amp;A 관리</a>
 					</li>
-					<li class="nav-item"><a class="nav-link active" href="#">About</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-						href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a> <a
-								class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div></li>
+                    <li class="nav-item"><a class="nav-link" href="${root}/admin/faq">FAQ 관리</a>
+                    </li>
 				</ul>
                <ul class="navbar-nav">
-                    <li class="nav-item"><a  class="nav-link" href="#">로그인</a></li>    
+                    <li class="nav-item"><a  class="nav-link" href="${root}/admin/root">관리자 설정</a></li>    
                 </ul>
 			</div>
 		</div>

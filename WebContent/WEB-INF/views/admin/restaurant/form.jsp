@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tasty Way : 식당 관리</title>
+<title>Tasty Way : 식당 등록</title>
 </head>
 <body>
 
