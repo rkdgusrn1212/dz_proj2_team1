@@ -5,20 +5,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/about")
 public class AboutController {
-	
-	@RequestMapping("/about")
-	public String about(Model model) {
-		return "about/jsp/aboutUs"; //자동 조립
+
+	@RequestMapping
+	public String aboutPage(Model model) {
+		model.addAttribute("containerHeader", "about/header");
+		model.addAttribute("innerPage", "about/index");
+		return "pageContainer";
+	}
+
+	@RequestMapping("/team")
+	public String teamPage(Model model) {
+		model.addAttribute("containerHeader", "about/header");
+		model.addAttribute("innerPage", "about/team");
+		return "pageContainer";
 	}
 	
-	@RequestMapping("/about/team")
-	public String about1(Model model) {
-		return "about/jsp/FeaturedServices"; //자동 조립
-	}
-	
-	@RequestMapping("/about/service")
-	public String about2(Model model) {
-		return "about/jsp/TastyWayIntroduce"; //자동 조립
+
+	@RequestMapping("/service")
+	public String servicePage(Model model) {
+		model.addAttribute("containerHeader", "about/header");
+		model.addAttribute("innerPage", "about/service");
+		return "pageContainer";
 	}
 }

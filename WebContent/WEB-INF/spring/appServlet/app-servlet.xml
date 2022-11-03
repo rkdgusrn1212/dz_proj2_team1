@@ -14,7 +14,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
     
-    <context:annotation-config />
-    
-    <context:component-scan base-package="team1.mini2.dz3"/>
+    <context:component-scan base-package="team1.mini2.dz3.controller">
+       <context:exclude-filter type="regex" expression="team1\.mini2\.dz3\.controller\.api\..*"/>
+    </context:component-scan>
 </beans>

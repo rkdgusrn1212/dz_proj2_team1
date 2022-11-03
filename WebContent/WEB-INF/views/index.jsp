@@ -4,9 +4,28 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Tasty Way 인덱스 페이지</title>
+<title>Tasty Way : 메인</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
-아래에 링크를 달아 각자 페이지를 테스트 하세요~!
+<h1>JQUERY AJAX TEST</h1>
+<button id="send-btn">send</button><br>
+<p id="result-text">df</p>
+<script>
+$("#send-btn").click(()=>{
+        $.ajax({
+            url : "${pageContext.request.contextPath}/api/notice/page/1",
+            type : "get",
+            //data : {},
+            dataType : "JSON",
+            contentType : "applicaton/json; charset=utf-8",
+            success: function(response) {
+            	$("#result-text").html(JSON.stringify(response));                    
+            },
+            
+        });
+    }
+);
+</script>
 </body>
 </html>
