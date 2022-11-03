@@ -29,8 +29,6 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
-
 	
 <font color="#E0E0E0">홈>ABOUT US></font>서비스
 
@@ -59,8 +57,6 @@
 <img class="subphoto5" src="${pageContext.request.contextPath}/resources/img/food1.PNG">
 <img class="subphoto4" src="${pageContext.request.contextPath}/resources/img/food2.PNG">
 <img class="subphoto4" src="${pageContext.request.contextPath}/resources/img/food3.PNG">
-
-<jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 -->	
 	
 </body>
 </html>

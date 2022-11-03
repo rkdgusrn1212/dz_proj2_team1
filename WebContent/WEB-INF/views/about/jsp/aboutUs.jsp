@@ -32,7 +32,8 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
+<%-- <jsp:include page="/WEB-INF/views/components/header.jsp" />  <!-- ROOT로 나옴 -->
+ --%>
 
 	<img class="mainphoto" src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG"> <!-- 서버경로 WEBCONTENT기준 / 상대경로 X ㅈ -->
 
@@ -55,50 +56,7 @@
 		</div>	
 	</div>
 
-<jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 -->
-
-
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-  <button type="button" class="btn btn-primary">Primary</button>
-  <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
-</div>
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-  <button type="button" class="btn btn-success">Success</button>
-  <div class="btn-group" role="group">
-    <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
-</div>
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-  <button type="button" class="btn btn-info">Info</button>
-  <div class="btn-group" role="group">
-    <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop3" style="">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
-</div>
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-  <button type="button" class="btn btn-danger">Danger</button>
-  <div class="btn-group" role="group">
-    <button id="btnGroupDrop4" type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
-</div>
-
+<%-- <jsp:include page="/WEB-INF/views/components/footer.jsp" />  <!-- ROOT로 나옴 --> --%>
 
 
 </body>

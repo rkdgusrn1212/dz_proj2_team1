@@ -21,10 +21,4 @@ public class AboutController {
 	public String about2(Model model) {
 		return "about/jsp/TastyWayIntroduce"; //자동 조립
 	}
-	
-	//test
-	@RequestMapping("/about/header")
-	public String about3(Model model) {
-		return "components/header"; //자동 조립
-	}
 }
