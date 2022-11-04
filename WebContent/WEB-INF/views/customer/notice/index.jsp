@@ -9,11 +9,18 @@
 <meta charset="UTF-8">
 <title>Tasty Way : 공지 메인</title>
 <style type="text/css">
-#line {height: 50px;border-top: 1px solid #d3d3d3;border-bottom: 1px solid #d3d3d3;}
-
+#line {
+	height: 50px;
+	border-top: 1px solid #d3d3d3;
+	border-bottom: 1px solid #d3d3d3;
+}
 </style>
 
-<link rel= "stylesheet" href = "${root}/resources/css/reset.css">
+<!-- css 초기화 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+<link rel="stylesheet" href="${root}/resources/css/reset.css">
 <!-- 부트스트랩 연결 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -34,12 +41,14 @@
         	console.log(response);
         	for(idx in response){
                 $("#notice-list").append("<tr id = 'line'><td align='center'>" + response[idx].noticeNo + "</td>" +
-                        "<td><a>"+ response[idx].noticeContent + "</a></td>"
-                        + "<td>" + response[idx].noticeWriter +" </td><tr>"); 
+                        "<td><a href =javascript:location.href = ${pageContext.request.contextPath}/customer/notice/detail?id="+response[idx].noticeNo + "'>	"+ response[idx].noticeTitle + "</a></td>"
+                        + "<td>" + new Date(response[idx].noticeRegDate) +" </td><tr>"); 
         	}
         }
 	});
 }); 
+ 
+ 
 </script>
 
 </head>
@@ -53,7 +62,7 @@
 						style="height: 50px; border-top: 1px solid #d3d3d3; border-bottom: 1px soild #d3d3d3;">
 						<th>No</th>
 						<th>Content</th>
-						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
 					<!-- jQuery로 출력 -->
 				</table>

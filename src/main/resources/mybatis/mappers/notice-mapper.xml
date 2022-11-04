@@ -11,8 +11,6 @@
 			javaType="java.lang.String" jdbcType="VARCHAR" />
 		<result property="noticeContent" column="notice_content"
 			javaType="java.lang.String" jdbcType="VARCHAR" />
-		<result property="noticeWriter" column="notice_writer"
-			javaType="java.lang.String" jdbcType="VARCHAR" />
 		<result property="noticeRegDate" column="notice_regdate"
 			javaType="java.util.Date" jdbcType="DATE" />
 	</resultMap>
