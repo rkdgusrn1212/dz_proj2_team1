@@ -58,6 +58,6 @@
 			</div>
 		</div>
 	</nav>
-
+    <script src="${root}/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

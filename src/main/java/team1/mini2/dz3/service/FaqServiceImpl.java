@@ -41,6 +41,36 @@ public class FaqServiceImpl implements FaqService {
 		return sqlSession.getMapper(FaqDao.class).getListWithRegDate(map);
 	}
 	
+
+	@Override
+	public int getFaqPageWithTitleCount(String key){
+		FaqDao dao = sqlSession.getMapper(FaqDao.class);
+		return (int) Math.ceil(dao.getWithTitleCount(key)/10.);
+	}
+	@Override
+	public int getFaqPageWithContentCount(String key){
+		FaqDao dao = sqlSession.getMapper(FaqDao.class);
+		return (int) Math.ceil(dao.getWithContentCount(key)/10.);
+	}
+	@Override
+	public int getFaqPageWithRegDateCount(String key){
+		FaqDao dao = sqlSession.getMapper(FaqDao.class);
+		return (int) Math.ceil(dao.getWithRegDateCount(key)/10.);
+	}
+	
+	@Override
+	public int getFaqWithTitleCount(String key){
+		return sqlSession.getMapper(FaqDao.class).getWithTitleCount(key);
+	}
+	@Override
+	public int getFaqWithContentCount(String key){
+		return sqlSession.getMapper(FaqDao.class).getWithContentCount(key);
+	}
+	@Override
+	public int getFaqWithRegDateCount(String key){
+		return sqlSession.getMapper(FaqDao.class).getWithRegDateCount(key);
+	}
+	
 	
 	public Map<String, String> getPageMap(int page) {
 		int rowSize = 10;

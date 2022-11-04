@@ -40,6 +40,36 @@ public class NoticeServiceImpl implements NoticeService {
 		map.put("key", key);
 		return sqlSession.getMapper(NoticeDao.class).getListWithRegDate(map);
 	}
+
+	@Override
+	public int getNoticePageWithTitleCount(String key){
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return (int) Math.ceil(dao.getWithTitleCount(key)/10.);
+	}
+	@Override
+	public int getNoticePageWithContentCount(String key){
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return (int) Math.ceil(dao.getWithContentCount(key)/10.);
+	}
+	@Override
+	public int getNoticePageWithRegDateCount(String key){
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return (int) Math.ceil(dao.getWithRegDateCount(key)/10.);
+	}
+	
+
+	@Override
+	public int getNoticeWithTitleCount(String key){
+		return sqlSession.getMapper(NoticeDao.class).getWithTitleCount(key);
+	}
+	@Override
+	public int getNoticeWithContentCount(String key){
+		return sqlSession.getMapper(NoticeDao.class).getWithContentCount(key);
+	}
+	@Override
+	public int getNoticeWithRegDateCount(String key){
+		return sqlSession.getMapper(NoticeDao.class).getWithRegDateCount(key);
+	}
 	
 	
 	public Map<String, String> getPageMap(int page) {
