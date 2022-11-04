@@ -13,6 +13,14 @@ public class NoticeController {
 		model.addAttribute("innerPage", "customer/notice/index");
 		return "pageContainer";
 	}
+	
+	@RequestMapping("/form")
+	public String noticeFormPage(Model model) {
+		model.addAttribute("containerHeader", "customer/header");
+		model.addAttribute("innerPage", "customer/notice/form");
+		return "pageContainer";
+	}
+	
 
 	@RequestMapping("/detail")
 	public String noticeDetailPage(Model model) {
