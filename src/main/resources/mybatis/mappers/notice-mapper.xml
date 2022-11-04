@@ -11,6 +11,8 @@
 			javaType="java.lang.String" jdbcType="VARCHAR" />
 		<result property="noticeContent" column="notice_content"
 			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="noticeWriter" column="notice_writer"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
 		<result property="noticeRegDate" column="notice_regdate"
 			javaType="java.util.Date" jdbcType="DATE" />
 	</resultMap>
@@ -33,7 +35,8 @@
 		where notice_title like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and
+		where r
+		>= #{start} and
 		r &lt;= #{end}
 	</select>
 
@@ -41,20 +44,24 @@
 		resultMap="noticeMap">
 		select *
 		from (select A.*, ROWNUM r from
-		(select * from notice where notice_content like '%'||#{key}||'%'
+		(select * from notice
+		where notice_content like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and r &lt;= #{end}
+		where
+		r >= #{start} and r &lt;= #{end}
 	</select>
 
 	<select id="getListWithRegDate" parameterType="map"
 		resultMap="noticeMap">
 		select *
 		from (select A.*, ROWNUM r from
-		(select * from notice where notice_regdate like '%'||#{key}||'%'
+		(select * from notice
+		where notice_regdate like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and r &lt;= #{end}
+		where
+		r >= #{start} and r &lt;= #{end}
 	</select>
 
 	<select id="get" parameterType="int" resultMap="noticeMap">
