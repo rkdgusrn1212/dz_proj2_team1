@@ -18,7 +18,7 @@ import team1.mini2.dz3.model.FaqDto;
 import team1.mini2.dz3.service.FaqServiceImpl;
 
 @RestController
-@RequestMapping("/faq")
+@RequestMapping("/faq") //faq라고 치면
 public class FaqApiController {
 	
 	@Autowired

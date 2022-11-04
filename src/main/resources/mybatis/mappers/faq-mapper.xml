@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="team1.mini2.dz3.model.FaqDao">
-
+	<!-- db/자바 id 일치하도록 변환  java 타입 / jdbc 타입 -->
 	<resultMap id="faqMap" type="FaqDto">
 		<result property="faqNo" column="faq_no" javaType="java.lang.Integer"
 			jdbcType="INTEGER" />

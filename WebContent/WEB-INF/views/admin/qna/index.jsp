@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tasty Way : Q&amp;A 관리</title>
+<title>Q&A 메인 페이지</title>
 </head>
 <body>
+
+
 
 </body>
 </html>
