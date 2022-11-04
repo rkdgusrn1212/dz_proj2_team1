@@ -61,12 +61,32 @@ public class NoticeApiController {
 	}
 
 	@GetMapping("/count")
-	public int getNoticeCount() {
+	public int getNoticeCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key) {
+		if(opt!=null&&key!=null) {
+			switch(opt) {
+			case "noticeTitle":
+				return noticeService.getNoticeWithTitleCount(key);
+			case "noticeContent":
+				return noticeService.getNoticeWithContentCount(key);
+			case "noticeRegDate":
+				return noticeService.getNoticeWithRegDateCount(key);
+			}
+		}
 		return noticeService.getNoticeCount();
 	}
 	
 	@GetMapping("/page/count")
-	public int getNoticePageCount() {
+	public int getNoticePageCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key){
+		if(opt!=null&&key!=null) {
+			switch(opt) {
+			case "noticeTitle":
+				return noticeService.getNoticePageWithTitleCount(key);
+			case "noticeContent":
+				return noticeService.getNoticePageWithContentCount(key);
+			case "noticeRegDate":
+				return noticeService.getNoticePageWithRegDateCount(key);
+			}
+		}
 		return noticeService.getNoticePageCount();
 	}
 }
