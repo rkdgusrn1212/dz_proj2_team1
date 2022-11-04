@@ -41,7 +41,7 @@
         	console.log(response);
         	for(idx in response){
                 $("#notice-list").append("<tr id = 'line'><td align='center'>" + response[idx].noticeNo + "</td>" +
-                        "<td><a href =javascript:location.href = ${pageContext.request.contextPath}/customer/notice/detail?id="+response[idx].noticeNo + "'>	"+ response[idx].noticeTitle + "</a></td>"
+                        "<td><a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+response[idx].noticeNo + ">	"+ response[idx].noticeTitle + "</a></td>"
                         + "<td>" + new Date(response[idx].noticeRegDate) +" </td><tr>"); 
         	}
         }
@@ -57,9 +57,9 @@
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">공지사항</h1>
 			<div class="row" style="float: none; margin: 0 auto;">
-				<table width="800px" style="text-align: center;" id="notice-list">
-					<tr bgcolor="#F3F3F3"
-						style="height: 50px; border-top: 1px solid #d3d3d3; border-bottom: 1px soild #d3d3d3;">
+				<table class = "table" width="800px" style="text-align: center; " id="notice-list">
+					<tr class="table-secondary"
+						style="height: 50px; ">
 						<th>No</th>
 						<th>Content</th>
 						<th>작성일</th>
@@ -130,7 +130,7 @@
 
 			<!-- -------------------------------------검색기능-------------------------------------------------- -->
 
-			<div class="row" style="float: none; margin: 0 auto; width: 525px;">
+			<div class="row" style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
 				<form action="./notice" method="GET">
 					<select class="form-select" id="exampleSelect1" name="opt"
 						style="width: 100px; float: left;">

@@ -1,5 +1,8 @@
 package team1.mini2.dz3.controller.customer;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +26,11 @@ public class NoticeController {
 	
 
 	@RequestMapping("/detail")
-	public String noticeDetailPage(Model model) {
+	public String noticeDetailPage(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
 		model.addAttribute("containerHeader", "customer/header");
 		model.addAttribute("innerPage", "customer/notice/detail");
+		model.addAttribute("id", id);
 		return "pageContainer";
 	}
 }
