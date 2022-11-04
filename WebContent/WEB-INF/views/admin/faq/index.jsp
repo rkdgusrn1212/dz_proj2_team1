@@ -53,8 +53,9 @@ const getFaqList = (page)=>{
             contentType : "applicaton/json; charset=utf-8",
             success: (response)=> {//reponse는 count이다.
                 page = Math.min(response, page);//page가 전체 count보다 크면 count로 바꿔준다.
+                page = Math.max(page,1);//1보다 작을순 없다.
                 $("#faq-pagination").empty();
-                const pStart = Math.floor((page-1)/5)*5+1;//보여지는 pagination 시작점.
+                const pStart = Math.max(Math.floor((page-1)/5)*5+1,1);//보여지는 pagination 시작점.
                 $("#faq-pagination").append("<li class='page-item"+(pStart<6?" disabled":"")+"'><a class='page-link' href='javascript:getFaqList("+(pStart-1)+")'>&laquo;</a>");
                 for(let i = pStart; i<= Math.min(pStart+4,response) ; i++){
                      $("#faq-pagination").append("<li class='page-item"+(i==page?" active":"")+"'><a class='page-link' href='javascript:getFaqList("+i+")'>"+i+"</a></li>");
@@ -69,7 +70,8 @@ const getFaqList = (page)=>{
                     contentType : "applicaton/json; charset=utf-8",
                     success: (response)=> {
                         $("#faq-list").empty();
-                        for(idx in response){
+                        let idx = 0;
+                        for(; idx < response.length; idx++){
                             const faq = response[idx];
                             const day = ["일", "월", "화", "수", "목", "금", "토"];
                             const date = new Date(faq.faqRegDate)
@@ -81,7 +83,7 @@ const getFaqList = (page)=>{
                                     +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td><td>"
                                     +"<a  type='button' href='javascript:showModal("+faq.faqNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a></td></tr>");
                         }
-                        for(++idx ; idx<10; idx++){
+                        for(idx ; idx<10; idx++){
                             $("#faq-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
                         }
                     },

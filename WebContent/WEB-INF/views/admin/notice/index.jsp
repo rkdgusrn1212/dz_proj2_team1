@@ -54,8 +54,9 @@ const getNoticeList = (page)=>{
 	        contentType : "applicaton/json; charset=utf-8",
 	        success: (response)=> {//reponse는 count이다.
 	            page = Math.min(response, page);//page가 전체 count보다 크면 count로 바꿔준다.
+	            page = Math.max(page,1);//1보다 작을순 없다.
 	        	$("#notice-pagination").empty();
-	            const pStart = Math.floor((page-1)/5)*5+1;//보여지는 pagination 시작점.
+	            const pStart = Math.max(Math.floor((page-1)/5)*5+1,1);//보여지는 pagination 시작점.
 	            $("#notice-pagination").append("<li class='page-item"+(pStart<6?" disabled":"")+"'><a class='page-link' href='javascript:getNoticeList("+(pStart-1)+")'>&laquo;</a>");
 	            for(let i = pStart; i<= Math.min(pStart+4,response) ; i++){
 	                 $("#notice-pagination").append("<li class='page-item"+(i==page?" active":"")+"'><a class='page-link' href='javascript:getNoticeList("+i+")'>"+i+"</a></li>");
@@ -70,7 +71,8 @@ const getNoticeList = (page)=>{
 	                contentType : "applicaton/json; charset=utf-8",
 	                success: (response)=> {
 	                    $("#notice-list").empty();
-	                    for(idx in response){
+	                    let idx = 0;
+	                    for(; idx < response.length; idx++){
 	                        const notice = response[idx];
 	                        const day = ["일", "월", "화", "수", "목", "금", "토"];
 	                        const date = new Date(notice.noticeRegDate)
@@ -82,7 +84,7 @@ const getNoticeList = (page)=>{
 	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td><td>"
 	                                +"<a  type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a></td></tr>");
 	                    }
-	                    for(++idx ; idx<10; idx++){
+	                    for(idx ; idx<10; idx++){
 	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
 	                    }
 	                },
