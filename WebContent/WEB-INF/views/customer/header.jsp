@@ -10,12 +10,6 @@
     href="${root}/resources/css/reset.css">
 <link rel="stylesheet"
     href="${root}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-    href="${root}/resources/css/bootstrap-icons.css">
-<link rel="stylesheet"
-    href="${root}/resources/css/prism-okaidia.css">
-<link rel="stylesheet"
-    href="${root}/resources/css/custom.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -44,6 +38,6 @@
             </div>
 		</div>
 	</nav>
-
+    <script src="${root}/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

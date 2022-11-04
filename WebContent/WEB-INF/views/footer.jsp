@@ -8,9 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${root}/resources/css/reset.css">
 <link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap-icons.css">
-<link rel="stylesheet" href="${root}/resources/css/prism-okaidia.css">
-<link rel="stylesheet" href="${root}/resources/css/custom.min.css">
 </head>
 <body>
 	<footer id="footer">
