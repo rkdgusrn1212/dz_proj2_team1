@@ -82,7 +82,6 @@ const getFaqList = (page)=>{
                                     +"<a  type='button' href='javascript:showModal("+faq.faqNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a></td></tr>");
                         }
                         for(++idx ; idx<10; idx++){
-                            console.log(idx);
                             $("#faq-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
                         }
                     },
