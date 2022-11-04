@@ -116,7 +116,7 @@ $(document).ready(getNoticeList(1));
 			aria-atomic="true">
 			<div class="toast-header">
 				<strong class="me-auto" id="toast-title"></strong> <small
-					id="toast-time">11 mins ago</small>
+					id="toast-time"></small>
 				<button type="button" class="btn-close ms-2 mb-1"
 					data-bs-dismiss="toast" aria-label="Close">
 					<span aria-hidden="true"></span>
