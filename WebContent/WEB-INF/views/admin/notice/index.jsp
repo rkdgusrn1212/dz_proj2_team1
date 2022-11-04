@@ -28,13 +28,11 @@ const deleteNotice = (id)=>{
 	        type : "delete",
 	        success: (response)=> {
                 showToast("삭제 성공","방금",id+"번 공지사항이 삭제되었습니다");
-                const page = $('#notice-pagination').find(".active").find(".page-link").text()
-                console.log(page);
+                const page = $('#notice-pagination').find(".active").find(".page-link").text();
                 getNoticeList(page);
 	        },
 	        error: (error)=>{
-	        	console.log(error);
-	        	showToast("삭제 실패","방금","알수 없는 오류로 발생");
+	        	showToast("삭제 실패","방금","알수 없는 오류 발생");
 	        }
 	    });
 };
@@ -45,7 +43,6 @@ const padDate = (date)=>{
 
 $(".delete-notice-anchor").on("click", ()=>{
     const id = $(this).data("id");
-    console.log(id);
     $("#delete-button").off().on("click #delete-button",  deleteNotice(id) );
 });
 
@@ -91,12 +88,12 @@ const getNoticeList = (page)=>{
 	                    }
 	                },
 	                error: ()=>{
-	                    alert("공지 리스트를 가져오지 못했습니다.");
+	                    showToast("공지 목록 로드 실페","방금","알수 없는 오류 발생");
 	                }
 	            });
 	        },
 	        error: ()=>{
-	            alert("공지 페이지네이션을 가져오지 못했습니다.");
+                showToast("공지 페이지네이션 로드 실페","방금","알수 없는 오류 발생");
 	        }
 	    });
 };
