@@ -9,6 +9,5 @@ public class NoticeDto {
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private String noticeWriter;
 	private Date noticeRegDate;
 }

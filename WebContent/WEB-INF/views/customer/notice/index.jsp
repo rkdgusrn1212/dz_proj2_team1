@@ -43,7 +43,6 @@
 
 </head>
 <body>
-
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">공지사항</h1>
@@ -83,7 +82,6 @@
 							</li>
 						</c:if>
 
-						<!-- 블록 범위 찍기 -->
 						<c:forEach begin="${fromPage}" end="${toPage}" var="i">
 							<c:if test="${i==pg}">
 								<li class="page-item  "><a class="page-link">${i}</a></li>
