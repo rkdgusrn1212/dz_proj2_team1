@@ -8,7 +8,9 @@ public interface NoticeDao {
 	List<NoticeDto> getListWithTitle(Map<String, String> map);
 	List<NoticeDto> getListWithContent(Map<String, String> map);
 	List<NoticeDto> getListWithRegDate(Map<String, String> map);
-
+	int getWithTitleCount(String key);
+	int getWithContentCount(String key);
+	int getWithRegDateCount(String key);
 	NoticeDto get(int noticeNo);
 	int getCount();
 	void add(Map<String, String> map);
