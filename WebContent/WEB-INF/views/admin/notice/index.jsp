@@ -77,12 +77,13 @@ const getNoticeList = (page)=>{
 	                        const day = ["일", "월", "화", "수", "목", "금", "토"];
 	                        const date = new Date(notice.noticeRegDate)
 	                        $("#notice-list").append(
-	                                "<tr><th scope='row'>"
-	                                +notice.noticeNo+"</th><td>"
-	                                +notice.noticeTitle+"</td><td>"
-	                                +notice.noticeContent+"</td><td>"
-	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td><td>"
-	                                +"<a  type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a></td></tr>");
+	                                "<tr><th scope='row' class='text-center text-truncate'>"
+	                                +notice.noticeNo+"</th><td class='text-truncate'>"
+	                                +notice.noticeTitle+"</td><td class='text-truncate'>"
+	                                +notice.noticeContent+"</td><td class='text-truncate'>"
+	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>"
+	                                +"<td class='text-center text-truncate'><a style='text-decoration: none;' type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span>"+
+	                                "&nbsp;&nbsp; <span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
 	                    }
 	                    for(idx ; idx<10; idx++){
 	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
@@ -128,29 +129,33 @@ $(document).ready(getNoticeList(1));
 	</div>
 	<div class="container-lg">
 		<div class="d-flex justify-content-between mt-5">
-		<h1>공지사항 관리</h1>
-		<div class="align-self-end"><small><span class='badge rounded-pill bg-danger'>삭제</span> 버튼을 눌러 해당 공지사항을 삭제합니다.</small>
-		</div>
+			<h1>공지사항 관리</h1>
+			<div class="align-self-end">
+				<small><span class='badge rounded-pill bg-danger'>삭제</span>
+					버튼을 눌러 해당 공지사항을 삭제합니다.&nbsp;&nbsp;&nbsp;<span class='badge rounded-pill bg-warning'>수정</span> 버튼을 눌러 해당 공지사항을 수정합니다.</small>
+			</div>
 		</div>
 		<hr class="border border-primary border-3 opacity-75">
-		<table class="table table-hover">
+		<table class="table table-hover table-bordered" style="table-layout:fixed;">
 			<thead>
 				<tr class="table-primary">
-					<th scope="col">번호</th>
-					<th scope="col">공지 제목</th>
-					<th scope="col">공지 내용</th>
-					<th scope="col">작성 시간</th>
-					<th scope="col">작업</th>
+					<th scope="col" class="col-1 text-center text-truncate">번호</th>
+					<th scope="col" class="col-3 text-center text-truncate">공지 제목</th>
+					<th scope="col" class="col-4 text-center text-truncate">공지 내용</th>
+					<th scope="col" class="col-3 text-center text-truncate">작성 시간</th>
+					<th scope="col" class="col-1 text-center text-truncate">작업</th>
 				</tr>
 			</thead>
 			<tbody id="notice-list">
 
 			</tbody>
 		</table>
-		<div class="row justify-content-md-center">
-			<div class="col-auto">
-				<ul class="pagination" style="" id="notice-pagination">
+		<div class="row">
+			<div class="d-flex justify-content-between align-items-baseline">
+				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
+				<ul class="pagination" id="notice-pagination">
 				</ul>
+				<button class="btn btn-sm btn-success" type="button">새 공지 등록</button>
 			</div>
 		</div>
 	</div>
