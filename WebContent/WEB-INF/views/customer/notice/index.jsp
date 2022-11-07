@@ -36,7 +36,7 @@
 		url : "${pageContext.request.contextPath}/api/notice/page/1",
         type : "get",
         dataType : "JSON",
-        contentType : "applicaton/json; charset=utf-8",
+        contentType : "application/json; charset=utf-8",
         success: function(response) {
         	console.log(response);
         	for(idx in response){
@@ -53,6 +53,7 @@
 
 </head>
 <body>
+<input type = "button" value = "글쓰기"  onclick = "javascript:location.href = 'notice/form' ">
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">공지사항</h1>

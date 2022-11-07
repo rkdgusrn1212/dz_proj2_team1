@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
 <%-- <script src="${root}/resources/css/reset.css"></script>
  --%>
 <!-- 부트스트랩 연결 -->
-<style type="text/css">
+<style>
 #multiple-container {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -39,15 +42,17 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 
 <title>Tasty Way : 공지 폼</title>
+
+
 </head>
 <body>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none;">
 			<h1 class="row" style="justify-content: center;">Tasty way</h1>
 		</div>
-		<form action="./notice/form" method="post">
+		<form action="./notice/form" method="post" id="form">
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
-				<input type="text" class="form-control" id="title" placeholder="제목" />
+				<input type="text" class="form-control" id="title" placeholder="제목"  name="title"/>
 			</div>
 			<!-- input -->
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
@@ -63,13 +68,14 @@
 			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<div id="multiple-container"></div>
-				
+
 			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<div style="float: right;">
 					<input type="reset" value="취소" class="btn btn-light reset"
 						style="background-color: #D3D3D3; width: 70px; float: right; margin-left: 15px;" />
-					<input type="submit" value="등록" class="btn btn-light submit"
+					<input type="submit" value="등록" id="submitBtn" 
+						class="btn btn-light submit"
 						style="background-color: #5F5F5F; width: 70px; float: right; color: white;" />
 				</div>
 			</div>
@@ -79,6 +85,26 @@
 	</div>
 </body>
 <script>
+
+$(function(){
+	$('#submitBtn').on("click", function(){		
+		let map = new Map();
+		console.log('1' + map);
+		map.set('title', ${'title'});
+		map.set('content', getAttribute("content"));
+		console.log(map[1]);
+		$.ajax({
+            url : "${pageContext.request.contextPath}/api/notice",
+            type : "post",
+            data : JSON.stringify(map),
+            dataType : "JSON",
+            contentType : "application/json; charset=utf-8",
+    
+		});
+		
+	});
+});	
+
 function readMultipleImage(input) {
 
     const multipleContainer = document.getElementById("multiple-container")

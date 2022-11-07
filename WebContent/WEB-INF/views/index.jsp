@@ -18,7 +18,7 @@ $("#send-btn").click(()=>{
             type : "get",
             //data : {},
             dataType : "JSON",
-            contentType : "applicaton/json; charset=utf-8",
+            contentType : "application/json; charset=utf-8",
             success: function(response) {
             	$("#result-text").html(JSON.stringify(response));                    
             },
