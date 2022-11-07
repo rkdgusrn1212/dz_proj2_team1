@@ -1,7 +1,7 @@
 CREATE TABLE NOTICE( -- 공지사항 테이블
     NOTICE_NO       	NUMBER  	NOT NULL	PRIMARY KEY,	-- 공지 번호 (100번부터 시작 1씩 증가)
-    NOTICE_TITLE    		VARCHAR2(30)	NOT NULL,			-- 공지 제목
-    NOTICE_CONTENT  	VARCHAR2(200)	NOT NULL,			-- 공지내용
+    NOTICE_TITLE    	NVARCHAR2(60)	NOT NULL,			-- 공지 제목
+    NOTICE_CONTENT  	NVARCHAR2(1000)	NOT NULL,			-- 공지내용
     NOTICE_REGDATE  	DATE		NOT NULL			-- 작성일
 );
 
