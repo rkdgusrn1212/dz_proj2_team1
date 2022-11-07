@@ -155,7 +155,7 @@ $(document).ready(getNoticeList(1));
 				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
 				<ul class="pagination" id="notice-pagination">
 				</ul>
-				<button class="btn btn-sm btn-success" type="button">새 공지 등록</button>
+				<button class="btn btn-sm btn-success" type="button" onclick = "javascript:location.href = 'notice/form'">새 공지 등록</button>
 			</div>
 		</div>
 	</div>

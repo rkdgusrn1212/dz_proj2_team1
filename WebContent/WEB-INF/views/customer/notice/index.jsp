@@ -31,6 +31,9 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <!-- jQuery 라이브러리 호출 -->
 <script>
+const padDate = (date)=>{
+	return date.toString().padStart(2,'0');
+}
  $(document).ready(()=>{
 	$.ajax({
 		url : "${pageContext.request.contextPath}/api/notice/page/1",
@@ -38,11 +41,18 @@
         dataType : "JSON",
         contentType : "application/json; charset=utf-8",
         success: function(response) {
-        	console.log(response);
-        	for(idx in response){
-                $("#notice-list").append("<tr id = 'line'><td align='center'>" + response[idx].noticeNo + "</td>" +
-                        "<td><a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+response[idx].noticeNo + ">	"+ response[idx].noticeTitle + "</a></td>"
-                        + "<td>" + new Date(response[idx].noticeRegDate) +" </td><tr>"); 
+            $("#notice-list").empty();
+            let idx=0;
+            for(; idx < response.length; idx++){
+        		const notice = response[idx];
+                const day = ["일", "월", "화", "수", "목", "금", "토"];
+                const date = new Date(notice.noticeRegDate)
+                $("#notice-list").append("<tr id = 'line'><td align='center'>" 
+                		+ notice.noticeNo + "</td>" 
+                		+"<td><a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+notice.noticeNo + ">"
+                		+ notice.noticeTitle + "</a></td>"
+                        + "<td>" + date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td></tr>"); 
+               
         	}
         }
 	});
@@ -53,7 +63,6 @@
 
 </head>
 <body>
-<input type = "button" value = "글쓰기"  onclick = "javascript:location.href = 'notice/form' ">
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">공지사항</h1>
