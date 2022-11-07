@@ -6,6 +6,7 @@
     <typeAliases>
     <typeAlias type="team1.mini2.dz3.model.NoticeDto" alias="NoticeDto"/>
     <typeAlias type="team1.mini2.dz3.model.FaqDto" alias="FaqDto"/>
+    <typeAlias type="team1.mini2.dz3.model.QnaDto" alias="QnaDto"/>
     </typeAliases>
 
 
