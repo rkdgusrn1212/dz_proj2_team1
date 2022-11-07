@@ -1,16 +1,9 @@
 package team1.mini2.dz3.controller.customer;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import team1.mini2.dz3.model.NoticeDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/customer/notice")
@@ -21,17 +14,9 @@ public class NoticeController {
 		model.addAttribute("innerPage", "customer/notice/index");
 		return "pageContainer";
 	}
-	
-	@RequestMapping("/form")
-	public String noticeFormPage(Model model) {
-		model.addAttribute("containerHeader", "customer/header");
-		model.addAttribute("innerPage", "customer/notice/form");
-		return "pageContainer";
-	}
-	
+
 	@RequestMapping("/detail")
-	public String noticeDetailPage(Model model, HttpServletRequest request) {
-		String id = request.getParameter("id");
+	public String noticeDetailPage(Model model, @RequestParam(required = true) int id) {
 		model.addAttribute("containerHeader", "customer/header");
 		model.addAttribute("innerPage", "customer/notice/detail");
 		model.addAttribute("id", id);

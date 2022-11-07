@@ -71,6 +71,21 @@
 		select count(*) from notice
 	</select>
 
+	<select id="getWithTitleCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_title like '%'||#{key}||'%'
+	</select>
+
+	<select id="getWithContentCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_content like '%'||#{key}||'%'
+	</select>
+
+	<select id="getWithRegDateCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_regdate like '%'||#{key}||'%'
+	</select>
+
 	<insert id="add" parameterType="map">
 		insert into notice values (
 		notice_seq.nextVal , #{noticeTitle},

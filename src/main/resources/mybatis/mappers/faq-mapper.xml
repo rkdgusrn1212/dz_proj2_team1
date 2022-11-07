@@ -59,6 +59,21 @@
     <select id="get" parameterType="int" resultMap="faqMap">
         select * from faq where faq_no = #{faqNo}
     </select>
+    
+    <select id="getWithTitleCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_title like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithContentCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_content like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithRegDateCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_regdate like '%'||#{key}||'%'
+    </select>
 
 	<select id="getCount" resultType="Integer">
 		select count(*) from faq
