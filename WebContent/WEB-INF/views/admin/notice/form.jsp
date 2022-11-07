@@ -43,16 +43,16 @@
 
 <title>Tasty Way : 공지 폼</title>
 
-
 </head>
-<body>
+<body onload=load()>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none;">
-			<h1 class="row" style="justify-content: center;">Tasty way</h1>
+			<h1 id="adnoticetitle" class="row" style="justify-content: center; margin-top: 50px; margin-bottom:50px;;">Tasty way</h1>
 		</div>
 		<form action="./notice/form" method="post" id="form">
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
-				<input type="text" class="form-control" id="title" placeholder="제목"  name="title"/>
+				<input type="text" class="form-control" id="title" placeholder="제목"
+					name="title" />
 			</div>
 			<!-- input -->
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
@@ -70,42 +70,16 @@
 
 			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
-				<div style="float: right;">
+				<div style="float: right; margin-bottom: 30px;" id="areaBtn">
 					<input type="reset" value="취소" class="btn btn-light reset"
+						onclick="${pageContext.request.contextPath}/api/notice"
 						style="background-color: #D3D3D3; width: 70px; float: right; margin-left: 15px;" />
-					<input type="Button" value="등록" id="submitBtn" 
-						class="btn btn-light submit" href="${root}/tastyway/admin/notice"
-						style="background-color: #5F5F5F; width: 70px; float: right; color: white;" />
 				</div>
 			</div>
-
 		</form>
-
 	</div>
 </body>
 <script>
-$(function(){
-	
-	$('#submitBtn').on("click", function(){		
-		const jobj = new Object();
-		jobj.noticeTitle = $('#title').val();
-		jobj.noticeContent = $('#content').val();
-
-		const jArray = new Array();
-		jArray.push(jobj);
-		const result = JSON.stringify(jobj);
-		
-		console.log(result);
-		$.ajax({
-            url : "${pageContext.request.contextPath}/api/notice",
-            type : "post",
-            data : result,
-            dataType : "json",
-            contentType : "application/json; charset=utf-8"
-		});
-		
-	});
-});	
 
 function readMultipleImage(input) {
 
@@ -161,10 +135,101 @@ function readMultipleImage(input) {
 
     }
 }
+function load(){
+	   
+	   var id = "";
+	   id = ${id};
+	   if(id !=0 )
+	   {
+	      var id = "";
+	      id = ${id};
 
-const inputMultipleImage = document.getElementById("input-multiple-image")
-inputMultipleImage.addEventListener("change", e => {
-    readMultipleImage(e.target)
-})
+	       $.ajax({
+	           url : "${pageContext.request.contextPath}/api/notice/"+id,
+	           type : "get",
+	           //data : {},
+	           dataType : "JSON",
+	           contentType : "applicaton/json; charset=utf-8",
+	      
+	           success: function(response){
+	              console.log(response);
+	              
+	              const date = new Date(response.noticeRegDate);
+
+	            const options = {
+	              year: '2-digit',
+	              month: '2-digit',
+	              day: '2-digit'
+	            
+	            };
+	            const americanDateTime = new Intl.DateTimeFormat('en-US', options).format;
+	            console.log(americanDateTime(date));
+	              
+	              
+	              //$("#regdate").append('작성일 ' + americanDateTime(date))
+	              $("#adnoticetitle").text("공지사항 수정");
+	              $("#title").val(response.noticeTitle);      //text
+	              $("#content").html(response.noticeContent); // textarea
+	              $("#areaBtn").append("<input type='Button' value='수정' id='updateBtn' onclick='update()'  class='btn btn-light submit' style='background-color: #5F5F5F; width: 70px; float: right; color: white;' />");
+	           }
+	       });
+	   }
+	   else
+	   {
+	      $("#adnoticetitle").text("공지사항 등록");
+	       $("#areaBtn").append("<input type='Button' value='등록' id='submitBtn' onclick = 'addnoticeList()' class='btn btn-light submit' style='background-color: #5F5F5F; width: 70px; float: right; color: white;' />");
+
+	   }
+	    
+	}
+
+
+function addNoticeList(){		
+		const jobj = new Object();
+		jobj.noticeTitle = $('#title').val();
+		jobj.noticeContent = $('#content').val();
+
+		const jArray = new Array();
+		jArray.push(jobj);
+		const result = JSON.stringify(jobj);
+		
+		$.ajax({
+         url : "${pageContext.request.contextPath}/api/notice",
+         type : "post",
+         data : result,
+         dataType : "json",
+         contentType : "application/json; charset=utf-8"
+		});
+		alert('공지사항이 등록 되었습니다.');
+		location.href= "${pageContext.request.contextPath}/admin/notice";
+	}
+	
+
+	function update(){
+	    const id = ${id};
+	       const jobj = new Object();
+	       jobj.noticeTitle = $('#title').val();
+	       jobj.noticeContent = $('#content').val();
+
+	       const jArray = new Array();
+	       jArray.push(jobj);
+	       const result = JSON.stringify(jobj);
+	       
+	       console.log(result);
+	       $.ajax({
+	             url : "${pageContext.request.contextPath}/api/notice/"+id,
+	             type : "patch",
+	             data : result,
+	             dataType : "json",
+	             contentType : "application/json; charset=utf-8"
+	             });
+	             alert('공지사항이 수정 되었습니다.');
+	             location.href= "${pageContext.request.contextPath}/admin/notice";
+	       }
+	const inputMultipleImage = document.getElementById("input-multiple-image")
+	inputMultipleImage.addEventListener("change", e => {
+	    readMultipleImage(e.target)
+	})
+
 </script>
 </html>

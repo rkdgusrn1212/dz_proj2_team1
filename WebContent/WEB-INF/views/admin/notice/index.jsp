@@ -82,8 +82,8 @@ const getNoticeList = (page)=>{
 	                                +notice.noticeTitle+"</td><td class='text-truncate'>"
 	                                +notice.noticeContent+"</td><td class='text-truncate'>"
 	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>"
-	                                +"<td class='text-center text-truncate'><a style='text-decoration: none;' type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span>"+
-	                                "&nbsp;&nbsp; <span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
+	                                +"<td class='text-center text-truncate'><a style='text-decoration: none;' type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a>"+
+	                                "&nbsp;&nbsp; <a style='text-decoration:none;' type='button' href= 'notice/form?id="+notice.noticeNo+"'><span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
 	                    }
 	                    for(idx ; idx<10; idx++){
 	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
