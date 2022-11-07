@@ -48,7 +48,7 @@ $(".delete-notice-anchor").on("click", ()=>{
 
 const getNoticeList = (page)=>{
 	 $.ajax({
-	        url : "${root}/api/notice/page/count",
+	        url : "${root}/api/notice/page/count",		
 	        type : "get",
 	        dataType : "JSON",
 	        contentType : "applicaton/json; charset=utf-8",
