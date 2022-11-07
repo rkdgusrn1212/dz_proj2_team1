@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/customer/notice")
@@ -18,9 +19,10 @@ public class NoticeController {
 	}
 
 	@RequestMapping("/detail")
-	public String noticeDetailPage(Model model) {
+	public String noticeDetailPage(Model model, @RequestParam(required = true) int id) {
 		model.addAttribute("containerHeader", "customer/header");
 		model.addAttribute("innerPage", "customer/notice/detail");
+		model.addAttribute("id", id);
 		return "pageContainer";
 	}
 }
