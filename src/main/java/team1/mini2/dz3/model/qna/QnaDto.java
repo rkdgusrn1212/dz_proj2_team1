@@ -1,4 +1,4 @@
-package team1.mini2.dz3.model;
+package team1.mini2.dz3.model.qna;
 
 import java.util.Date;
 

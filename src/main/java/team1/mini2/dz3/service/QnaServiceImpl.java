@@ -4,166 +4,100 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
-import team1.mini2.dz3.controller.api.exception.NotMatchMapException;
-import team1.mini2.dz3.model.QnaDao;
-import team1.mini2.dz3.model.QnaDto;
+import team1.mini2.dz3.model.qna.QuestionWithNoAuthDto;
+import team1.mini2.dz3.model.qna.QuestionWithNoAuthWithIdDto;
+import team1.mini2.dz3.model.qna.PageVo;
+import team1.mini2.dz3.model.qna.QnaDao;
+import team1.mini2.dz3.model.qna.QnaDto;
+import team1.mini2.dz3.model.qna.QnaSearchKeyDto;
+import team1.mini2.dz3.model.qna.QuestionWithAuthDto;
+import team1.mini2.dz3.model.qna.QuestionWithAuthWithIdDto;
 
-@Component
+
+@Service
 public class QnaServiceImpl implements QnaService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+
 	@Override
-	public List<QnaDto> getQnaPage(int page, Map<String, String> optMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitleKey", "qnaContentKey", "qnaPublicKey", "qnaWriterKey", "qnaReplyKey", "dateStart", "dateEnd", "replyDateStart", "replyDateEnd"};
-		for(String key : keys) {
-			String val = optMap.get(key);
-			if(val!=null) {
-				map.put(key, val);
-			}
+	public List<QnaDto> getQnaPage(@Min(1) int page, @Valid QnaSearchKeyDto optKey) {
+		if(optKey==null) {
+			optKey = new QnaSearchKeyDto();
 		}
-		if(optMap.size()!=map.size()) {
-			throw new NotMatchMapException();//잘못된 컬럼명 입력은 실행에는 문제없지만 사용자 편의를 위해 오류처리.
-		}
-		map.putAll(PageCalculator.getPageIdx(page));
-		return sqlSession.getMapper(QnaDao.class).getList(map);
+		optKey.setPageVo(new PageVo(page));
+		return sqlSession.getMapper(QnaDao.class).getList(optKey);
 	}
 
 	@Override
-	public int getQnaPageCount(Map<String, String> optMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitleKey", "qnaContentKey", "qnaPublicKey", "qnaWriterKey", "qnaReplyKey", "dateStart", "dateEnd", "replyDateStart", "replyDateEnd"};
-		for(String key : keys) {
-			String val = optMap.get(key);
-			if(val!=null) {
-				map.put(key, val);
-			}
+	public int getQnaPageCount(@Valid QnaSearchKeyDto optKey) {
+		if(optKey==null) {
+			optKey = new QnaSearchKeyDto();
 		}
-		if(optMap.size()!=map.size()) {
-			throw new NotMatchMapException();//잘못된 컬럼명 입력은 실행에는 문제없지만 사용자 편의를 위해 오류처리.
-		}
-		return PageCalculator.getPageCount(sqlSession.getMapper(QnaDao.class).getCount(optMap));
+		return PageVo.calculatePageCount(sqlSession.getMapper(QnaDao.class).getCount(optKey));
 	}
 
 	@Override
-	public int getQnaCount(Map<String, String> optMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitleKey", "qnaContentKey", "qnaPublicKey", "qnaWriterKey", "qnaReplyKey", "dateStart", "dateEnd", "replyDateStart", "replyDateEnd"};
-		for(String key : keys) {
-			String val = optMap.get(key);
-			if(val!=null) {
-				map.put(key, val);
-			}
+	public int getQnaCount(@Valid QnaSearchKeyDto optKey) {
+		if(optKey==null) {
+			optKey = new QnaSearchKeyDto();
 		}
-		if(optMap.size()!=map.size()) {
-			throw new NotMatchMapException();//잘못된 컬럼명 입력은 실행에는 문제없지만 사용자 편의를 위해 오류처리.
-		}
-		return sqlSession.getMapper(QnaDao.class).getCount(optMap);
+		return sqlSession.getMapper(QnaDao.class).getCount(optKey);
 	}
 
 	@Override
-	public QnaDto getQna(int qnaNo) {
+	public QnaDto getQna(@Min(1) int qnaNo) {
 		return sqlSession.getMapper(QnaDao.class).get(qnaNo);
 	}
 
+	
 	@Override
-	public boolean addAnswer(int qnaNo, @NonNull String reply) {
-		Map<String, String> map = new HashMap<>();
+	public boolean setAnswer(@Min(1) int qnaNo, @NotNull @Size(max=1000) String reply) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaNo", qnaNo);
 		map.put("qnaReply", reply);
-		map.put("qnaNo", Integer.toString(qnaNo));
 		return sqlSession.getMapper(QnaDao.class).setAnswer(map)>0;
 	}
 
 	@Override
-	public boolean removeAnswer(int qnaNo) {
+	public boolean removeAnswer(@Min(1) int qnaNo) {
 		return sqlSession.getMapper(QnaDao.class).removeAnswer(qnaNo)>0;
 	}
 
 	@Override
-	public boolean setAnswer(int qnaNo, @NonNull String reply) {
-		Map<String, String> map = new HashMap<>();
-		map.put("qnaReply", reply);
-		map.put("qnaNo", Integer.toString(qnaNo));
-		return sqlSession.getMapper(QnaDao.class).setQuestion(map)>0;
+	public boolean addQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthDto questionDto){
+		return sqlSession.getMapper(QnaDao.class).addWithoutAuth(questionDto)>0;
 	}
 
 	@Override
-	public boolean addQuestionWithoutAuth(@NonNull Map<String, String> questionMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitle", "qnaContent", "qnaPublic", "qnaNonMember", "qnaPwd"};
-		for(String key : keys) {
-			String val = questionMap.get(key);
-			if(val==null) {
-				throw new NotMatchMapException();
-			}
-			map.put(key, val);
-		}
-		if(map.size()!=questionMap.size()) {
-			throw new NotMatchMapException();//잘못된 컬럼명 제거
-		}
-		return sqlSession.getMapper(QnaDao.class).add(map)>0;
+	public boolean addQuestionWtihAuth(@Valid @NotNull QuestionWithAuthDto questionDto){
+		return sqlSession.getMapper(QnaDao.class).addWithAuth(questionDto)>0;
 	}
 
 	@Override
-	public boolean addQuestionWtihAuth(@NonNull Map<String, String> questionMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitle", "qnaContent", "qnaPublic", "qnaWriter"};
-		for(String key : keys) {
-			String val = questionMap.get(key);
-			if(val==null) {
-				throw new NotMatchMapException();
-			}
-			map.put(key, val);
-		}
-		if(map.size()!=questionMap.size()) {
-			throw new NotMatchMapException();//잘못된 컬럼명 아웃
-		}
-		return sqlSession.getMapper(QnaDao.class).add(map)>0;
+	public boolean setQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthWithIdDto questionDto){
+		return sqlSession.getMapper(QnaDao.class).setQuestionWithoutAuth(questionDto)>0;
+	}
+	
+	@Override
+	public boolean setQuestionWithAuth(@NonNull QuestionWithAuthWithIdDto questionDto) {
+		return sqlSession.getMapper(QnaDao.class).setQuestionWithAuth(questionDto)>0;
 	}
 
+	
 	@Override
-	public boolean setQuestionWithoutAuth(int qnaNo, @NonNull Map<String, String> questionMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitle", "qnaContent", "qnaPublic", "qnaNonMember", "qnaPwd"};
-		for(String key : keys) {
-			String val = questionMap.get(key);
-			if(val!=null) {
-				map.put(key, val);
-			}
-		}
-		if(map.size()<1||map.size()!=questionMap.size()) {//잘못된 컬럼명도 걸러냄
-			throw new NotMatchMapException();
-		}
-		map.put("qnaNo", Integer.toString(qnaNo));
-		return sqlSession.getMapper(QnaDao.class).setQuestion(map)>0;
-	}
-
-	@Override
-	public boolean setQuestionWithAuth(int qnaNo, @NonNull Map<String, String> questionMap) throws NotMatchMapException {
-		Map<String, String> map = new HashMap<>();
-		String[] keys = {"qnaTitle", "qnaContent", "qnaPublic"};
-		for(String key : keys) {
-			String val = questionMap.get(key);
-			if(val!=null) {
-				map.put(key, val);
-			}
-		}
-		if(map.size()<1||map.size()!=questionMap.size()) {
-			throw new NotMatchMapException();
-		}
-		map.put("qnaNo", Integer.toString(qnaNo));
-		return sqlSession.getMapper(QnaDao.class).setQuestion(map)>0;
-	}
-
-	@Override
-	public boolean removeQna(int qnaNo) {
+	public boolean removeQna(@Min(1) int qnaNo) {
 		return sqlSession.getMapper(QnaDao.class).remove(qnaNo)>0;
 	}
 }

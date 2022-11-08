@@ -1,39 +1,46 @@
 package team1.mini2.dz3.service;
 
 import java.util.List;
-import java.util.Map;
 
-import lombok.NonNull;
-import team1.mini2.dz3.controller.api.exception.NotMatchMapException;
-import team1.mini2.dz3.model.QnaDto;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.springframework.validation.annotation.Validated;
+import team1.mini2.dz3.model.qna.QuestionWithNoAuthDto;
+import team1.mini2.dz3.model.qna.QuestionWithNoAuthWithIdDto;
+import team1.mini2.dz3.model.qna.QnaDto;
+import team1.mini2.dz3.model.qna.QnaSearchKeyDto;
+import team1.mini2.dz3.model.qna.QuestionWithAuthDto;
+import team1.mini2.dz3.model.qna.QuestionWithAuthWithIdDto;
+
+@Validated
 public interface QnaService {
 	
 	/**
-	 * 해당 페이지의 Q&A 목록을 반환
-	 * @param page 결과중 반환해야할 페이지. 수없이 많은 데이터중, 몇 번째 페이지 데이터를 반환할지를 가리킨다.
-	 * @param optMap 검색 옵션, null이거나 제공하는 옵션과 일치하는 키 값이 없다면, 옵션 없이 검색된다.
-	 * @return Q&A 목록을 반환, 존재하지 않는 페이지(음수이거나 전체 페이지수보다 높은 페이지)는 EmptyList. 
-	 * @throws NotMatchMapException 
+	 * 전체 검색을 수행, {@code optKey}를 검색 조건에 추가할 수 있다. 검색 결과의 {@code page} 페이지만 반환된다.
+	 * @param page 반환할 페이지
+	 * @param optKey 검색 옵션, null이거나 제공하는 옵션 키 값이 하나도 없다면 조건 없이 검색된다.
+	 * @return 검색 수행결과 리스트, 해당 페이지가 결과 목록을 벗어난다면 리스트가 비어있을 수 있다.
 	 */
-	List<QnaDto> getQnaPage(int  page, Map<String, String> optMap) throws NotMatchMapException;
-	
-	/**
-	 * 해당 검색 조건에 해당하는 결과의 전체 페이지 수.
-	 * @param optMap 검색 옵션, null이거나 제공하는 옵션 키 값이 하나도 없다면 옵션 없이 검색된다.
-	 * @return 목록의 아이템이 1개라도 있는 페이지 수를 반환한다. 즉, 전체 Q&A가 0개일때는 0을 반환한다.
-	 * @throws NotMatchMapException 
-	 */
-	int getQnaPageCount(Map<String, String> optMap) throws NotMatchMapException;
+	List<QnaDto> getQnaPage(@Min(1) int  page, @Valid QnaSearchKeyDto optKey);
 	
 	
 	/**
-	 * 해당 검색 조건에 해당하는 결과의 수.
-	 * @param optMap 검색 옵션, null이거나 제공하는 옵션 키 값이 하나도 없다면 옵션 없이 검색된다.
+	 * 전체 검색을 수행한 결과 레코드의 페이지 수를 반환한다. 검색에 조건을 추가할 수 있다.
+	 * @param optKey 검색 옵션, null이거나 제공하는 옵션 키 값이 하나도 없다면 조건 없이 검색된다.
+	 * @return 비어있지 않은 페이지 수를 반환. 즉, 검색 결과의 페이지 수.
+	 */
+	int getQnaPageCount(@Valid QnaSearchKeyDto optKey);
+	
+	
+	/**
+	 * 전체 검색을 수행한 결과 레코드 수를 반환한다. 검색에 조건을 추가할 수 있다.
+	 * @param optKey 검색 옵션, null이거나 제공하는 옵션 키 값이 하나도 없다면 조건 없이 검색된다.
 	 * @return 검색 결과의 전체 항목 수를 반환.
-	 * @throws NotMatchMapException 
 	 */
-	int getQnaCount(Map<String, String> optMap) throws NotMatchMapException;
+	int getQnaCount(@Valid QnaSearchKeyDto optKey);
 	
 	
 	/**
@@ -41,67 +48,56 @@ public interface QnaService {
 	 * @param qnaNo Q&A 게시글 번호
 	 * @return Q&A 게시글, 해당 게시글이 없으면 null
 	 */
-	QnaDto getQna(int qnaNo);
-	
-	/**
-	 * 관리자의 답글 작성
-	 * @param qnaNo Q&A 번호 
-	 * @param reply 답변, non-null이다.
-	 * @return 트랜잭션 성공 여부 반환.
-	 */
-	boolean addAnswer(int qnaNo, @NonNull String reply);
+	QnaDto getQna(@Min(1) int qnaNo);
+
 	
 	/**
 	 * 관리자 답글 삭제
-	 * @param qnaNo
-	 * @return 트랜잭션 성공 여부 반환.
+	 * @param qnaNo Q&A 번호
+	 * @return 삭제 성공 여부 반환.
 	 */
-	boolean removeAnswer(int qnaNo);
+	boolean removeAnswer(@Min(1)int qnaNo);
 	
 	/**
 	 * 답글 갱신
 	 * @param qnaNo
 	 * @param reply
-	 * @return 트랜잭션 성공 여부 반환.
+	 * @return 성공 여부 반환, {@code qnaNo}를 가진 Q&A가 없으면 실패.
 	 */
-	boolean setAnswer(int qnaNo, @NonNull String reply);
+	boolean setAnswer(@Min(1) int qnaNo, @NotNull @Size(max=1000) String reply);
 	
 	/**
-	 * 미인증 Q&A 글을 작성.
-	 * @param questionMap. 필수 키값 qnaTitle, qnaContent, qnaPublic, qnaNoMember, qnaPwd
-	 * @return 트랜잭션 성공 여부 반환. 필수 키값들이 없으면 false.
-	 * @throws NotMatchMapException 
+	 * 미인증 질문 글 작성
+	 * @param questionDto 미인증 질문 글 내용.
+	 * @return 질문 글 작성 성공여부. 알수 없는 이유로 실패할 수 있음.
 	 */
-	boolean addQuestionWithoutAuth(@NonNull Map<String, String> questionMap) throws NotMatchMapException;
+	boolean addQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthDto questionDto);
+	
 	/**
-	 * 인증 Q&A 글을 작성.
-	 * @param questionMap. 필수 키값 qnaTitle, qnaContent, qnaPublic, qnaWriter
-	 * @return 트랜잭션 성공 여부 반환.
-	 * @throws NotMatchMapException 
+	 * 인증 질문 글 작성
+	 * @param questionDto 인증 질문 글 내용
+	 * @return 질문 글 작성 성공여부. 알수 없는 이유로 실패할 수 있음.
 	 */
-	boolean addQuestionWtihAuth(@NonNull Map<String, String> questionMap) throws NotMatchMapException;
+	boolean addQuestionWtihAuth(@Valid @NotNull QuestionWithAuthDto questionDto);
+	
 	/**
-	 * 미인증 Q&A 글을 수정.
-	 * @param qnaNo 대상 Q&A 번호
-	 * @param valMap 업데이트할 컬럼-값의 맵.
-	 *  qnaTitle, qnaContent, qnaPublic, qnaNonMember, qnaPwd 이외의 컬럼은 갱신하지 않는다. Non-null
-	 * @return 트랜잭션 성공 여부 반환.
-	 * @throws NotMatchMapException 
+	 * 미인증 질문 글 수정
+	 * @param questionDto 새로 갱신될 미인증 질문 글 내용
+	 * @return 갱신 성공 여부 반환. 주로 {@code qnaNo}의 해당하는 개시글이 없어서 실패할 수 있다.
 	 */
-	boolean setQuestionWithoutAuth(int qnaNo, @NonNull Map<String, String> valMap) throws NotMatchMapException;
+	boolean setQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthWithIdDto questionDto);
+	
 	/**
-	 * 인증 Q&A 글을 수정.
-	 * @param qnaNo 대상 Q&A 번호
-	 * @param map 업데이트할 컬럼-값의 맵. qnaTitle, qnaContent, qnaPublic 이외의 컬럼은 갱신되지 않는다. Non-null
-	 * @return 트랜잭션 성공 여부 반환.
-	 * @throws NotMatchMapException 
+	 * 인증 질문 글 수정
+	 * @param questionDto 새로 갱신될 인증 글 내용
+	 * @return 갱신 실패 여부 반환. 주로 {@code qnaNo}의 해당하는 개시글이 없어서 실패할 수 있다.
 	 */
-	boolean setQuestionWithAuth(int qnaNo, @NonNull Map<String, String> valMap) throws NotMatchMapException;
+	boolean setQuestionWithAuth(@Valid @NotNull QuestionWithAuthWithIdDto questionDto);
 	
 	/**
 	 * Q&A 게시글을 삭제
 	 * @param qnaNo Q&A번호
-	 * @return 트랜잭션 성공 여부 반환
+	 * @return 삭제 성공 여부 반환. 주로 {@code qnaNo}의 해당하는 개시글이 없어서 실패할 수 있다.
 	 */
-	boolean removeQna(int qnaNo);
+	boolean removeQna(@Min(1) int qnaNo);
 }
