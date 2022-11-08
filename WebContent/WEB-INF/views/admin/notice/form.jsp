@@ -177,7 +177,7 @@ function load(){
 	   else
 	   {
 	      $("#adnoticetitle").text("공지사항 등록");
-	       $("#areaBtn").append("<input type='Button' value='등록' id='submitBtn' onclick = 'addnoticeList()' class='btn btn-light submit' style='background-color: #5F5F5F; width: 70px; float: right; color: white;' />");
+	       $("#areaBtn").append("<input type='Button' value='등록' id='submitBtn' onclick = 'addNoticeList()' class='btn btn-light submit' style='background-color: #5F5F5F; width: 70px; float: right; color: white;' />");
 
 	   }
 	    
