@@ -14,10 +14,5 @@
 	<jsp:include page="/WEB-INF/views/${innerPage}.jsp"></jsp:include>
 	<!--재귀호출 조심 -->
 	<%@ include file="/WEB-INF/views/footer.jsp"%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/prism.js"
-		data-manual></script>
-	<script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
 </body>
 </html>

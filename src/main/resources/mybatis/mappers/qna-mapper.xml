@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.qna.QnaDao">
+
+	<resultMap id="qnaMap" type="QnaDto">
+		<result property="qnaNo" column="qna_no"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="qnaTitle" column="qna_title"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="qnaContent" column="qna_content"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="qnaRegDate" column="qna_regdate"
+			javaType="java.util.Date" jdbcType="DATE" />
+		<result property="qnaWriter" column="qna_writer"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="qnaNonMember" column="qna_nonmember"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="qnaPwd" column="qna_pwd"
+			javaType="java.lang.String" jdbcType="CHAR" />
+		<result property="qnaPublic" column="qna_public"
+			javaType="java.lang.Character" jdbcType="CHAR" />
+		<result property="qnaReply" column="qna_reply"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="qnaReplyRegDate" column="qna_reply_regdate"
+			javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+
+	<select id="getList" parameterType="QnaSearchKeyDto"
+		resultMap="qnaMap">
+		select *
+		from
+		(select A.*, ROWNUM r from
+		(select * from qna where 1=1
+		<if test="titleKey != null">
+			and qna_title like '%'||#{titleKey}||'%'
+		</if>
+		<if test="contentKey != null">
+			and qna_content like '%'||#{contentKey}||'%'
+		</if>
+		<if test="writerKey != null">
+			and qna_nonmember like '%'||#{writerKey}||'%' <!--나중에 member조인 추가해야함 -->
+		</if>
+		<if test="dateStart != null">
+			and qna_regdate >= to_date(#{dateStart},'YYYYMMDD')
+		</if>
+		<if test="dateEnd != null">
+			and qna_regdate
+			&lt;= to_date(#{dateEnd},'YYYYMMDD')
+		</if>
+		<if test="replyKey != null">
+			and qna_content like '%'||#{qnaKey.replyKey}||'%'
+		</if>
+		<if test="replyDateStart != null">
+			and qna_reply_regdate >=
+			to_date(#{replyDateStart},'YYYYMMDD')
+		</if>
+		<if test="replyDateEnd != null">
+			and qna_reply_regdate
+			&lt;=
+			to_date(#{replayDateEnd},'YYYYMMDD')
+		</if>
+
+
+		order by qna_no desc) A
+		)
+		where r >= #{pageVo.start} and r &lt;=
+		#{pageVo.end}
+	</select>
+
+	<select id="get" parameterType="int" resultMap="qnaMap">
+		select * from
+		qna
+		where qna_no = #{qnaNo}
+	</select>
+
+	<select id="getCount" resultType="int"
+		parameterType="QnaSearchKeyDto">
+		select count(*) from qna where 1=1
+		<if test="titleKey != null">
+			and qna_title like '%'||#{titleKey}||'%'
+		</if>
+		<if test="contentKey != null">
+			and qna_content like '%'||#{contentKey}||'%'
+		</if>
+		<if test="writerKey != null">
+			and qna_nonmember like '%'||#{writerKey}||'%' <!--나중에 member조인 추가해야함 -->
+		</if>
+		<if test="dateStart != null">
+			and qna_regdate >= to_date(#{dateStart},'YYYYMMDD')
+		</if>
+		<if test="dateEnd != null">
+			and qna_regdate
+			&lt;= to_date(#{dateEnd},'YYYYMMDD')
+		</if>
+		<if test="replyKey != null">
+			and qna_content like '%'||#{replyKey}||'%'
+		</if>
+		<if test="replyDateStart != null">
+			and qna_reply_regdate >=
+			to_date(#{replyDateStart},'YYYYMMDD')
+		</if>
+		<if test="replyDateEnd != null">
+			and qna_reply_regdate
+			&lt;=
+			to_date(#{replayDateEnd},'YYYYMMDD')
+		</if>
+	</select>
+
+	<insert id="addWithoutAuth"
+		parameterType="QuestionWithNoAuthDto">
+		insert into qna values (
+		qna_seq.nextVal , #{qnaTitle},
+		#{qnaContent},
+		sysdate,
+		null, #{qnaNonMember}, #{qnaPwd},
+		#{qnaPublic},
+		null, null)
+	</insert>
+
+	<insert id="addWithAuth" parameterType="QuestionWithAuthDto">
+		insert into qna values (
+		qna_seq.nextVal , #{qnaTitle},
+		#{qnaContent},
+		sysdate,
+		#{qnaWriter},
+		null, null,
+		#{qnaPublic}, null, null)
+	</insert>
+
+	<update id="setQuestionWithoutAuth"
+		parameterType="QuestionWithNoAuthWithIdDto">
+		update qna set
+		qna_title = #{qnaTitle},
+		qna_content =
+		#{qnaContent},
+		qna_nonmember = #{qnaNonMember},
+		qna_pwd = #{qnaPwd},
+		qna_public = #{qnaPublic},
+		qna_regdate = sysdate
+		where qna_no = #{qnaNo}
+	</update>
+
+	<update id="setQuestionWithAuth"
+		parameterType="QuestionWithAuthWithIdDto">
+		update qna set
+		qna_title = #{qnaTitle},
+		qna_content =
+		#{qnaContent},
+		qna_writer = #{qnaWriter},
+		qna_public = #{qnaPublic},
+		qna_regdate = sysdate
+		where qna_no = #{qnaNo}
+	</update>
+
+
+	<update id="setAnswer" parameterType="map">
+		update qna set
+		qna_reply =
+		#{qnaReply},
+		qna_reply_regdate = sysdate
+		where qna_no = #{qnaNo}
+	</update>
+
+	<update id="removeAnswer" parameterType="int">
+		update qna set
+		qna_reply=null,
+		qna_reply_regdate=null
+		where qna_no = #{qnaNo}
+	</update>
+
+	<delete id="remove" parameterType="int">
+		delete from qna where
+		qna_no =
+		#{qnaNo}
+	</delete>
+
+</mapper>

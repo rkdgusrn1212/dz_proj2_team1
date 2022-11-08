@@ -1,68 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Tasty Way : 공지 메인</title>
+<style type="text/css">
+#line {
+	height: 50px;
+	border-top: 1px solid #d3d3d3;
+	border-bottom: 1px solid #d3d3d3;
+}
+</style>
+
+<!-- css 초기화 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+<link rel="stylesheet" href="${root}/resources/css/reset.css">
 <!-- 부트스트랩 연결 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
-	<script>
-	$(document).ready(()=>{
-		$.ajax({
-			url : "${pageContext.request.contextPath}/api/notice/page/1",
-            type : "get",
-            dataType : "JSON",
-            contentType : "applicaton/json; charset=utf-8",
-            success: function(response) {
-            	for(idx in response){
-                    $("#notice-list").append("<p>"+JSON.stringify(response[idx])+"</p>");
-            	}
-            }
-		});
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
+<!-- jQuery 라이브러리 호출 -->
+<script>
+ $(document).ready(()=>{
+	$.ajax({
+		url : "${pageContext.request.contextPath}/api/notice/page/1",
+        type : "get",
+        dataType : "JSON",
+        contentType : "applicaton/json; charset=utf-8",
+        success: function(response) {
+        	console.log(response);
+        	for(idx in response){
+                $("#notice-list").append("<tr id = 'line'><td align='center'>" + response[idx].noticeNo + "</td>" +
+                        "<td><a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+response[idx].noticeNo + ">	"+ response[idx].noticeTitle + "</a></td>"
+                        + "<td>" + new Date(response[idx].noticeRegDate) +" </td><tr>"); 
+        	}
+        }
 	});
-	</script>
-</head>
+}); 
+ 
+ 
+</script>
+
 </head>
 <body>
-  <!-- 블록 범위 찍기 -->
-                        <div id="notice-list">
-                        </div>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none; margin-top: 10%">
-			<h1 class="row" style="justify-content: center;">
-				공지사항
-			</h1>
+			<h1 class="row" style="justify-content: center;">공지사항</h1>
 			<div class="row" style="float: none; margin: 0 auto;">
-				<table width="800px" style="text-align: center;">
-					<tr bgcolor="#F3F3F3"
-						style="height: 50px; border-top: 1px solid #d3d3d3; border-bottom: 1px soild #d3d3d3;">
+				<table class = "table" width="800px" style="text-align: center; " id="notice-list">
+					<tr class="table-secondary"
+						style="height: 50px; ">
 						<th>No</th>
 						<th>Content</th>
-						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
-					<c:forEach var="list" items="${ list }">
-						<tr bgcolor="#FFF"
-							style="height: 50px; border-top: 1px solid #d3d3d3; border-bottom: 1px soild #d3d3d3;">
-							<td>${ list.noticeNo }</td>
-							<td><a
-								href="javascript:location.href='notice/detail?id=${ list.noticeNo }' ">${ list.noticeTitle }</a></td>
-							<td>${ list.noticeWriter }</td>
-						</tr>
-					</c:forEach>
+					<!-- jQuery로 출력 -->
 				</table>
 			</div>
 			<!--  --------------------페이지 링크----------------------------------     -->
 			<div class="row" style="float: none; margin: 0 auto;">
 				<div class="test">
-					<ul class="pagination pagination-lg"  style="justify-content: center;">
+					<ul class="pagination pagination-lg"
+						style="justify-content: center;">
 						<!-- 처음 이전 링크 -->
 						<c:if test="${pg>block}">
 							<!-- 5>10 : false / 15>10 : true -->
@@ -121,17 +130,16 @@
 
 			<!-- -------------------------------------검색기능-------------------------------------------------- -->
 
-			<div class="row" style="float: none; margin: 0 auto; width : 525px;">
-				<form action="./notice" method="GET" >
+			<div class="row" style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
+				<form action="./notice" method="GET">
 					<select class="form-select" id="exampleSelect1" name="opt"
 						style="width: 100px; float: left;">
 						<option value="notice_title">제목</option>
 						<option value="notice_content">내용</option>
-					</select> 
-					<input type="text" name="key" class="form-control"
-						style="width: 300px; float: left; margin-left : 15px;"> <input type="submit"
-						value="검색" class="btn btn-light"
-						style="background-color: #d3d3d3; width: 70px; float : left; margin-left: 15px;">
+					</select> <input type="text" name="key" class="form-control"
+						style="width: 300px; float: left; margin-left: 15px;"> <input
+						type="submit" value="검색" class="btn btn-light"
+						style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;">
 				</form>
 			</div>
 		</div>
