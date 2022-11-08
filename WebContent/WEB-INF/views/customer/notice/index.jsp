@@ -47,7 +47,7 @@
 		<div class="col" style="float: none; margin-top: 10%">
 			<h1 class="row" style="justify-content: center;">공지사항</h1>
 			<div class="row" style="float: none; margin: 0 auto;">
-				<table class="table table-hover" id="test">
+				<table class="table table-hov	er" id="test" style="text-align: center;">
 					<thead>
 						<tr>
 
