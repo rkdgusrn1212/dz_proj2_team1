@@ -7,6 +7,6 @@
 <title>Tasty Way : 공지 상세</title>
 </head>
 <body>
-
+test
 </body>
 </html>

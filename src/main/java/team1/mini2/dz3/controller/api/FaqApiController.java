@@ -18,7 +18,7 @@ import team1.mini2.dz3.model.FaqDto;
 import team1.mini2.dz3.service.FaqServiceImpl;
 
 @RestController
-@RequestMapping("/faq") //faq라고 치면
+@RequestMapping("/faq")
 public class FaqApiController {
 	
 	@Autowired
@@ -61,12 +61,32 @@ public class FaqApiController {
 	}
 	
 	@GetMapping("/count")
-	public int getFaqCount() {
+	public int getFaqCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key){
+		if(opt!=null&&key!=null) {
+			switch(opt) {
+			case "faqTitle":
+				return faqService.getFaqWithTitleCount(key);
+			case "faqContent":
+				return faqService.getFaqWithContentCount(key);
+			case "faqRegDate":
+				return faqService.getFaqWithRegDateCount(key);
+			}
+		}
 		return faqService.getFaqCount();
 	}
 	
 	@GetMapping("/page/count")
-	public int getFaqPageCount() {
+	public int getFaqPageCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key){
+		if(opt!=null&&key!=null) {
+			switch(opt) {
+			case "faqTitle":
+				return faqService.getFaqPageWithTitleCount(key);
+			case "faqContent":
+				return faqService.getFaqPageWithContentCount(key);
+			case "faqRegDate":
+				return faqService.getFaqPageWithRegDateCount(key);
+			}
+		}
 		return faqService.getFaqPageCount();
 	}
 }

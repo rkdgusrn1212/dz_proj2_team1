@@ -10,6 +10,12 @@ public interface NoticeService {
 	List<NoticeDto> getNoticePageWithTitle(int page, String key);
 	List<NoticeDto> getNoticePageWithContent(int page, String key);
 	List<NoticeDto> getNoticePageWithRegDate(int page, String key);
+	int getNoticePageWithTitleCount(String key);
+	int getNoticePageWithContentCount(String key);
+	int getNoticePageWithRegDateCount(String key);
+	int getNoticeWithTitleCount(String key);
+	int getNoticeWithContentCount(String key);
+	int getNoticeWithRegDateCount(String key);
 	NoticeDto getNotice(int noticeNo);
 	void addNotice(Map<String, String> map);
 	void removeNotice(int noticeNo);

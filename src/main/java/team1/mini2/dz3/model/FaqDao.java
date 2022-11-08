@@ -8,6 +8,9 @@ public interface FaqDao {
 	List<FaqDto> getListWithTitle(Map<String, String> map);
 	List<FaqDto> getListWithContent(Map<String, String> map);
 	List<FaqDto> getListWithRegDate(Map<String, String> map);
+	int getWithTitleCount(String key);
+	int getWithContentCount(String key);
+	int getWithRegDateCount(String key);
 	FaqDto get(int faqNo);
 	int getCount();
 	void add(Map<String, String> map);

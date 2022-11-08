@@ -33,7 +33,8 @@
 		where notice_title like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and
+		where r
+		>= #{start} and
 		r &lt;= #{end}
 	</select>
 
@@ -41,20 +42,24 @@
 		resultMap="noticeMap">
 		select *
 		from (select A.*, ROWNUM r from
-		(select * from notice where notice_content like '%'||#{key}||'%'
+		(select * from notice
+		where notice_content like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and r &lt;= #{end}
+		where
+		r >= #{start} and r &lt;= #{end}
 	</select>
 
 	<select id="getListWithRegDate" parameterType="map"
 		resultMap="noticeMap">
 		select *
 		from (select A.*, ROWNUM r from
-		(select * from notice where notice_regdate like '%'||#{key}||'%'
+		(select * from notice
+		where notice_regdate like '%'||#{key}||'%'
 		order by notice_no) A
 		)
-		where r >= #{start} and r &lt;= #{end}
+		where
+		r >= #{start} and r &lt;= #{end}
 	</select>
 
 	<select id="get" parameterType="int" resultMap="noticeMap">
@@ -64,6 +69,21 @@
 
 	<select id="getCount" resultType="Integer">
 		select count(*) from notice
+	</select>
+
+	<select id="getWithTitleCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_title like '%'||#{key}||'%'
+	</select>
+
+	<select id="getWithContentCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_content like '%'||#{key}||'%'
+	</select>
+
+	<select id="getWithRegDateCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from notice where notice_regdate like '%'||#{key}||'%'
 	</select>
 
 	<insert id="add" parameterType="map">

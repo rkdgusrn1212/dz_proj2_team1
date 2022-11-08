@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="team1.mini2.dz3.model.FaqDao">
-	<!-- db/자바 id 일치하도록 변환  java 타입 / jdbc 타입 -->
+
 	<resultMap id="faqMap" type="FaqDto">
 		<result property="faqNo" column="faq_no" javaType="java.lang.Integer"
 			jdbcType="INTEGER" />
@@ -58,6 +58,21 @@
     
     <select id="get" parameterType="int" resultMap="faqMap">
         select * from faq where faq_no = #{faqNo}
+    </select>
+    
+    <select id="getWithTitleCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_title like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithContentCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_content like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithRegDateCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_regdate like '%'||#{key}||'%'
     </select>
 
 	<select id="getCount" resultType="Integer">

@@ -29,5 +29,4 @@ public class AboutController {
 		model.addAttribute("innerPage", "about/service");
 		return "pageContainer";
 	}
-	
 }

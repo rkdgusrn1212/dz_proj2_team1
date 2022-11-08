@@ -6,7 +6,7 @@ CREATE TABLE QNA( -- 고객센터 QnA 테이블
     QNA_WRITER  		NUMBER,						-- 회원 작성자	FK ( MEMBER 테이블 PK 참조 )
     QNA_NONMEMBER	VARCHAR2(64),					-- 비회원 작성자
     QNA_PWD		VARCHAR2(64)	NOT NULL,			-- 비회원 작성시 비밀번호
-    QNA_PUBLIC		BOOLEAN	DEFAULT 0,			-- 공개여부 (기본값 0 비공개)
+    QNA_PUBLIC		NUMBER	DEFAULT 0,			-- 공개여부 (기본값 0 비공개)
     QNA_REPLY		VARCHAR2(512)					-- 답글
     CONSTRAINT 	
     FK_SERVICE FOREIGN KEY(QNA_WRITER) REFERENCES MEMBER(MEMBER_NO) ON DELETE CASCADE
