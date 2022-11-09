@@ -33,7 +33,8 @@ public class AuthConfig{
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers("/member/login", "/auth/login", "/resources/**");
+		return (web) -> web.ignoring().antMatchers(
+				"/**/login", "/**/signup", "/resources/**");
 	}
 
 	@Bean

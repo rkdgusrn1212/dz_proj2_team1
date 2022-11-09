@@ -5,17 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- 부트스트랩 연결 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-
 <!-- css 연결 -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/auth.css">
+<link rel="stylesheet" href="${root}/resources/css/reset.css">
+<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${root}/resources/css/auth.css">
+</head>
+<script>
+const sendRequest = (elem)=>{
+    $.ajax({
+        url : "${root}/auth/signup",
+        type : "post",
+        contentType:"application/json;charset=utf-8",
+        data:JSON.stringify({
+            authId : $("#id-input").val(),
+            authPwd : $("#pwd-input").val()
+        }),
+        dataType : "json",
+        success: (response)=> {
+
+            console.log(response);
+        },
+        error: (error)=>{
+            console.log(error);
+        }
+    })
+}
+</script>
 </head>
 <body>
 	<form>
@@ -87,6 +102,4 @@
 		</div>
 	</form>
 </body>
-<jsp:include page="/WEB-INF/views/footer.jsp" />  <!-- ROOT로 나옴 -->
-
 </html>

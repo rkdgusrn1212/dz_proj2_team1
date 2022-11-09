@@ -37,7 +37,7 @@ const sendRequest = (elem)=>{
 </head>
 <body>
 	<form>
-		<div class="container" style="float: none; margin: 0 auto;">
+		<div class="container-md">
 			<div class="col" style="float: none;">
 				<img class="row"
 					src="${pageContext.request.contextPath}/resources/img/TW.png"

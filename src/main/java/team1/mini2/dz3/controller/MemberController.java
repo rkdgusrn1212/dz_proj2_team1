@@ -11,7 +11,13 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public String forwardLoginPage(Model model) {
-		model.addAttribute("innerPage", "auth/login");
+		model.addAttribute("innerPage", "member/login");
+		return "pageContainer";
+	}
+	
+	@GetMapping("/signup")
+	public String forwardSignUpPage(Model model){
+		model.addAttribute("innerPage", "member/signup");
 		return "pageContainer";
 	}
 }
