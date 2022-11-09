@@ -10,7 +10,7 @@ public class QnaDto {
 	private String qnaTitle;
 	private String qnaContent;
 	private Date qnaRegDate;
-	private String qnaWriter;
+	private int qnaWriter;
 	private String qnaNonMember;
 	private String qnaPwd;
 	private char qnaPublic;
