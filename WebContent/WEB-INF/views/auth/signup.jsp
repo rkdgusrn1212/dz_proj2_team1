@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +17,14 @@
 
 <!-- css 연결 -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/auth.css">
+	href="${root}/resources/css/auth.css">
 </head>
 <body>
 	<form>
 		<div class="container" style="float: none; margin: 0 auto;">
 			<div class="col" style="float: none; margin-top: 0%">
 				<img class="row"
-					src="${pageContext.request.contextPath}/resources/img/TW.png"
+					src="${root}/resources/img/TW.png"
 					style="width: 250px; height: 250px; float: none; margin: 0 auto;">
 				<div class="row"
 					style="float: none; margin: 0 auto; width: 25%; text-align: center">

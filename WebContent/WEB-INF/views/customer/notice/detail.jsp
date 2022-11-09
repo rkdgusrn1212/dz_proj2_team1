@@ -2,12 +2,14 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script defer="defer" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <!DOCTYPE html>
 <html>
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<script defer="defer" src="${root}/resources/js/jquery-3.6.1.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Notice 상세페이지</title>
 <script type="text/javascript">
 function load(){
 console.log(${id});
@@ -17,7 +19,7 @@ var id = "";
 id = ${id};
 
 $.ajax({
-	url : "${pageContext.request.contextPath}/api/notice/"+id,
+	url : "${root}/api/notice/"+id,
 	type : "get",
 	//data : {},
 	dataType : "JSON",
@@ -48,7 +50,7 @@ $.ajax({
 }
 
 function listpage(){
-location.href= "${pageContext.request.contextPath}/customer/notice";
+location.href= "${root}/customer/notice";
 }
 </script>
 
