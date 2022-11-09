@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,105 +12,101 @@
 <!-- css 초기화 -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${rootPath}/resources/css/bootstrap.min.css">
+<script src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
 <!-- css 연결 -->
-<link rel="stylesheet" href="${root}/resources/css/jjh.css">
+
+<link rel="stylesheet" href="${rootPath}/resources/css/star.css">
 <script>
-	function addMenu() {
-		("#menulist")
-				.append('<div>'
-						+ '<div class="greenbox" style="width: 250px;">음식명</div>'
-						+ '<input type="text" style="width: 400px; height: 50px;"placeholder="홍콩반점">'
-						+ '<div class="greenbox" style="width: 250px;">가격</div>'
-						+ '<input type="text" style="width: 400px; height: 50px; padding: 0;"	placeholder="10000"/>'
-						+ '</div>');
+const drawStar = (target) => {
+  	document.querySelector(`.star span`).style.width = target.value*10+"%";
+  	const i = target.value * 0.5;
+	document.getElementById("pointView").innerHTML = i;
+
+}
+
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
 	}
-</script>
+	</script>
 </head>
 <body>
 	<div class="container"
-		style="float: none; margin: 0 auto; margin-top: 100px;">
-		<form action="" method="POST">
-			<div class="row" style="float: none; margin: 0 auto; width: 1300px;">
-				<div class="greenbox" style="width: 250px;">점포명</div>
-				<input type="text" style="width: 400px; height: 50px;" id="name"
-					placeholder="홍콩반점">
-				<div class="greenbox" style="width: 250px;">분류</div>
+		style="float: none; margin: 0 auto; margin-bottom: 100px;">
+		<div class="row"
+			style="float: none; margin: 0 auto; justify-content: center; margin-top: 100px;">
+			<h1 style="justify-content: center; width: 700px; float: left;">리뷰
+				작성</h1>
+			<input type="submit" class="btn btn-info" value="등록"
+				style="width: 150px; margin: 10px;" /> <input type="reset"
+				class="btn btn-info" value="취소" style="width: 150px; margin: 10px;" />
 
-				<select class="form-select" id="category"
-					style="float: left; width: 400px; height: 50px; text-align: center;">
-					<option>한식</option>
-					<option>양식</option>
-					<option>중식</option>
-					<option>기타</option>
-				</select>
-			</div>
-
-			<div class="row" style="float: none; margin: 0 auto; width: 1300px;">
-				<div class="biggreenbox"
-					style="width: 250px; height: 110px; float: left;">주소</div>
-				<div class="row" style="float: left; width: 1070px;">
-					<input type="text" id="address"
-						style="width: 1050px; height: 50px; float: left; margin: 0;"
-						placeholder="주소검색"> <input type="text" id="addressDetail"
-						style="width: 1050px; height: 50px; float: left; margin: 0;"
-						placeholder="상세주소">
-				</div>
-			</div>
-
-			<div class="row" style="float: none; margin: 0 auto; width: 1300px;">
-				<div class="greenbox" style="width: 250px;">연락처</div>
-				<input type="text" id="ph" style="width: 400px; height: 50px;"
-					placeholder="031-000-0000">
-				<div class="greenbox" style="width: 250px;">영업시간</div>
-				<div style="width: 400px; margin: 0 auto; padding: 0;">
-					<input type="time" id="opentime"
-						style="width: 150px; height: 50px; float: left; margin: 0; margin-left: 15px;">
-					<h1
-						style="width: 80px; height: 50px; float: left; margin: 0; text-align: center;">
-						~</h1>
-					<input type="time" id="closetime"
-						style="width: 150px; height: 50px; float: left; margin: 0;">
-				</div>
-			</div>
-			<div class="row" style="float: none; margin: 0 auto; width: 1300px;">
-				<div class="greenbox" style="width: 250px;">대표 메뉴</div>
-				<input type="text" id="menu" style="width: 400px; height: 50px;"
-					placeholder="짜장면">
-				<div class="greenbox" style="width: 250px;">대표 가격</div>
-				<input type="text" id="price"
-					style="width: 400px; height: 50px; padding: 0;" placeholder="10000">
-			</div>
-			<div class="row" id="menulist"
-				style="float: none; margin: 0 auto; width: 1300px;">
+			<div class="col" style="float:left;">
 				<div class="row"
-					style="float: none; margin: 0 auto; width: 1300px; justify-content: space-between; align-items: center;">
-					<p class="h3" style="float: left; width: 500px;">메뉴</p>
-					<img alt=""
-						src="${pageContext.request.contextPath}/resources/img/plus.png"
-						style="width: 50px; height: 25px; float: right;"
-						onclick="addMenu()" />
+					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
+					<div
+						style="background-color: #50C785; width: 200px; height: 50px; float: left;'">
+						<h2 class="form-label"
+							style="text-align: center; color: #fff; line-height: 50px;">제목</h2>
+					</div>
+					<input type="text" id="title" style="float: left; width: 500px;"
+						placeholder="리뷰 제목을 작성해주세요" />
 				</div>
-				<div class="greenbox" style="width: 250px;">음식명</div>
-				<input type="text" style="width: 400px; height: 50px;"
-					placeholder="홍콩반점">
-				<div class="greenbox" style="width: 250px;">가격</div>
-				<input type="text" style="width: 400px; height: 50px; padding: 0;"
-					placeholder="10000" />
-			</div>
-			<div class="row"
-				style="float: none; margin: 0 auto; width: 1300px; justify-content: center;">
-				<input type="submit" class="btn btn-info" value="등록"
-					style="width: 150px; height: 50px; float: left; margin: 25px;" /> 
+				<div class="row"
+					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
 
-					<input
-					type="reset" class="btn btn-info" value="취소"
-					style="width: 150px; height: 50px; float: left; margin: 25px;" />
+					<input type="file" onchange="readURL(this);" class="form-control "
+						style="width: 700px;">
+				</div>
+				<div class="row"
+					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
+					<div
+						style="background-color: #50C785; width: 200px; height: 200px; float: left;'">
+						<h2 style="text-align: center; color: #fff; line-height: 200px;">내용</h2>
+					</div>
+					<textarea rows="6" cols="20" style="float: left; width: 500px;"
+						id="content"></textarea>
+				</div>
+				<div class="row"
+					style="float: none; margin: 0 auto; justify-content: center;">
+					<div
+						style="background-color: #50C785; width: 200px; height: 50px; float: left;'">
+						<h2 style="text-align: center; color: #fff; line-height: 50px;">평점</h2>
+					</div>
+					<div style="float: left; width: 200px;">
+						<span class="star"> ★★★★★ <span id="after">★★★★★</span> <input
+							type="range" id="ran" oninput="drawStar(this)" value="1" step="1"
+							min="0" max="10">
+						</span>
+					</div>
+					<div style="float: left; width: 300px; justify-content: center;">
+						<h3 id="pointView"
+							style="width: 100px; height: 50px; float: left; text-align: right; margin: 0; line-height: 50px;">0</h3>
+						<h3
+							style="width: 100px; height: 50px; float: left; text-align: left; margin: 0; line-height: 50px;">점</h3>
+					</div>
+				</div>
 			</div>
-		</form>
+			
+				<img class= "col" alt="음식사진을 추가해 주세요" id="preview"  style="width:350px; height:350px;"/>
+		
+		</div>
+
 	</div>
 
+
+
+
 </body>
+
 </html>

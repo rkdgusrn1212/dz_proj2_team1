@@ -2,15 +2,22 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- CSS 초기화  -->
-<%-- <script src="${root}/resources/css/reset.css"></script>
- --%>
-<!-- 부트스트랩 연결 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- css 초기화 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${rootPath}/resources/css/bootstrap.min.css">
+<script src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
+
 <style>
 #multiple-container {
 	display: grid;
@@ -19,7 +26,7 @@
 
 .image {
 	display: inline;
-	width: 300px;
+	width: 250px;
 	height: 300px;
 	border: 1px solid;
 }
@@ -32,14 +39,8 @@
 	text-shadow: 2px 2px 2px black;
 }
 </style>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<!-- jQuery 라이브러리 호출 -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
+
+<script src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
 
 <title>Tasty Way : 공지 폼</title>
 
@@ -47,7 +48,9 @@
 <body onload=load()>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none;">
-			<h1 id="adnoticetitle" class="row" style="justify-content: center; margin-top: 50px; margin-bottom:50px;;">Tasty way</h1>
+			<h1 id="adnoticetitle" class="row"
+				style="justify-content: center; margin-top: 50px; margin-bottom: 50px;">Tasty
+				way</h1>
 		</div>
 		<form action="./notice/form" method="post" id="form">
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
@@ -58,24 +61,25 @@
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<label for="formFileMultiple" class="form-label"></label> <input
 					class="form-control" type="file" id="input-multiple-image"
-					style="width: 800px; margin-bottom: 10px; display: block;" multiple>
+					style="width: 800px; margin-bottom: 10px; display: block;">
 			</div>
 			<!-- output -->
+			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
+				<div id="multiple-container">s</div>
+			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<textarea rows="20" cols="1000" class="form-control" id="content"
 					style="margin-top: 10px; margin-bottom: 10px;"></textarea>
 			</div>
-			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
-				<div id="multiple-container"></div>
 
-			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<div style="float: right; margin-bottom: 30px;" id="areaBtn">
 					<input type="reset" value="취소" class="btn btn-light reset"
-						onclick="${pageContext.request.contextPath}/api/notice"
+						onclick="${rootPath}/api/notice"
 						style="background-color: #D3D3D3; width: 70px; float: right; margin-left: 15px;" />
 				</div>
 			</div>
+
 		</form>
 	</div>
 </body>
@@ -95,10 +99,10 @@ function readMultipleImage(input) {
         const fileArr = Array.from(input.files)
 
         const $colDiv1 = document.createElement("div")
-        const $colDiv2 = document.createElement("div")
-        $colDiv1.classList.add("column")
-        $colDiv2.classList.add("column")
-
+         const $colDiv2 = document.createElement("div")
+         $colDiv1.classList.add("column")
+       $colDiv2.classList.add("column")
+ 
         fileArr.forEach((file, index) => {
             const reader = new FileReader()
 
@@ -145,7 +149,7 @@ function load(){
 	      id = ${id};
 
 	       $.ajax({
-	           url : "${pageContext.request.contextPath}/api/notice/"+id,
+	           url : "${rootPath}/api/notice/"+id,
 	           type : "get",
 	           //data : {},
 	           dataType : "JSON",
@@ -194,14 +198,14 @@ function addNoticeList(){
 		const result = JSON.stringify(jobj);
 		
 		$.ajax({
-         url : "${pageContext.request.contextPath}/api/notice",
+         url : "${rootPath}/api/notice",
          type : "post",
          data : result,
          dataType : "json",
          contentType : "application/json; charset=utf-8"
 		});
 		alert('공지사항이 등록 되었습니다.');
-		location.href= "${pageContext.request.contextPath}/admin/notice";
+		location.href= "${rootPath}/admin/notice";
 	}
 	
 
@@ -217,14 +221,14 @@ function addNoticeList(){
 	       
 	       console.log(result);
 	       $.ajax({
-	             url : "${pageContext.request.contextPath}/api/notice/"+id,
+	             url : "${rootPath}/api/notice/"+id,
 	             type : "patch",
 	             data : result,
 	             dataType : "json",
 	             contentType : "application/json; charset=utf-8"
 	             });
 	             alert('공지사항이 수정 되었습니다.');
-	             location.href= "${pageContext.request.contextPath}/admin/notice";
+	             location.href= "${rootPath}/admin/notice";
 	       }
 	const inputMultipleImage = document.getElementById("input-multiple-image")
 	inputMultipleImage.addEventListener("change", e => {
