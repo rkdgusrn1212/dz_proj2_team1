@@ -1,21 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tasty Way : 로그인 페이지</title>
+<link rel="stylesheet" href="${root}/resources/css/reset.css">
+<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${root}/resources/css/auth.css">
+<script
+    src="${root}/resources/js/jquery-3.6.1.min.js"></script>
+<script>
+const sendRequest = (elem)=>{
+	$.ajax({
+        url : "${root}/auth/login",
+        type : "post",
+        contentType:"application/json;charset=utf-8",
+        data:JSON.stringify({
+            authId : $("#id-input").val(),
+            authPwd : $("#pwd-input").val()
+        }),
+        dataType : "json",
+        success: (response)=> {
 
-<!-- 부트스트랩 연결 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-
-<!-- css 연결 -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/auth.css">
+            console.log(response);
+        },
+        error: (error)=>{
+        	console.log(error);
+        }
+    })
+}
+</script>
 </head>
 <body>
 	<form>
@@ -26,25 +44,22 @@
 					style="width: 250px; height: 250px; float: none; margin: 0 auto;">
 				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
 					<input type="text" class="form-control" placeholder="User ID"
-						id="inputDefault" style="margin-top: 10px;">
+						id="id-input" style="margin-top: 10px;">
 				</div>
 				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
 					<input type="password" class="form-control" placeholder="Password"
-						id="inputDefault" style="margin-top: 10px;">
+						id="pwd-input" style="margin-top: 10px;">
 				</div>
 				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="submit" class="btn btn-dark" style="margin-top: 10px;"
-						value="Login" />
+					<button type="button" class="btn btn-dark" style="margin-top: 10px;" onclick="sendRequest()">Login</button>
 				</div>
 				<div class="row"
 					style="float: none; margin: 0 auto; width: 25%; text-align: center">
-					<span style="margin-top: 10px; width: 60%;">ID & 비밀번호 찾기</span> <span
-						style="margin-top: 10px; width: 40%">회원가입</span>
+					<span style="margin-top: 10px; width: 60%;">ID &amp; 비밀번호 찾기</span>
+					<span style="margin-top: 10px; width: 40%">회원가입</span>
 				</div>
 			</div>
 		</div>
 	</form>
 </body>
-<jsp:include page="/WEB-INF/views/footer.jsp" />  <!-- ROOT로 나옴 -->
-
 </html>

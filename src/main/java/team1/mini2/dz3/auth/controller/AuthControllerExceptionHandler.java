@@ -1,4 +1,4 @@
-package team1.mini2.dz3.controller.api;
+package team1.mini2.dz3.auth.controller;
 
 
 import java.util.logging.Level;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 @RestControllerAdvice
-public class ApiControllerExceptionHandler {
+public class AuthControllerExceptionHandler {
 	
 	
 	@ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class, org.springframework.validation.BindException.class})
