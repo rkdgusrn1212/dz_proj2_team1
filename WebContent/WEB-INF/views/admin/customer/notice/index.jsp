@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Tasty Way : 공지 메인</title>
 
@@ -23,7 +23,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
@@ -36,7 +36,7 @@ const padDate = (date)=>{
 
 const getNoticeList = (page)=>{
 	 $.ajax({
-	        url : "${root}/api/notice/page/count",		
+	        url : "${rootPath}/api/notice/page/count",		
 	        type : "get",
 	        dataType : "JSON",
 	        contentType : "applicaton/json; charset=utf-8",
@@ -53,7 +53,7 @@ const getNoticeList = (page)=>{
 
 	            /* 여기에서 page의 리스트 로드 */
 	            $.ajax({
-	                url : "${root}/api/notice/page/"+page,
+	                url : "${rootPath}/api/notice/page/"+page,
 	                type : "get",
 	                dataType : "JSON",
 	                contentType : "applicaton/json; charset=utf-8",
@@ -159,7 +159,7 @@ $(document).ready(getNoticeList(1));
 <script>
 const search = (page)=>{
 	 $.ajax({
-	        url : "${root}/api/notice/page/count",		
+	        url : "${rootPath}/api/notice/page/count",		
 	        type : "get",
 	        dataType : "JSON",
 	        contentType : "applicaton/json; charset=utf-8",
@@ -176,7 +176,7 @@ const search = (page)=>{
 
 	            /* 여기에서 page의 리스트 로드 */
 	            $.ajax({
-	                url : "${root}/api/notice/page/"+page,
+	                url : "${rootPath}/api/notice/page/"+page,
 	                type : "get",
 	                dataType : "JSON",
 	                contentType : "applicaton/json; charset=utf-8",
