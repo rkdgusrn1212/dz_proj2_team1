@@ -122,7 +122,7 @@ $(document).ready(getNoticeList(1));
 			</div>
 
 			<!-- -------------------------------------검색기능-------------------------------------------------- -->
-			<div class="row"
+<div class="row"
 				style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
 				<form name="searchform" method="GET">
 					<div class="form-group" style="max-width: 2000px;">
