@@ -46,7 +46,7 @@
 			</div>
 		</div>
 
-		<div class="row" style="float: none; margin: 0 auto; width: 800px;">
+		<div class="row" style="float: none; margin: 0 auto; width: 2000px;">
 			<div class="input-group mb-3"
 				style="width: 800px; border-bottom: 1px solid;">
 				<div>
