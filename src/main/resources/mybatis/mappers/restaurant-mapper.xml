@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.RestaurantDao">
+
+	<resultMap id="restaurantMap" type="RestaurantDto">
+		<result property="restaurantNo" column="restaurant_no"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="restaurantName" column="restaurant_name"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantPh" column="restaurant_ph"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantCategory"
+			column="restaurant_category" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="restaurantMenu" column="restaurant_menu"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantSi" column="restaurant_si"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantGu" column="restaurant_gu"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantDong" column="restaurant_dong"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantAddress"
+			column="restaurant_address" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="restaurantLatitude"
+			column="restaurant_latitude" javaType="java.lang.Double"
+			jdbcType="DOUBLE" />
+		<result property="restaurantLongtitude"
+			column="restaurant_longtitude" javaType="java.lang.Double"
+			jdbcType="DOUBLE" />
+
+	</resultMap>
+
+	<select id="getList" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from
+		(select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		order by restaurant_no) A
+		)
+		where r
+		>= #{start} and r &lt;=
+		#{end}
+	</select>
+
+
+	<select id="get" parameterType="int" resultMap="restaurantMap">
+		select * from
+		restaurant
+		where restaurant_no = #{restaurantNo}
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		select count(*) from restaurant
+	</select>
+
+
+</mapper>
