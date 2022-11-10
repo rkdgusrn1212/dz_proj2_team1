@@ -9,8 +9,17 @@ public interface RestaurantService {
 	List<RestaurantDto> getRestaurantPage(int page);
 	List<RestaurantDto> getRestaurantPageWithName(int page, String key);
 	List<RestaurantDto> getRestaurantPageWithCategory(int page, String key);
+	List<RestaurantDto> getRestaurantPageWithMenu(int page, String key);
+	List<RestaurantDto> getRestaurantPageWithSi(int page,String key);
+	List<RestaurantDto> getRestaurantPageWithGu(int page,String key);
+	List<RestaurantDto> getRestaurantPageWithDong(int page,String key);
+
 	int getRestaurantPageWithNameCount(String key);
 	int getRestaurantPageWithCategoryCount(String key);
+	int getRestaurantPageWithMenuCount(String key);
+	int getRestaurantPageWithSiCount(String key);
+	int getRestaurantPageWithGuCount(String key);
+	int getRestaurantPageWithDongCount(String key);
 	RestaurantDto getRestaurant(int restaurantNo);
 	void addRestaurant(Map<String,String> map);
 	void removeRestaurant(int restaurantNo);

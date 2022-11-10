@@ -48,6 +48,88 @@
 		#{end}
 	</select>
 
+	<select id="getListWithName" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_name like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithCategory" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_category like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithMenu" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_menu like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithSi" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_si like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithGu" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_gu like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
+	<select id="getListWithDong" parameterType="map"
+		resultMap="restaurantMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		restaurant
+		where restaurant_dong like '%'||#{key}||'%'
+		order by
+		restaurant_no) A
+		)
+		where
+		r >= #{start} and r &lt;= #{end}
+	</select>
 
 	<select id="get" parameterType="int" resultMap="restaurantMap">
 		select * from
@@ -59,5 +141,60 @@
 		select count(*) from restaurant
 	</select>
 
+	<select id="getWithNameCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_name like
+		'%'||#{key}||'%'
+	</select>
+
+	<select id="getWithCategoryCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_Category
+		like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithMenuCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_menu like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithSiCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_si like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithGuCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_gu like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithDongCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from restaurant where restaurant_dong like
+		'%'||#{key}||'%'
+	</select>
+
+	<insert id="add" parameterType="map">
+		insert into restaurant values (
+		restaurant_seq.nextVal , #{restaurantName},
+		#{restaurantPh},
+		#{restaurantCategory}, #{restaurantSi},
+		#{restaurantGu}, #{restaurantDong}, #{restaurantAddress},
+		#{restaurantLatitude},
+		#{restaurantLongtitude}
+		)
+	</insert>
+
+	<update id="set" parameterType="map">
+		update restaurant set restaurant_name =
+		#{restaurantName}, restaurant_category =
+		#{restaurantCategory}, #{restaurantAddress}
+		where restaurant_no = #{restaurantNo}
+	</update>
+
+	<delete id="remove" parameterType="int">
+		delete from restaurant where
+		restaurant_no = #{restaurantNo}
+	</delete>
 
 </mapper>
