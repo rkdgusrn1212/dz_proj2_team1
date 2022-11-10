@@ -14,6 +14,14 @@ public interface RestaurantService {
 	List<RestaurantDto> getRestaurantPageWithGu(int page,String key);
 	List<RestaurantDto> getRestaurantPageWithDong(int page,String key);
 
+	int getRestaurantWithNameCount(String key);
+	int getRestaurantWithCategoryCount(String key);
+	int getRestaurantWithMenuCount(String key);
+	int getRestaurantWithSiCount(String key);
+	int getRestaurantWithGuCount(String key);
+	int getRestaurantWithDongCount(String key);
+	
+	
 	int getRestaurantPageWithNameCount(String key);
 	int getRestaurantPageWithCategoryCount(String key);
 	int getRestaurantPageWithMenuCount(String key);

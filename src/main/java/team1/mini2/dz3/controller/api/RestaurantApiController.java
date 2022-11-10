@@ -20,73 +20,96 @@ import team1.mini2.dz3.service.RestaurantServiceImpl;
 @RestController
 @RequestMapping("/restaurant")
 public class RestaurantApiController {
-	
+
 	@Autowired
 	private RestaurantServiceImpl restaurantService;
 
 	@GetMapping("/page/{pNum}")
-	public List<RestaurantDto> getList(@PathVariable(required=true) int pNum, @RequestParam(required=false) String opt, @RequestParam(required=false) String key){
-		/*if(opt!=null&&key!=null) {
-			switch(opt) {
-			case "restaurantTitle":
-				return restaurantService.getRestaurantPageWithTitle(pNum, key);
-			case "restaurantContent":
-				return restaurantService.getRestaurantPageWithContent(pNum, key);
-			case "restaurantRegDate":
-				return restaurantService.getRestaurantPageWithRegDate(pNum, key);
+	public List<RestaurantDto> getList(@PathVariable(required = true) int pNum,
+			@RequestParam(required = false) String opt, @RequestParam(required = false) String key) {
+		if (opt != null && key != null) {
+			switch (opt) {
+			case "restaurantName":
+				return restaurantService.getRestaurantPageWithName(pNum, key);
+			case "restaurantCategory":
+				return restaurantService.getRestaurantPageWithCategory(pNum, key);
+			case "restaurantMenu":
+				return restaurantService.getRestaurantPageWithMenu(pNum, key);
+			case "restaurantSi":
+				return restaurantService.getRestaurantPageWithSi(pNum, key);
+			case "restaurantGu":
+				return restaurantService.getRestaurantPageWithGu(pNum, key);
+			case "restaurantDong":
+				return restaurantService.getRestaurantPageWithDong(pNum, key);
 			}
-		}*/
+		}
 		return restaurantService.getRestaurantPage(pNum);
 	}
-	
+
 	@GetMapping("/{restaurantNo}")
-	public RestaurantDto getRestaurant(@PathVariable(required=true) int restaurantNo) {
+	public RestaurantDto getRestaurant(@PathVariable(required = true) int restaurantNo) {
 		return restaurantService.getRestaurant(restaurantNo);
 	}
-	
+
 	@PostMapping
-	public void addRestaurant(@RequestBody(required=true) Map<String, String> map) {
+	public void addRestaurant(@RequestBody(required = true) Map<String, String> map) {
 		restaurantService.addRestaurant(map);
 	}
-	
+
 	@PatchMapping("/{restaurantNo}")
-	public void setRestaurant(@PathVariable(required=true) String restaurantNo, @RequestBody(required=true) Map<String, String> map) {
+	public void setRestaurant(@PathVariable(required = true) String restaurantNo,
+			@RequestBody(required = true) Map<String, String> map) {
 		map.put("restaurantNo", restaurantNo);
 		restaurantService.setRestaurant(map);
 	}
-	
+
 	@DeleteMapping("/{restaurantNo}")
-	public void putRestaurant(@PathVariable(required=true)  int restaurantNo) {
+	public void putRestaurant(@PathVariable(required = true) int restaurantNo) {
 		restaurantService.removeRestaurant(restaurantNo);
 	}
 
 	@GetMapping("/count")
-	public int getRestaurantCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key) {
-		/*if(opt!=null&&key!=null) {
-			switch(opt) {
-			case "restaurantTitle":
-				return restaurantService.getRestaurantWithTitleCount(key);
-			case "restaurantContent":
-				return restaurantService.getRestaurantWithContentCount(key);
-			case "restaurantRegDate":
-				return restaurantService.getRestaurantWithRegDateCount(key);
+	public int getRestaurantCount(@RequestParam(required = false) String opt,
+			@RequestParam(required = false) String key) {
+		if (opt != null && key != null) {
+			switch (opt) {
+			case "restaurantName":
+				return restaurantService.getRestaurantWithNameCount(key);
+			case "restaurantCategory":
+				return restaurantService.getRestaurantWithCategoryCount(key);
+			case "restaurantMenu":
+				return restaurantService.getRestaurantWithMenuCount(key);
+			case "restaurantSi":
+				return restaurantService.getRestaurantWithSiCount(key);
+			case "restaurantGu":
+				return restaurantService.getRestaurantWithGuCount(key);
+			case "restaurantDong":
+				return restaurantService.getRestaurantWithDongCount(key);
 			}
-		}*/
+		}
 		return restaurantService.getRestaurantCount();
 	}
-	
+
 	@GetMapping("/page/count")
-	public int getRestaurantPageCount(@RequestParam(required=false) String opt, @RequestParam(required=false) String key){
-		/*if(opt!=null&&key!=null) {
-			switch(opt) {
-			case "restaurantTitle":
-				return restaurantService.getRestaurantPageWithTitleCount(key);
-			case "restaurantContent":
-				return restaurantService.getRestaurantPageWithContentCount(key);
-			case "restaurantRegDate":
-				return restaurantService.getRestaurantPageWithRegDateCount(key);
+	public int getRestaurantPageCount(@RequestParam(required = false) String opt,
+			@RequestParam(required = false) String key) {
+		if (opt != null && key != null) {
+			switch (opt) {
+			case "restaurantName":
+				return restaurantService.getRestaurantPageWithNameCount(key);
+			case "restaurantCategory":
+				return restaurantService.getRestaurantPageWithCategoryCount(key);
+			case "restaurantMenu":
+				return restaurantService.getRestaurantPageWithMenuCount(key);
+			case "restaurantSi":
+				return restaurantService.getRestaurantPageWithSiCount(key);
+			case "restaurantGu":
+				return restaurantService.getRestaurantPageWithGuCount(key);
+			case "restaurantDong":
+				return restaurantService.getRestaurantPageWithDongCount(key);
 			}
-		}*/
+		}
+
 		return restaurantService.getRestaurantPageCount();
 	}
 }
