@@ -17,7 +17,19 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <title>Insert title here</title>
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+</style>
 <script type="text/javascript">
 function load(){
 	   console.log(${id});
@@ -45,7 +57,10 @@ function load(){
 </script>
 
 </head>
-<body onload=load()>
+<body >
+<span class="material-symbols-outlined">
+reply
+</span>
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="row" style="float: none; margin: 0 auto; border-bottom: 1px solid; ">
 			<h3 id="regdate" style="margin-top: 100px;"></h3>

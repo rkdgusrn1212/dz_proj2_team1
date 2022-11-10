@@ -14,6 +14,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	
 	<context:component-scan base-package="team1.mini2.dz3">
        <context:exclude-filter type="regex" expression="^.*controller((?!\.api).)*$"/>
     </context:component-scan>

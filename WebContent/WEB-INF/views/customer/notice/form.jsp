@@ -7,6 +7,8 @@
 <!-- CSS 초기화  -->
 <%-- <script src="${root}/resources/css/reset.css"></script>
  --%>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <!-- 부트스트랩 연결 -->
 <style type="text/css">
 #multiple-container {
@@ -28,6 +30,15 @@
 	color: white;
 	text-shadow: 2px 2px 2px black;
 }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+</style>
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -41,6 +52,7 @@
 <title>Tasty Way : 공지 폼</title>
 </head>
 <body>
+<span class="material-symbols-outlined">
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none;">
 			<h1 class="row" style="justify-content: center;">Tasty way</h1>

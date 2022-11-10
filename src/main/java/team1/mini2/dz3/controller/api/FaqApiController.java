@@ -29,10 +29,14 @@ public class FaqApiController {
 		if(opt!=null&&key!=null) {
 			switch(opt) {
 			case "faqTitle":
+				System.out.println("title");
 				return faqService.getFaqPageWithTitle(pNum, key);
 			case "faqContent":
+				System.out.println("title");
 				return faqService.getFaqPageWithContent(pNum, key);
+				
 			case "faqRegDate":
+				System.out.println("title");
 				return faqService.getFaqPageWithRegDate(pNum, key);
 			}
 		}
