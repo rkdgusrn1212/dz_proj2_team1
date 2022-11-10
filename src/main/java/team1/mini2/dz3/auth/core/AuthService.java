@@ -18,4 +18,5 @@ public interface AuthService {
 	JwtDto reissue(@NotBlank String bearerToken);
 	ValidDto validId(@NotBlank String authId);
 	ValidDto validEmail(@NotNull @Email String authEmail);
+	ValidDto validPwd(@NotBlank String authPwd);
 }

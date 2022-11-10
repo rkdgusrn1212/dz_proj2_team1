@@ -1,3 +1,4 @@
+<%@page import="team1.mini2.dz3.auth.core.ValidationProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -8,11 +9,7 @@
 <c:set var="rootPage" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- css 연결 -->
-<link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
-<link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
-<script src="${rootPage}/resources/js/jquery-3.6.1.min.js"></script>
-</head>
+<%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 <script>
 const sendSignUpRequest = (elem)=>{
     $.ajax({
@@ -42,10 +39,11 @@ const sendValidIdRequest = (elem)=>{
         },
         dataType : "json",
         success: (response)=> {
-            console.log(response);
+            showToast("사용 가능한 아이디", "now", $("#id-input").val()+"는 사용가능합니다.");
         },
         error: (error)=>{
-            console.log(error);
+            showToast("이미 사용중인 아이디", "now", $("#id-input").val()+"는 현재 다른 사용자가 이용 중입니다.");
+            resetInput("#id-input");
         }
     })
 }
@@ -66,6 +64,74 @@ const sendValidEmailRequest = (elem)=>{
         }
     })
 }
+
+const checkValidPwdRequest = (elem)=>{
+    $.ajax({
+        url : "${rootPage}/auth/valid/pwd",
+        type : "get",
+        data:{
+            authEmail : $("#pwd-input").val(),
+        },
+        dataType : "json",
+        success: (response)=> {
+            console.log(response);
+        },
+        error: (error)=>{
+            console.log(error);
+        }
+    })
+}
+
+
+const patternInputMap = {
+		  "#id-input": new RegExp("${ValidationProperties.AUTH_ID_REGEX}"),
+		  "#pwd-input": new RegExp("${ValidationProperties.AUTH_PWD_REGEX}")
+		};
+$(document).ready(()=>{
+	
+	$("#id-input").on('keyup', (e) => {
+		if(patternInputMap["#"+e.target.id].test(e.target.value)){
+			e.target.className = "form-control is-valid";
+        }else{
+        	e.target.className = "form-control is-invalid";
+        }
+	});
+	
+	$('#pwd-confirm-input').on('keyup', (e)=>{
+		if($("#pwd-input").attr("class")==="form-control is-valid"){
+			if($("#pwd-input").val()===e.target.value) {
+				e.target.className = 'form-control is-valid';
+			}else{
+				e.target.className = 'form-control is-invalid';
+			}
+		}
+	});
+	$('#pwd-confirm-input').on('focus', (e)=>{
+        if($("#pwd-input").attr("class")==="form-control is-invalid"){
+        	resetInput("#pwd-confirm-input");
+        	$("#pwd-input").focus();
+        }
+	})
+	$('#pwd-input').on('keyup', (e)=>{
+		if(patternInputMap["#"+e.target.id].test(e.target.value)){
+			e.target.className = "form-control is-valid";
+		}else{
+			e.target.className = "form-control is-invalid";
+		}
+    })
+    $('#name-input').on('keyup', (e)=>{
+        if(e.target.value.length()>0){
+        	e.target.className = 'form-control is-valid';
+        }else{
+            e.target.className = 'form-control is-invalid';
+        }
+    });
+});
+
+const resetInput = (id)=>{
+	$(id).val("");
+    $(id).attr("class","form-control");
+}
 </script>
 </head>
 <body>
@@ -82,24 +148,37 @@ const sendValidEmailRequest = (elem)=>{
 					<fieldset>
 						<legend>회원가입</legend>
 						<div class="form-group">
-							<label for="id-input" class="form-label mt-4">아이디</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="id-input"
-									placeholder="아이디 입력" aria-describedby="button-addon1">
-								<button class="btn btn-secondary" type="button"
-									id="button-addon1" onclick="sendValidIdRequest()">중복확인</button>
+							<label for="id-input" class="form-label mt-4">아이디</label> <input
+								type="text" class="form-control" id="id-input"
+								placeholder="아이디 입력">
+							<div class="valid-feedback">
+								<button class="btn btn-primary mt-2" type="button"
+									id="button-addon1" onclick="sendValidIdRequest()">중복확인
+								</button>
 							</div>
+							<div class="invalid-feedback">${ValidationProperties.AUTH_ID_REGEX_DESC}을
+								입력하세요.</div>
 						</div>
 						<div class="form-group">
 							<label for="pwd-input" class="form-label mt-4">비밀번호</label> <input
 								type="password" class="form-control" id="pwd-input"
-								placeholder="비밀번호 입력"> <input type="password"
-								class="form-control mt-2" id="pwd-input2" placeholder="비밀번호 재입력">
+								placeholder="비밀번호 입력">
+							<div class="valid-feedback">올바른 입력입니다.</div>
+							<div class="invalid-feedback">${ValidationProperties.AUTH_PWD_REGEX_DESC}을
+								입력하세요</div>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control mt-2"
+								id="pwd-confirm-input" placeholder="비밀번호 재입력">
+							<div class="valid-feedback">일치합니다.</div>
+							<div class="invalid-feedback">다시 입력한 비밀번호가 다릅니다.</div>
 						</div>
 						<div class="form-group">
 							<label for="name-input" class="form-label mt-4">이름</label> <input
 								type="password" class="form-control" id="name-input"
 								placeholder="이름 입력">
+							<div class="valid-feedback">일치합니다.</div>
+							<div class="invalid-feedback">다시 입력한 비밀번호가 다릅니다.</div>
 						</div>
 						<div class="form-group">
 							<label for="email-input" class="form-label mt-4">이메일</label>
@@ -107,7 +186,8 @@ const sendValidEmailRequest = (elem)=>{
 								<input type="email" class="form-control" id="email-input"
 									placeholder="이메일 입력" aria-describedby="button-addon2">
 								<button class="btn btn-secondary" type="button"
-									id="button-addon2" onclick="sendValidEmailRequest()">인증번호 발송</button>
+									id="button-addon2" onclick="sendValidEmailRequest()">인증번호
+									발송</button>
 							</div>
 							<input type="text" class="form-control mt-2" id="valid-input"
 								placeholder="인증번호 입력">
@@ -115,13 +195,13 @@ const sendValidEmailRequest = (elem)=>{
 						<hr>
 						<div class="form-group d-flex">
 							<div class="pe-2 w-10">
-								<a role="button" href="${rootPage}/member/login" class="btn btn-outline-primary w-100"
-									onclick="">뒤로가기</a>
+								<a role="button" href="${rootPage}/member/login"
+									class="btn btn-outline-primary w-100" onclick="">뒤로가기</a>
 							</div>
-                            <div class="ps-2 flex-fill">
-                                <button type="submit" class="btn btn-primary w-100"
-                                    onclick="sendRequest()">회원가입</button>
-                            </div>
+							<div class="ps-2 flex-fill">
+								<button type="submit" class="btn btn-primary w-100"
+									onclick="sendRequest()">회원가입</button>
+							</div>
 						</div>
 					</fieldset>
 				</form>

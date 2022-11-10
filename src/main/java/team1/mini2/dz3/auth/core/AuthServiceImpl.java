@@ -1,10 +1,13 @@
 package team1.mini2.dz3.auth.core;
 
+import javax.validation.Validator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,13 +26,15 @@ class AuthServiceImpl implements AuthService{
     private final PasswordEncoder passwordEncoder;
     private final JwtIssuer jwtIssuer;
     private final SqlSessionTemplate sqlSession;
+    private final Validator validator;
     
     public AuthServiceImpl(SqlSessionTemplate sqlSession,
             PasswordEncoder passwordEncoder,
-            JwtIssuer jwtIssuer) {
+            JwtIssuer jwtIssuer, Validator validator) {
     	this.sqlSession = sqlSession;
         this.passwordEncoder = passwordEncoder;
         this.jwtIssuer = jwtIssuer;
+		this.validator = validator;
     }
 
     private String resolveToken(String bearerToken) {
@@ -92,5 +97,10 @@ class AuthServiceImpl implements AuthService{
 	@Override
 	public ValidDto validEmail(@NotNull @Email String authEmail) {
 		return new ValidDto(sqlSession.getMapper(AuthDao.class).get(authEmail)==null);
+	}
+
+	@Override
+	public ValidDto validPwd(@NotBlank String authPwd) {
+		return new ValidDto(java.util.regex.Pattern.matches(ValidationProperties.AUTH_PWD_REGEX, authPwd));
 	}
 }		
