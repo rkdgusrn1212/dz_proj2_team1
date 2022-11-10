@@ -7,6 +7,11 @@ import org.springframework.util.StringUtils;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import team1.mini2.dz3.auth.model.AuthDao;
+import team1.mini2.dz3.auth.model.AuthDto;
+import team1.mini2.dz3.auth.model.AuthVo;
+import team1.mini2.dz3.auth.model.JwtDto;
+
 @Service
 public class AuthServiceImpl implements AuthService{
 

@@ -16,7 +16,7 @@
 <script>
 const sendRequest = (elem)=>{
     $.ajax({
-        url : "${root}/auth/signup",
+        url : "${rootPage}/auth/signup",
         type : "post",
         contentType:"application/json;charset=utf-8",
         data:JSON.stringify({
@@ -25,7 +25,6 @@ const sendRequest = (elem)=>{
         }),
         dataType : "json",
         success: (response)=> {
-
             console.log(response);
         },
         error: (error)=>{

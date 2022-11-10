@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="team1.mini2.dz3.auth.AuthDao">
-	<select id="get" parameterType="String" resultType="team1.mini2.dz3.auth.AuthVo">
+<mapper namespace="team1.mini2.dz3.auth.model.AuthDao">
+	<select id="get" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
 		select * from user_auth where auth_id = #{authId}
 	</select>
 </mapper>

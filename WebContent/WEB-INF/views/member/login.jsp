@@ -10,11 +10,11 @@
 <title>Tasty Way : 로그인 페이지</title>
 <link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
 <link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
-<script src="${root}/resources/js/jquery-3.6.1.min.js"></script>
+<script src="${rootPage}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
 const sendRequest = (elem)=>{
 	$.ajax({
-        url : "${root}/auth/login",
+        url : "${rootPage}/auth/login",
         type : "post",
         contentType:"application/json;charset=utf-8",
         data:JSON.stringify({
