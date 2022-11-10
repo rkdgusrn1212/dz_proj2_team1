@@ -15,6 +15,6 @@ public class QuestionDto{
 	@Size(max=1000)
 	String qnaContent;
 	@NotBlank
-	@Pattern(regexp = "[TF]")
+	@Pattern(regexp = "[TF]") //정규표현식을 따름
 	String qnaPublic;
 }

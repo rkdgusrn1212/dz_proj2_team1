@@ -28,8 +28,8 @@
 	</resultMap>
 
 	<select id="getList" parameterType="QnaSearchKeyDto"
-		resultMap="qnaMap">
-		select *
+		resultMap="qnaMap"> <!-- 1에서 10을 가져와 -->
+		select * <!-- null이 아니면 값을 가져온다. -->
 		from
 		(select A.*, ROWNUM r from
 		(select * from qna where 1=1

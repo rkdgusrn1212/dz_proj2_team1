@@ -30,6 +30,12 @@ public class QnaApiController {
 	private QnaService qnaService;
 
 	
+	@GetMapping("/page/{page}")
+	public List<QnaDto> getList(@PathVariable(required=true) int page, 
+			@Valid QnaSearchKeyDto optKey){ //검증
+		return qnaService.getQnaPage(page, optKey);
+	} //맨처음 여기
+	
 	@GetMapping("/{qnaNo}")
 	public QnaDto get(@PathVariable(required=true) int qnaNo) {
 		return qnaService.getQna(qnaNo);
@@ -39,22 +45,15 @@ public class QnaApiController {
 	public Map<String, Integer> getCount(@Valid QnaSearchKeyDto optKey) {
 		Map<String, Integer> result = new HashMap<>();
 		result.put("count", qnaService.getQnaCount(optKey));
-		return result;
+		return result; //전체 게시글 수 
 	}
 	
 	@GetMapping("/page/count")
 	public Map<String, Integer> getPageCount(@Valid QnaSearchKeyDto optKey) {
 		Map<String, Integer> result = new HashMap<>();
-		result.put("pageCount", qnaService.getQnaPageCount(optKey));
+		result.put(null, qnaService.getQnaPageCount(optKey));
 		return result;
 	}
-	
-	@GetMapping("/page/{page}")
-	public List<QnaDto> getList(@PathVariable(required=true) int page, 
-			@Valid QnaSearchKeyDto optKey){
-		return qnaService.getQnaPage(page, optKey);
-	}
-
 	
 	@PostMapping
 	public boolean add(@Valid @RequestBody(required=true) QuestionWithNoAuthDto questionDto){

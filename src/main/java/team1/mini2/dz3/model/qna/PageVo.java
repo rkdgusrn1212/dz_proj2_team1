@@ -10,7 +10,7 @@ public class PageVo {
 	public static final int DEFAULF_PAGE_SIZE = 10;
 	
 	public PageVo(int page){
-		this(page, DEFAULF_PAGE_SIZE);
+		this(page, DEFAULF_PAGE_SIZE); //1에서 10
 	}
 	/**
 	 * 추후의 확장성(view에서 요구하는 단위 page 레코드 수의 변화)을 위해

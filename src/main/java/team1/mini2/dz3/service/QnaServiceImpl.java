@@ -36,7 +36,7 @@ public class QnaServiceImpl implements QnaService {
 		if(optKey==null) {
 			optKey = new QnaSearchKeyDto();
 		}
-		optKey.setPageVo(new PageVo(page));
+		optKey.setPageVo(new PageVo(page)); //1~10
 		return sqlSession.getMapper(QnaDao.class).getList(optKey);
 	}
 

@@ -31,9 +31,11 @@
 
 </head>
 <body>
-
-    <img class="mainphoto" src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG"> <!-- 서버경로 WEBCONTENT기준 / 상대경로 X ㅈ -->
-
+	<div class="mainphoto">
+    <img style="width: 2000px;" height="500px"; src="${pageContext.request.contextPath}/resources/img/mainPhoto.PNG"> <!-- 서버경로 WEBCONTENT기준 / 상대경로 X ㅈ -->
+	</div>
+	
+	
     <div class="mainfontsize">전세계 맛집을 공유하는 플랫폼</div>
     <div class="basicfontsize">Tasty way의 다양한 서비스를 사용해보세요!</div>
 
