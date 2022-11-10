@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="rootPage" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- css 연결 -->
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${root}/resources/css/auth.css">
+<link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${rootPage}/resources/css/auth.css">
 </head>
 <script>
 const sendRequest = (elem)=>{
@@ -33,73 +36,64 @@ const sendRequest = (elem)=>{
 </script>
 </head>
 <body>
-	<form>
-		<div class="container" style="float: none; margin: 0 auto;">
-			<div class="col" style="float: none; margin-top: 0%">
-				<img class="row"
-					src="${pageContext.request.contextPath}/resources/img/TW.png"
-					style="width: 250px; height: 250px; float: none; margin: 0 auto;">
-				<div class="row"
-					style="float: none; margin: 0 auto; width: 25%; text-align: center">
-					<span style="margin-top: 10px;">회원 가입</span>
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control" placeholder="아이디 입력"
-						id="id" style="margin-top: 10px; float: left; width: 62%;">
-					<input type="submit" class="btn btn-light"
-						style="margin-top: 10px; float: left; margin-left: 6%; width: 32%; background-color: #D3D3D3; color: #000;"
-						value="중복 확인" />
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="password" class="form-control" placeholder="비밀번호 입력"
-						id="pwd" style="margin-top: 10px;">
-				</div>
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="password" class="form-control" placeholder="비밀번호 재입력"
-						id="pwd2" style="margin-top: 10px;">
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control" placeholder="성명" id="name"
-						style="margin-top: 10px;">
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control" placeholder="생년월일" id="mid"
-						style="margin-top: 10px;">
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="email" class="form-control" placeholder="이메일 주소"
-						id="email" style="margin-top: 10px;">
-				</div>
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="submit" class="btn btn-warning"
-						style="margin-top: 10px; color: white;" value="이메일 인증" />
-				</div>
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control" placeholder="인증번호 입력"
-						id="check" style="margin-top: 10px;">
-				</div>
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control" placeholder="주소 입력"
-						id="addr" style="margin-top: 10px;">
-				</div>
-				<div class="row" style="float: none; margin: 0 auto; width: 25%;">
-					<input type="text" class="form-control"
-						placeholder="휴대폰 번호 입력 (-제외 11자리)" id="mid"
-						style="margin-top: 10px;">
-				</div>
-
-				<div class="row" style="float: none; margin: 0 auto; width: 15%;">
-					<input type="submit" class="btn btn-light"
-						style="margin-top: 10px; background-color: #d3d3d3; color: #000;"
-						value="가입하기" />
-				</div>
+	<div class="container-sm mb-5">
+		<div class="row justify-content-center">
+			<div class="col">
+				<img src="${rootPage}/resources/img/TW.png" class="mx-auto d-block"
+					width="250" height="250">
 			</div>
 		</div>
-	</form>
+		<div class="row justify-content-center mb-5">
+			<div class="col mb-5" style="max-width: 500px;">
+				<form>
+					<fieldset>
+						<legend>회원가입</legend>
+						<div class="form-group">
+							<label for="id-input" class="form-label mt-4">아이디</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="id-input"
+									placeholder="아이디 입력" aria-describedby="button-addon1">
+								<button class="btn btn-secondary" type="button"
+									id="button-addon1">중복확인</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pwd-input" class="form-label mt-4">비밀번호</label> <input
+								type="password" class="form-control" id="pwd-input"
+								placeholder="비밀번호 입력"> <input type="password"
+								class="form-control mt-2" id="pwd-input2" placeholder="비밀번호 재입력">
+						</div>
+						<div class="form-group">
+							<label for="name-input" class="form-label mt-4">이름</label> <input
+								type="password" class="form-control" id="name-input"
+								placeholder="이름 입력">
+						</div>
+						<div class="form-group">
+							<label for="email-input" class="form-label mt-4">이메일</label>
+							<div class="input-group">
+								<input type="email" class="form-control" id="email-input"
+									placeholder="이메일 입력" aria-describedby="button-addon2">
+								<button class="btn btn-secondary" type="button"
+									id="button-addon2">인증번호 발송</button>
+							</div>
+							<input type="text" class="form-control mt-2" id="valid-input"
+								placeholder="인증번호 입력">
+						</div>
+						<hr>
+						<div class="form-group d-flex">
+							<div class="pe-2 w-10">
+								<a role="button" href="${rootPage}/member/login" class="btn btn-outline-primary w-100"
+									onclick="">뒤로가기</a>
+							</div>
+                            <div class="ps-2 flex-fill">
+                                <button type="submit" class="btn btn-primary w-100"
+                                    onclick="sendRequest()">회원가입</button>
+                            </div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

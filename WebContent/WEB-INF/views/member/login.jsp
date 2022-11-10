@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="rootPage" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
 <title>Tasty Way : 로그인 페이지</title>
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
 <script src="${root}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
 const sendRequest = (elem)=>{
@@ -37,7 +37,7 @@ const sendRequest = (elem)=>{
 	<div class="container-sm">
 		<div class="row justify-content-center">
 			<div class="col">
-				<img src="${root}/resources/img/TW.png" class="mx-auto d-block"
+				<img src="${rootPage}/resources/img/TW.png" class="mx-auto d-block"
 					width="250" height="250">
 			</div>
 		</div>
@@ -61,7 +61,7 @@ const sendRequest = (elem)=>{
 						<div class="form-group row">
 							<div class="col">
 								<button type="submit" class="btn btn-primary w-100"
-									onclick="sendRequest()">Login</button>
+									onclick="sendRequest()">로그인</button>
 							</div>
 						</div>
 						<div class="form-group row justify-content-center mt-2">
@@ -72,7 +72,7 @@ const sendRequest = (elem)=>{
 								<p class="text-center">|</p>
 							</div>
 							<div class="d-flex col-4">
-								<a class="w-100 text-center" href="${root}/member/signup">회원가입</a>
+								<a class="w-100 text-center" href="${rootPage}/member/signup">회원가입</a>
 							</div>
 						</div>
 					</fieldset>
