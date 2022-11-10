@@ -1,6 +1,6 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
-public class JwtProperties {
+class JwtProperties {
 	static final String SECRET_KEY = "비밀값입니다";
 	static final String REFRESH_SECRET_KEY = "이것도 비밀입니다";
 	static final int EXPIRE_MIN = 60;

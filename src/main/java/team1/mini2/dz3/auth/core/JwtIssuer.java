@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 import java.util.Collections;
 import java.util.Date;
@@ -11,7 +11,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
 @Component
-public class JwtIssuer {
+class JwtIssuer {
 	private final int ONE_SECONDS = 1000;
 	private final int ONE_MINUTE = 60 * ONE_SECONDS;
 

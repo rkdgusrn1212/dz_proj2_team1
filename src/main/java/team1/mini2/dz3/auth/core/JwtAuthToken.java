@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 
-public class JwtAuthToken extends AbstractAuthenticationToken{
+class JwtAuthToken extends AbstractAuthenticationToken{
 	
 	private static final long serialVersionUID = -2466850710586626364L;
 	private String jwtToken;

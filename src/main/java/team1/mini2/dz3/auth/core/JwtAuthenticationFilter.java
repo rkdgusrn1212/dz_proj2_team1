@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	private static final String TOKEN_PREFIX = "Bearer";
 	

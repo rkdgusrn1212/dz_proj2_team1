@@ -34,7 +34,13 @@
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-	<context:component-scan base-package="team1.mini2.dz3.auth">
-	   <context:exclude-filter type="regex" expression="team1.mini2.dz3.auth.AuthController"/>
+	
+	
+    <bean id="validator"
+    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+	
+	<context:component-scan base-package="team1.mini2.dz3.auth.core">
 	</context:component-scan>
 </beans>

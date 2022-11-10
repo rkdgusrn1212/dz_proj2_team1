@@ -11,9 +11,4 @@
     </mvc:annotation-driven>
     
     <context:component-scan base-package="team1.mini2.dz3.auth.controller"></context:component-scan> 
-
-    <bean id="validator"
-    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-    
-    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
 </beans>

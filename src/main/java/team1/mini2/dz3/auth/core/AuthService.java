@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;

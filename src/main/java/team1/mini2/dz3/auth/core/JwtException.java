@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 public class JwtException extends RuntimeException{
 

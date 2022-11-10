@@ -13,9 +13,4 @@
        <context:exclude-filter type="regex" expression="^.*controller((?!\.api).)*$"/>
        <context:exclude-filter type="regex" expression="team1.mini2.dz3.auth.*"/>
     </context:component-scan>
-    
-    <bean id="validator"
-    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-    
-    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
 </beans>

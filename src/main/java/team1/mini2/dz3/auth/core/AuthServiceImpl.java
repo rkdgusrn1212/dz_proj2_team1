@@ -1,4 +1,4 @@
-package team1.mini2.dz3.auth;
+package team1.mini2.dz3.auth.core;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +13,7 @@ import team1.mini2.dz3.auth.model.AuthVo;
 import team1.mini2.dz3.auth.model.JwtDto;
 
 @Service
-public class AuthServiceImpl implements AuthService{
+class AuthServiceImpl implements AuthService{
 
     private final String GRANT_TYPE_BEARER = "Bearer";
     private final PasswordEncoder passwordEncoder;
