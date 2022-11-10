@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.JwtDto;
-import team1.mini2.dz3.auth.model.ValidDto;
 import team1.mini2.dz3.auth.model.SignUpDto;
+import team1.mini2.dz3.auth.model.ValidDto;
 
 @RestController
 @Validated
 public class AuthController {
-
+	
 	@Autowired
 	private AuthService authService;
 	
@@ -38,12 +38,17 @@ public class AuthController {
 	
 	@GetMapping("/valid/email")
 	public ValidDto validEmail( 
-			@Valid @NotBlank @Email @RequestParam(required=true) String authEmail) {
-		return null;//eturn authService.validId(authEmail);
+			@NotBlank @Email @RequestParam(required=true) String authEmail) {
+		return authService.validId(authEmail);
 	}
 	
 	@GetMapping("/valid/id")
 	public ValidDto validId(@NotBlank @RequestParam(required=true) String authId) {
 		return authService.validId(authId);
+	}
+	
+	@GetMapping("/valid/pwd")
+	public ValidDto validPwd(@NotBlank @RequestParam(required=true) String authPwd) {
+		return authService.validId(authPwd);
 	}
 }
