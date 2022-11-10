@@ -558,7 +558,7 @@
 
 
 		
-			<h1 class="row" style="justify-content: center;">공지사항</h1>
+			<h1 class="row" style="justify-content: center; margin-top: 50px; margin-bottom: 50px;">Q&A</h1>
 
 		<!-- 테이블 생성 부트스트랩-->
 

@@ -7,7 +7,8 @@
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${rootPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${rootPath}/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Tasty Way : 공지 메인</title>
 
@@ -68,6 +69,8 @@ const getNoticeList = (page)=>{
 	                                "<tr><th scope='row' class='text-center text-truncate'>"
 	                                +notice.noticeNo+"</th><td class='text-truncate'>"
 	                                +"<a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+notice.noticeNo+ ">"+notice.noticeTitle+"</td><td class='text-truncate'>"
+	                                +"관리자"+"</td>"+
+	                                "<td class='text-truncate'>"
 	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>");
 	                    }
 	                    for(idx ; idx<10; idx++){
@@ -93,64 +96,66 @@ $(document).ready(getNoticeList(1));
 </head>
 <body>
 	<div class="container" style="float: none; margin: 0 auto;">
-		<div class="col" style="float: none; margin-top: 50px;">
-			<h1 class="row" style="justify-content: center;">공지사항</h1>
-			<div class="row" style="float: none; margin: 0 auto;">
-				<table class="table table-hover" id="test"
-					style="text-align: center;">
-					<thead>
-						<tr class="table-danger">
-							<th scope="col" class="col-1 text-center text-truncate">번호</th>
-							<th scope="col" class="col-4 text-center text-truncate">공지
-								제목</th>
-							<th scope="col" class="col-1 text-center text-truncate">작성
-								시간</th>
-						</tr>
-					</thead>
-					<tbody id="notice-list">
 
-					</tbody>
+		<div class="row"
+			style="margin: 0 auto; justify-content: center; margin-top: 50px; margin-bottom: 50px;">
+			<h3 style="text-align: center; width: 500px;">공지사항</h3>
+		</div>
 
-				</table>
-			</div>
+		<div class="row" style="float: none; margin: 0 auto;">
+			<table class="table table-hover" id="test"
+				style="text-align: center;">
+				<thead>
+					<tr class="table-danger">
+						<th scope="col" class="col-1 text-center text-truncate">번호</th>
+						<th scope="col" class="col-3 text-center text-truncate">공지 제목</th>
+						<th scope="col" class="col-1 text-center text-truncate">작성자</th>
+						<th scope="col" class="col-2 text-center text-truncate">작성 시간</th>
+					</tr>
+				</thead>
+				<tbody id="notice-list">
 
-			<!--       --------------------페이지 링크----------------------------------     -->
-			<div class="test">
-				<ul class="pagination pagination-lg" id="button"
-					style="justify-content: center;">
-				</ul>
-			</div>
+				</tbody>
 
-			<!-- -------------------------------------검색기능-------------------------------------------------- -->
-<div class="row"
-				style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
-				<form name="searchform" method="GET">
-					<div class="form-group" style="max-width: 2000px;">
-						<select class="form-select" id="searchopt" name="opt"
-							style="width: 100px; float: left;">
-							<!--  style="width: 120px" -->
-							<option value="noticeTitle">제목</option>
-							<option value="noticeContent">내용</option>
-						</select>
+			</table>
+		</div>
+
+		<!--       --------------------페이지 링크----------------------------------     -->
+		<div class="test">
+			<ul class="pagination pagination-lg" id="button"
+				style="justify-content: center;">
+			</ul>
+		</div>
+
+		<!-- -------------------------------------검색기능-------------------------------------------------- -->
+		<div class="row"
+			style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
+			<form name="searchform" method="GET">
+				<div class="form-group" style="max-width: 2000px;">
+					<select class="form-select" id="searchopt" name="opt"
+						style="width: 100px; float: left;">
+						<!--  style="width: 120px" -->
+						<option value="noticeTitle">제목</option>
+						<option value="noticeContent">내용</option>
+					</select>
 
 
-						<div
-							style="margin: auto; align-content: center; margin-bottom: 10px; text-align: center; max-width: 2000px;">
-							<input type="text" name="key" id="searchdata"
-								style="width: 300px; float: left; margin-left: 15px;"
-								class="form-control"> <input type="button" value="검색"
-								class="btn btn-light"
-								style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;"
-								onclick="search()">
-						</div>
+					<div
+						style="margin: auto; align-content: center; margin-bottom: 10px; text-align: center; max-width: 2000px;">
+						<input type="text" name="key" id="searchdata"
+							style="width: 300px; float: left; margin-left: 15px;"
+							class="form-control"> <input type="button" value="검색"
+							class="btn btn-light"
+							style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;"
+							onclick="search()">
 					</div>
-				</form>
+				</div>
+			</form>
 
-				<div class="row" style="margin-top: 50px;">
-					<div class="d-flex justify-content-center">
-						<ul class="pagination" id="notice-pagination">
-						</ul>
-					</div>
+			<div class="row" style="margin-top: 50px;">
+				<div class="d-flex justify-content-center">
+					<ul class="pagination" id="notice-pagination">
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -191,10 +196,10 @@ const search = (page)=>{
 	                                "<tr><th scope='row' class='text-center text-truncate'>"
 	                                +notice.noticeNo+"</th><td class='text-truncate'>"
 	                                +"<a href = ${pageContext.request.contextPath}/customer/notice/detail?id="+notice.noticeNo+ ">"+notice.noticeTitle+"</td><td class='text-truncate'>"
-	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>");
+	                                +"관리자"+"</td>"+"<td class='text-truncate'>"+date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>");
 	                    }
 	                    for(idx ; idx<10; idx++){
-	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td></tr>");
+	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td></tr>");
 	                    }
 	                },
 	                error: ()=>{

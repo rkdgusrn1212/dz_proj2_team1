@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tasty Way : 식당 등록</title>
+<title>Tasty Way : 마이페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- css 초기화 -->
