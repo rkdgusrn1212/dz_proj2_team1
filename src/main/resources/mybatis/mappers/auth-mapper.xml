@@ -6,4 +6,7 @@
 	<select id="get" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
 		select * from user_auth where auth_id = #{authId}
 	</select>
+	<select id="getByEmail" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
+        select * from user_auth where auth_email = #{authEmail}
+	</select>
 </mapper>

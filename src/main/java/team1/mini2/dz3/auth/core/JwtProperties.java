@@ -7,4 +7,5 @@ class JwtProperties {
 	static final int REFRESH_EXPIRE_MIN = 43200;
 	static final String ISSUER = "tasty-way";
 	static final String KEY_ROLES = "roles";
+	static final String TOKEN_PREFIX = "Bearer";
 }

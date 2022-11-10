@@ -1,5 +1,9 @@
 package team1.mini2.dz3.auth.core;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,11 +15,11 @@ import team1.mini2.dz3.auth.model.AuthDao;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.AuthVo;
 import team1.mini2.dz3.auth.model.JwtDto;
+import team1.mini2.dz3.auth.model.ValidDto;
 
 @Service
 class AuthServiceImpl implements AuthService{
 
-    private final String GRANT_TYPE_BEARER = "Bearer";
     private final PasswordEncoder passwordEncoder;
     private final JwtIssuer jwtIssuer;
     private final SqlSessionTemplate sqlSession;
@@ -29,8 +33,8 @@ class AuthServiceImpl implements AuthService{
     }
 
     private String resolveToken(String bearerToken) {
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(GRANT_TYPE_BEARER)) {
-            return bearerToken.substring(7);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(JwtProperties.TOKEN_PREFIX)) {
+            return bearerToken.substring(JwtProperties.TOKEN_PREFIX.length());
         }
         return null;
     }
@@ -39,7 +43,7 @@ class AuthServiceImpl implements AuthService{
         String userId = UserVo.getAuthId();
         String authority = UserVo.getAuthAuthority();
         return JwtDto.builder()
-                .grantType(GRANT_TYPE_BEARER)
+                .grantType(JwtProperties.TOKEN_PREFIX)
                 .accessToken(jwtIssuer.createAccessToken(userId, authority))
                 .refreshToken(jwtIssuer.createRefreshToken(userId, authority))
                 .build();
@@ -50,10 +54,10 @@ class AuthServiceImpl implements AuthService{
 
         AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(UserVoDto.getAuthId());
         if(UserVo==null) {
-        	throw new JwtException("해당 유저 없음");
+        	throw new AuthException("해당 유저 없음");
         }
         if (!passwordEncoder.matches(UserVoDto.getAuthPwd(), UserVo.getAuthPwd())) {
-            throw new JwtException("비밀번호가 맞지 않음");
+            throw new AuthException("비밀번호가 맞지 않음");
         }
 
         return createJwtDto(UserVo);
@@ -64,19 +68,29 @@ class AuthServiceImpl implements AuthService{
 
         String refreshToken = resolveToken(bearerToken);
         if (!StringUtils.hasText(refreshToken)) {
-            throw new JwtException("grant type 오류");
+            throw new AuthException("grant type 오류");
         }
 
         DecodedJWT claims = jwtIssuer.parseClaimsFromRefreshToken(refreshToken);
         if (claims == null) {
-            throw new JwtException("코튼 클래임이 비어있음");
+            throw new AuthException("코튼 클래임이 비어있음");
         }
 
         AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(claims.getSubject());
         if(UserVo==null) {
-        	 throw new JwtException("해당 유저 없음");
+        	 throw new AuthException("해당 유저 없음");
         }
 
         return createJwtDto(UserVo);
     }
+
+	@Override
+	public ValidDto validId(@NotBlank String authId) {
+		return new ValidDto(sqlSession.getMapper(AuthDao.class).get(authId)==null);
+	}
+
+	@Override
+	public ValidDto validEmail(@NotNull @Email String authEmail) {
+		return new ValidDto(sqlSession.getMapper(AuthDao.class).get(authEmail)==null);
+	}
 }		

@@ -11,10 +11,10 @@
 <!-- css 연결 -->
 <link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
 <link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${rootPage}/resources/css/auth.css">
+<script src="${rootPage}/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <script>
-const sendRequest = (elem)=>{
+const sendSignUpRequest = (elem)=>{
     $.ajax({
         url : "${rootPage}/auth/signup",
         type : "post",
@@ -23,6 +23,40 @@ const sendRequest = (elem)=>{
             authId : $("#id-input").val(),
             authPwd : $("#pwd-input").val()
         }),
+        dataType : "json",
+        success: (response)=> {
+            console.log(response);
+        },
+        error: (error)=>{
+            console.log(error);
+        }
+    })
+}
+
+const sendValidIdRequest = (elem)=>{
+    $.ajax({
+        url : "${rootPage}/auth/valid/id",
+        type : "get",
+        data:{
+            authId : $("#id-input").val(),
+        },
+        dataType : "json",
+        success: (response)=> {
+            console.log(response);
+        },
+        error: (error)=>{
+            console.log(error);
+        }
+    })
+}
+
+const sendValidEmailRequest = (elem)=>{
+    $.ajax({
+        url : "${rootPage}/auth/valid/email",
+        type : "get",
+        data:{
+            authEmail : $("#email-input").val(),
+        },
         dataType : "json",
         success: (response)=> {
             console.log(response);
@@ -53,7 +87,7 @@ const sendRequest = (elem)=>{
 								<input type="text" class="form-control" id="id-input"
 									placeholder="아이디 입력" aria-describedby="button-addon1">
 								<button class="btn btn-secondary" type="button"
-									id="button-addon1">중복확인</button>
+									id="button-addon1" onclick="sendValidIdRequest()">중복확인</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -73,7 +107,7 @@ const sendRequest = (elem)=>{
 								<input type="email" class="form-control" id="email-input"
 									placeholder="이메일 입력" aria-describedby="button-addon2">
 								<button class="btn btn-secondary" type="button"
-									id="button-addon2">인증번호 발송</button>
+									id="button-addon2" onclick="sendValidEmailRequest()">인증번호 발송</button>
 							</div>
 							<input type="text" class="form-control mt-2" id="valid-input"
 								placeholder="인증번호 입력">

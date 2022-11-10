@@ -4,5 +4,6 @@ auth_id VARCHAR(60) PRIMARY KEY,
 -- 인증 아이디, 아이디를 조건으로한 검색이 많아서 PK가 되었다. 별도의 id를 안둔이유는 인증 서버가 auth_id기준으로 식별하기 때문에,
 -- 별도의 식별 id는 의미가 없어진다.
 auth_pwd CHAR(60) NOT NULL, -- 인증 비밀번호
-auth_authority NOT NULL --인증이 가진 권한
+auth_authority VARCHAR(500) NOT NULL --인증이 가진 권한
+auth_email VARCHAR(320) NOT NULL --본인인증된 email 인증만 하면 바꿀 수 있다. 이메일 최대크기는 320;
 );

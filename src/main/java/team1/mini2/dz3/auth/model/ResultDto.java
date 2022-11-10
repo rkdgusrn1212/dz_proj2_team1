@@ -1,9 +1,0 @@
-package team1.mini2.dz3.auth.model;
-
-import lombok.Data;
-
-@Data
-public class ResultDto {
-	boolean success;
-	String reason;
-}

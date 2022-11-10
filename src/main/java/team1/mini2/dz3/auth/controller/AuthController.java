@@ -3,20 +3,23 @@ package team1.mini2.dz3.auth.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.JwtDto;
-import team1.mini2.dz3.auth.model.ResultDto;
+import team1.mini2.dz3.auth.model.ValidDto;
 import team1.mini2.dz3.auth.model.SignUpDto;
+
 @RestController
+@Validated
 public class AuthController {
 
 	@Autowired
@@ -28,18 +31,19 @@ public class AuthController {
 	}
 	
 	@PostMapping("/signup")
-	public ResultDto SignUp(@Valid @RequestBody(required=true) SignUpDto signUpDto) {
+	public ValidDto SignUp(@Valid @RequestBody(required=true) SignUpDto signUpDto) {
 		return null;
 		
 	}
 	
 	@GetMapping("/valid/email")
-	public ResultDto validEmail(@NotNull@Email @RequestBody(required=true) String validEmail) {
-		return null;
+	public ValidDto validEmail( 
+			@Valid @NotBlank @Email @RequestParam(required=true) String authEmail) {
+		return null;//eturn authService.validId(authEmail);
 	}
 	
 	@GetMapping("/valid/id")
-	public ResultDto validId(@NotBlank @RequestBody(required=true) String validId) {
-		return null;
+	public ValidDto validId(@NotBlank @RequestParam(required=true) String authId) {
+		return authService.validId(authId);
 	}
 }

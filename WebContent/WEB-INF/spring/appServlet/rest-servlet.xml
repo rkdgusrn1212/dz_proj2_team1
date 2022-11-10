@@ -9,6 +9,7 @@
 		
 	<mvc:annotation-driven />
 	
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
 	<context:component-scan base-package="team1.mini2.dz3">
        <context:exclude-filter type="regex" expression="^.*controller((?!\.api).)*$"/>
        <context:exclude-filter type="regex" expression="team1.mini2.dz3.auth.*"/>

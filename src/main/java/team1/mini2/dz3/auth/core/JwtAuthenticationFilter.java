@@ -17,8 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
 class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-	private static final String TOKEN_PREFIX = "Bearer";
 	
 	private final AuthenticationManager authenticationManager;
 	
@@ -30,8 +28,8 @@ class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-		if (authorizationHeader != null && authorizationHeader.startsWith(TOKEN_PREFIX)) {
-			String token = authorizationHeader.substring(TOKEN_PREFIX.length());
+		if (authorizationHeader != null && authorizationHeader.startsWith(JwtProperties.TOKEN_PREFIX)) {
+			String token = authorizationHeader.substring(JwtProperties.TOKEN_PREFIX.length());
 			try {
 				JwtAuthToken jwtToken = new JwtAuthToken(token);
 				Authentication auth = authenticationManager.authenticate(jwtToken);
