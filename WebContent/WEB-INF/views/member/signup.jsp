@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 <script>
-const sendSignUpRequest = (elem)=>{
+const sendSignUpRequest = ()=>{
     $.ajax({
         url : "${rootPage}/auth/signup",
         type : "post",
@@ -30,7 +30,7 @@ const sendSignUpRequest = (elem)=>{
     })
 }
 
-const sendValidIdRequest = (elem)=>{
+const sendValidIdRequest = ()=>{
     $.ajax({
         url : "${rootPage}/auth/valid/id",
         type : "get",
@@ -48,7 +48,7 @@ const sendValidIdRequest = (elem)=>{
     })
 }
 
-const sendValidEmailRequest = (elem)=>{
+const sendValidEmailRequest = ()=>{
     $.ajax({
         url : "${rootPage}/auth/valid/email",
         type : "get",
@@ -57,15 +57,22 @@ const sendValidEmailRequest = (elem)=>{
         },
         dataType : "json",
         success: (response)=> {
-            console.log(response);
+        	$("#email-input").attr("readonly","");
+        	$("#valid-input").focus();
         },
         error: (error)=>{
-            console.log(error);
+        	resetInput("#email-input");
+        	$("#email-input").focus();
         }
     })
 }
 
-const checkValidPwdRequest = (elem)=>{
+const cancelEmail = ()=>{
+	resetInput("#email-input");
+	$("#email-input").focus();
+}
+
+const checkValidPwdRequest = ()=>{
     $.ajax({
         url : "${rootPage}/auth/valid/pwd",
         type : "get",
@@ -85,7 +92,9 @@ const checkValidPwdRequest = (elem)=>{
 
 const patternInputMap = {
 		  "#id-input": new RegExp("${ValidationProperties.AUTH_ID_REGEX}"),
-		  "#pwd-input": new RegExp("${ValidationProperties.AUTH_PWD_REGEX}")
+		  "#pwd-input": new RegExp("${ValidationProperties.AUTH_PWD_REGEX}"),
+		  "#name-input": new RegExp("${ValidationProperties.NAME_REGEX}"),
+          "#email-input": new RegExp("${ValidationProperties.AUTH_EMAIL_REGEX}")
 		};
 $(document).ready(()=>{
 	
@@ -120,8 +129,16 @@ $(document).ready(()=>{
 		}
     })
     $('#name-input').on('keyup', (e)=>{
-        if(e.target.value.length()>0){
+        if(patternInputMap["#"+e.target.id].test(e.target.value)){
         	e.target.className = 'form-control is-valid';
+        }else{
+            e.target.className = 'form-control is-invalid';
+        }
+    });
+	
+	$('#email-input').on('keyup', (e)=>{
+        if(patternInputMap["#"+e.target.id].test(e.target.value)){
+            e.target.className = 'form-control is-valid';
         }else{
             e.target.className = 'form-control is-invalid';
         }
@@ -165,7 +182,7 @@ const resetInput = (id)=>{
 								placeholder="비밀번호 입력">
 							<div class="valid-feedback">올바른 입력입니다.</div>
 							<div class="invalid-feedback">${ValidationProperties.AUTH_PWD_REGEX_DESC}을
-								입력하세요</div>
+								입력하세요.</div>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control mt-2"
@@ -175,22 +192,29 @@ const resetInput = (id)=>{
 						</div>
 						<div class="form-group">
 							<label for="name-input" class="form-label mt-4">이름</label> <input
-								type="password" class="form-control" id="name-input"
+								type="text" class="form-control" id="name-input"
 								placeholder="이름 입력">
-							<div class="valid-feedback">일치합니다.</div>
-							<div class="invalid-feedback">다시 입력한 비밀번호가 다릅니다.</div>
+							<div class="valid-feedback">올바른 입력입니다.</div>
+							<div class="invalid-feedback">${ValidationProperties.NAME_REGEX_DESC}을
+								입력하세요.</div>
 						</div>
 						<div class="form-group">
-							<label for="email-input" class="form-label mt-4">이메일</label>
-							<div class="input-group">
-								<input type="email" class="form-control" id="email-input"
-									placeholder="이메일 입력" aria-describedby="button-addon2">
-								<button class="btn btn-secondary" type="button"
-									id="button-addon2" onclick="sendValidEmailRequest()">인증번호
+							<label for="email-input" class="form-label mt-4">이메일</label> <input
+								type="email" class="form-control" id="email-input"
+								placeholder="이메일 입력">
+							<div class="valid-feedback">
+							<div class="d-flex justify-content-start mt-2">
+								<button class="btn btn-primary" type="button"
+									 onclick="sendValidEmailRequest()">인증번호
 									발송</button>
+                                <button class="btn btn-outline-primary ms-2" type="button"
+                                    onclick="cancelEmail()">이메일 초기화</button>
+                                    </div>
+								<input type="text" class="form-control mt-2" id="valid-input"
+									placeholder="인증번호 입력">
 							</div>
-							<input type="text" class="form-control mt-2" id="valid-input"
-								placeholder="인증번호 입력">
+							<div class="invalid-feedback">${ValidationProperties.AUTH_EMAIL_REGEX_DESC}을
+								입력하세요.</div>
 						</div>
 						<hr>
 						<div class="form-group d-flex">
