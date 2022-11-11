@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ValidDto {
-	boolean valid;
+	private boolean valid;
 }

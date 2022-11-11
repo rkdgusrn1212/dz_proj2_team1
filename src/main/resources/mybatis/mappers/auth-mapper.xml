@@ -9,4 +9,18 @@
 	<select id="getByEmail" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
         select * from user_auth where auth_email = #{authEmail}
 	</select>
+	<delete id="deleteEmailCode" parameterType="String">
+	   delete from user_auth where auth_email = #{authEmail}
+	</delete>
+	<insert id="addEmailCode" parameterType="team1.mini2.dz3.auth.model.PutEmailCodeDto">
+	   insert into user_auth values(auth_seq.nextVal, null, #{authPwd}, #{authAuthority}, #{authEmail}, null)
+	</insert>
+	<update id="putAuthUser" parameterType="team1.mini2.dz3.auth.model.SignUpDto">
+       update user_auth set
+        auth_id = #{authId}, 
+        auth_pwd = #{authPwd}, 
+        auth_authority = 'member', 
+        auth_email = #{authEmail}, 
+        auth_name = #{authName}
+    </update>
 </mapper>

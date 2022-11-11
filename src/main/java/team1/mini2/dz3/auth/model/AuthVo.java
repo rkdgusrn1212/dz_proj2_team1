@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AuthVo {
+	private int id;
     private String authId;
     private String authPwd;
     private String authAuthority;

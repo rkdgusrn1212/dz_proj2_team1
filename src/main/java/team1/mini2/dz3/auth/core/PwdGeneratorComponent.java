@@ -28,7 +28,6 @@ class PwdGeneratorComponent {
 
 	//영문자, 숫자, 특수문자가 하나이상 포함된 size크기의 비밀번호 생성.
 	String getRamdomPwd(int size) {
-
 		StringBuffer sb = new StringBuffer();
 		SecureRandom sr = new SecureRandom();
 		sr.setSeed(new Date().getTime());
@@ -36,25 +35,25 @@ class PwdGeneratorComponent {
 		for(int i=0 ;i<size; i++) {
 			numbers[i] = i;
 		}
-		int numIdx = numbers[(int) Math.random()*size];
+		int numIdx = numbers[(int) (Math.random()*size)];
 		swapNumbers(numbers,numIdx,size-1);
-		int specIdx = numbers[(int) Math.random()*(size-1)];
+		int specIdx = numbers[(int) (Math.random()*(size-1))];
 		swapNumbers(numbers,specIdx,size-2);
-		int alpIdx = numbers[(int) Math.random()*(size-2)];
+		int alpIdx = numbers[(int) (Math.random()*(size-2))];
 		swapNumbers(numbers,numIdx,size-3);
 		int idx = 0;
 		int len = mCharSet.length;
 		for (int i=0; i<size; i++) {
 			if(i == numIdx) {
-				sb.append(mCharSet[(int)Math.random()*10]);
+				sb.append(mCharSet[(int)(Math.random()*10)]);
 				continue;
 			}
 			if(i == specIdx) {
-				sb.append(mCharSet[10+(int)Math.random()*52]);
+				sb.append(mCharSet[62+((int)Math.random()*7)]);
 				continue;
 			}
 			if(i == alpIdx) {
-				sb.append(mCharSet[62+(int)Math.random()*7]);
+				sb.append(mCharSet[10+(int)(Math.random()*52)]);
 				continue;
 			}
 			idx = sr.nextInt(len);

@@ -1,4 +1,5 @@
-<%@page import="team1.mini2.dz3.auth.core.ValidationProperties"%>
+<%@page import="team1.mini2.dz3.auth.core.ValidationProperties, 
+team1.mini2.dz3.auth.model.SignUpResultDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -12,20 +13,57 @@
 <%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 <script>
 const sendSignUpRequest = ()=>{
+	if($("#id-input").attr("class")!=="form-control is-valid"){
+		$("#id-input").focus();
+		return;
+	}
+	if($("#pwd-confirm-input").attr("class")!=="form-control is-valid"){
+        $("#pwd-input").focus();
+        return;
+    }
+	if($("#name-input").attr("class")!=="form-control is-valid"){
+        $("#name-input").focus();
+        return;
+    }
+	if($("#email-input").attr("class")!=="form-control is-valid"){
+        $("#email-input").focus();
+        return;
+    }
     $.ajax({
         url : "${rootPage}/auth/signup",
         type : "post",
         contentType:"application/json;charset=utf-8",
         data:JSON.stringify({
             authId : $("#id-input").val(),
-            authPwd : $("#pwd-input").val()
+            authPwd : $("#pwd-input").val(),
+            authName : $("#name-input").val(),
+            authEmail : $("#email-input").val(),
+            code : $("#valid-input").val()
         }),
         dataType : "json",
         success: (response)=> {
-            console.log(response);
+        	if(response.result==${SignUpResultDto.CODE_FAIL}){
+        		showToast("인증코드 실패", "now", "인증코드가 다릅니다.");
+                $("#valid-input").focus();
+                return;
+        	}
+        	if(response.result==${SignUpResultDto.FAIL}){
+                showToast("실패", "now", "회원 가입 할 수 없습니다.");	
+                return;
+        	}
+        	if(response.result==${SignUpResultDto.ID_FAIL}){
+                showToast("아이디 중복", "now", "중복된 아이디 입니다.");
+                $("#id-input").focus();
+                return;
+        	}
+            showToast("회원 가입 성공", "now", "회원가입에 성공하였습니다.");
         },
-        error: (error)=>{
-            console.log(error);
+        error: (request, status ,error)=>{
+        	if(request.status===422){
+                showToast("입력 형식 오류", "now", "형식이 맞지 않습니다.");	
+        	}else{
+                showToast("실패", "now", "인터넷 연결을 확인해 주세요."); 
+        	}
         }
     })
 }
@@ -57,12 +95,21 @@ const sendValidEmailRequest = ()=>{
         },
         dataType : "json",
         success: (response)=> {
-        	$("#email-input").attr("readonly","");
+        	if(response.exist){
+        		cancelEmail();
+        		showToast("이미 존재하는 이메일", "now", "이미 사용중인 이메일 입니다.");
+        		return;
+        	}
+        	if(!response.send){
+        		showToast("이메일 전송 실패", "now", "해당 이메일로 전송이 불가합니다.");
+        		return;
+        	}
+        	$("#email-input").attr("readonly","");//이메일 고정하기
         	$("#valid-input").focus();
+        	showToast("이메일 전송 성공","now","전송된 인증코드를 입력해 주세요.");
         },
         error: (error)=>{
-        	resetInput("#email-input");
-        	$("#email-input").focus();
+        	showToast("이메일 전송 실패","now","인터넷 연결을 확인해주세요.");
         }
     })
 }
@@ -70,6 +117,7 @@ const sendValidEmailRequest = ()=>{
 const cancelEmail = ()=>{
 	resetInput("#email-input");
 	$("#email-input").focus();
+	$("#email-input").attr("readonly",null);
 }
 
 const checkValidPwdRequest = ()=>{
@@ -86,7 +134,7 @@ const checkValidPwdRequest = ()=>{
         error: (error)=>{
             console.log(error);
         }
-    })
+    });
 }
 
 
@@ -223,8 +271,8 @@ const resetInput = (id)=>{
 									class="btn btn-outline-primary w-100" onclick="">뒤로가기</a>
 							</div>
 							<div class="ps-2 flex-fill">
-								<button type="submit" class="btn btn-primary w-100"
-									onclick="sendRequest()">회원가입</button>
+								<button type="button" class="btn btn-primary w-100"
+									onclick="sendSignUpRequest()">회원가입</button>
 							</div>
 						</div>
 					</fieldset>
