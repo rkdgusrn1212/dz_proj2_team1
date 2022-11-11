@@ -1,212 +1,373 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+   pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+
 <title>Tasty Way : 메인</title>
+
+<script defer="defer"
+   src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 
 <!-- css 초기화 -->
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/bootstrap.min.css">
-<script src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
+   href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
+<!-- css 연결 -->
+<link rel="stylesheet"
+   href="${pageContext.request.contextPath}/resources/css/lkc.css">
+
+<!-- 반응형 웹 연결 -->
+<link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css"
+   integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+   crossorigin="anonymous">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+   href="${rootPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+   href="${rootPath}/resources/css/bootstrap-icons.css">
+<link rel="stylesheet"
+   href="${rootPath}/resources/css/prism-okaidia.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/custom.min.css">
 </head>
 
-<body>
+<body onload="load()">
 
-	<!-- <h1>JQUERY AJAX TEST</h1>
-<button id="send-btn">send</button><br>
-<p id="result-text">df</p>
-<script>
-$("#send-btn").click(()=>{
-        $.ajax({
-            url : "${pageContext.request.contextPath}/api/notice/page/1",
-            type : "get",
-            //data : {},
-            dataType : "JSON",
-            contentType : "applicaton/json; charset=utf-8",
-            success: function(response) {
-            	$("#result-text").html(JSON.stringify(response));                    
-            },
-            
-        });
-    }
-);
-</script> -->
 
-	<div class="container" style="float: none; margin: 0 auto;">
+   <div class="container" style="float: none; margin: 0 auto;">
 
-		<div class="row"
-			style="float : none; margin : 0 auto; height: 350px;
-		background-image: url('${rootPath}/resources/img/main_banner.jpg')">
-			<h2
-				style="font-weight: bolder; text-align: center; justify-content: center; padding-top: 130px;">
-				<font color="FFFFFF">근처의 맛집을 찾아보세요 </font>
-			</h2>
+      <div class="row"
+         style="float : none; margin : 0 auto; height: 600px;
+      background-image: url('${rootPath}/resources/img/main_banner.png')">
+           <h1
+            style="font-weight: bolder; text-align: center; justify-content: center; padding-top: 240px; text-decoration-line: underline; " >
+            <font color="FFFFFF"> 근처의 맛집을 찾아보세요</font>
+         </h1>
 
-			<div class="row" style="float: none; margin: 0 auto;">
-				<div
-					style="width: 1300px; height: 100px; justify-content: center; padding-left: 450px; padding-right: 450px;">
-					<form class="d-flex">
-						<input class="form-control me-sm-2" type="text"
-							placeholder="Search" width='5px;' height='5px;' "/>
-						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-					</form>
-				</div>
-			</div>
-		</div>
+      </div>
 
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
-			<h3>
-				<b>요즘 핫한 맛집들</b>
-			</h3>
-			<br> <br>
-			<h4>▼</h4>
-		</div>
-		<br> <br>
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <!-- 그림클릭하면 이동할 주소 --> <img
-						src="${rootPath}/resources/img/food1.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food4.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타2 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food3.PNG">
-						<h4 style="padding-bottom: 5px; padding-top: 3px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타3 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-		</div>
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food2.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타4 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food4.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타5 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food2.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타6 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-		</div>
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food1.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타7 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food4.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스타8 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-			<div
-				style="border: 1px black; float: left; width: 33%; padding-right: 35px; padding-left: 35px; padding-bottom: 3px;">
-				<div class="selector">
-					<a href="https://www.naver.com/"> <img
-						src="${rootPath}/resources/img/food3.PNG">
-						<h4 style="padding-bottom: 5px;">
-							<b>엄청 맛있는 양식집</b></a>
-					</h4>
-					<h5 style="padding-bottom: 2px;">
-						평점 : ★★★★★ <br> 메뉴 : 파스9 <br> 주소 : 서울시 강서구
-				</div>
-				<br>
-				<hr>
-			</div>
-		</div>
-	</div><br><br>
+
+      <div class="row"
+         style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
+         <h3>
+            <b>요즘 핫한 맛집들</b>
+         </h3>
+         <br> <br>
+         <h4>▼</h4>
+      </div>
+      <br> <br>
+      
+      
+      <div class="row"
+         style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+               <a href="${rootPath}/restaurant/detail?id=1"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview" id="storereview" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu" id="storemenu" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress" id="storeaddress" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+                <a href="${rootPath}/restaurant/detail?id=2"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename2"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview2" id="storereview2" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu2" id="storemenu2" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress2" id="storeaddress2" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=3"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename3"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview3" id="storereview3" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu3" id="storemenu3" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress3" id="storeaddress3" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+      </div>
+      
+      
+      
+      
+      
+      <div class="row"
+         style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=4"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename4"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview4" id="storereview4" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu4" id="storemenu4" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress4" id="storeaddress4" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=5"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename5"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview5" id="storereview5" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu5" id="storemenu5" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress5" id="storeaddress5" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=6"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename6"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview6" id="storereview6" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu6" id="storemenu6" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress6" id="storeaddress6" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+      </div>
+      
+      
+      <div class="row"
+         style="float: none; margin: 0 auto; margin-top: 13px; text-align: center;">
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=7"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename7"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview7" id="storereview7" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu7" id="storemenu7" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress7" id="storeaddress7" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=8"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename8"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview8" id="storereview8" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu8" id="storemenu8" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress8" id="storeaddress8" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+         
+         <div style="border: 1px black; float: left; width: 33%; padding-right: 10px; padding-left: 30px;">
+            <div class="selector">
+ 			   <a href="${rootPath}/restaurant/detail?id=9"> <!-- 그림클릭하면 이동할 주소 --> <img
+                  src="${rootPath}/resources/img/food1.PNG">
+                  <h4 style="padding-bottom: 5px; text-align: left; padding-bottom: 10px;">
+                     <div class="memu" id="storename9"></div></a>
+                   </h4>
+               <h5 style= "text-align: left;">
+                  <div class="storereview9" id="storereview9" style="padding-bottom: 2px;"><b>리뷰 :</b> (☞ﾟヮﾟ)☞</div>
+                  <div class="storemenu9" id="storemenu9" style="padding-bottom: 2px;"></div>
+                  <div class="storeaddress9" id="storeaddress9" style="padding-bottom: 2px;"></div>
+               </h5>
+               <br><hr>
+            </div>
+         </div>
+      </div>
+   </div>
+   <br>
+   <br>
 
 </body>
+
+<script type="text/javascript">
+   function load() {
+      
+//------------값 불러오기 -----------
+      
+/*       const count = (int)(Math.random() * 2945) + 1;
+      console.log(count);
+       */
+      
+      $.ajax({
+         url : "${rootPath}/api/restaurant/1", //식당 No.1의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename").append(response.restaurantName)
+            $("#storemenu").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/2", //식당 No.2의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename2").append(response.restaurantName)
+            $("#storemenu2").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress2").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/3", //식당 No.3의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename3").append(response.restaurantName)
+            $("#storemenu3").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress3").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/4", //식당 No.4의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename4").append(response.restaurantName)
+            $("#storemenu4").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress4").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/5", //식당 No.5의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename5").append(response.restaurantName)
+            $("#storemenu5").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress5").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/6", //식당 No.6의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename6").append(response.restaurantName)
+            $("#storemenu6").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress6").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/7", //식당 No.7의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename7").append(response.restaurantName)
+            $("#storemenu7").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress7").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/8", //식당 No.8의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename8").append(response.restaurantName)
+            $("#storemenu8").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress8").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+
+      $.ajax({
+         url : "${rootPath}/api/restaurant/15", //식당 No.15의 값
+         type : "get",
+         dataType : "JSON",
+         contentType : "applicaton/json; charset=utf-8",
+         success : function(response) { //값을 받아오면
+            //console.log(response)
+            $("#storename9").append(response.restaurantName)
+            $("#storemenu9").append("<b>"+"메뉴 : "+"</b>" + response.restaurantMenu)
+            $("#storeaddress9").append("<b>"+"주소 :"+"</b>"+response.restaurantAddress)
+         }
+      });
+      
+      //------------검색 기능 미정 -----------
+   }
+</script>
+
 </html>
