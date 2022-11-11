@@ -29,7 +29,7 @@ const sendSignUpRequest = ()=>{
         $("#email-input").focus();
         return;
     }
-    $.ajax({
+	$.ajax({
         url : "${rootPage}/auth/signup",
         type : "post",
         contentType:"application/json;charset=utf-8",
@@ -57,6 +57,7 @@ const sendSignUpRequest = ()=>{
                 return;
         	}
             showToast("회원 가입 성공", "now", "회원가입에 성공하였습니다.");
+        	location.replace("${rootPage}/member/login"); 
         },
         error: (request, status ,error)=>{
         	if(request.status===422){

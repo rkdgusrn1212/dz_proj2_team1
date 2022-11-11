@@ -13,14 +13,14 @@
 	   delete from user_auth where auth_email = #{authEmail}
 	</delete>
 	<insert id="addEmailCode" parameterType="team1.mini2.dz3.auth.model.PutEmailCodeDto">
-	   insert into user_auth values(auth_seq.nextVal, null, #{authPwd}, #{authAuthority}, #{authEmail}, null)
+	   insert into user_auth values(auth_seq.nextVal, #{authId}, #{authPwd}, #{authAuthority}, #{authEmail}, 'please change your name')
 	</insert>
 	<update id="putAuthUser" parameterType="team1.mini2.dz3.auth.model.SignUpDto">
        update user_auth set
         auth_id = #{authId}, 
         auth_pwd = #{authPwd}, 
-        auth_authority = 'member', 
-        auth_email = #{authEmail}, 
+        auth_authority = 'member',  
         auth_name = #{authName}
+        where auth_email = #{authEmail}
     </update>
 </mapper>

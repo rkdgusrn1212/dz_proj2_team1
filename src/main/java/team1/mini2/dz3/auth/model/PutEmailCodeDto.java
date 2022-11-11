@@ -10,6 +10,10 @@ import team1.mini2.dz3.auth.core.ValidationProperties;
 public class PutEmailCodeDto {
 	
 	@NotNull
+	@Pattern(regexp = ValidationProperties.AUTH_ID_REGEX)
+	String authId;
+	
+	@NotNull
 	@Pattern(regexp = ValidationProperties.AUTH_PWD_REGEX)
 	String authPwd;
 

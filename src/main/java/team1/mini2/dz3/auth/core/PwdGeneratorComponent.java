@@ -18,7 +18,7 @@ class PwdGeneratorComponent {
 		SecureRandom sr = new SecureRandom();
 		sr.setSeed(new Date().getTime());
 		int idx = 0;
-		int len = mCharSet.length;
+		int len = mCharSet.length-7;//특수문자제거
 		for (int i=0; i<size; i++) {
 			idx = sr.nextInt(len);
 			sb.append(mCharSet[idx]);

@@ -1,11 +1,9 @@
 package team1.mini2.dz3.auth.controller;
 
 import java.util.HashMap;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.EmailCodeDto;
@@ -58,6 +55,6 @@ public class AuthController {
 	
 	@PostMapping("valid/code")
 	public ValidDto validCode(@Valid @RequestBody(required=true) EmailCodeDto dto) {
-		return authService.validCode(dto);	
+		return authService.validCode(dto);
 	}
 }
