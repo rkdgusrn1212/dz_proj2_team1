@@ -69,13 +69,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public int getRestaurantPageWithNameCount(String key) {
 		RestaurantDao dao = sqlSession.getMapper(RestaurantDao.class);
-		return (int) Math.ceil(dao.getWithNameCount(key) / 10.);
+		return (int) Math.ceil(dao.getWithNameCount(key) / 5.);
 	}
 
 	@Override
 	public int getRestaurantPageWithCategoryCount(String key) {
 		RestaurantDao dao = sqlSession.getMapper(RestaurantDao.class);
-		return (int) Math.ceil(dao.getWithCategoryCount(key) / 10.);
+		return (int) Math.ceil(dao.getWithCategoryCount(key) / 5.);
 	}
 
 	@Override
