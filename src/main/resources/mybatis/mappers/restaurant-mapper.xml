@@ -123,7 +123,23 @@
 		from (select A.*, ROWNUM r from
 		(select * from
 		restaurant
-		where restaurant_dong like '%'||#{key}||'%'
+		where
+        case
+        when
+        restaurant_dong like '%동' then
+        restaurant_dong
+        when
+        restaurant_dong like '%읍' then
+        restaurant_dong
+        when
+        restaurant_dong like '%면' then
+        restaurant_dong
+        when
+        restaurant_dong like '%리' then
+        restaurant_dong
+        else
+        restaurant_gu end
+        like '%'||#{key}||'%'
 		order by
 		restaurant_no) A
 		)
@@ -170,8 +186,23 @@
 	</select>
 	<select id="getWithDongCount" parameterType="String"
 		resultType="Integer">
-		select count(*) from restaurant where restaurant_dong like
-		'%'||#{key}||'%'
+		select count(*) from restaurant  
+		case
+        when
+        restaurant_dong like '%동' then
+        restaurant_dong
+        when
+        restaurant_dong like '%읍' then
+        restaurant_dong
+        when
+        restaurant_dong like '%면' then
+        restaurant_dong
+        when
+        restaurant_dong like '%리' then
+        restaurant_dong
+        else
+        restaurant_gu end
+        like %'||#{key}||'%'
 	</select>
 
 	<insert id="add" parameterType="map">
