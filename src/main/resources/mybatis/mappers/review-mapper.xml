@@ -113,15 +113,10 @@
 		select count(*) from review where review_star like
 		'%'||#{key}||'%'
 	</select>
-	<select id="getListWithRegDate" parameterType="map"
-		resultMap="reviewMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from review where review_regdate like '%'||#{key}||'%'
-		order by review_no) A
-		)
-		where r >= #{start} and r &lt;= #{end}
-	</select>
+	<select id="getWithRegDateCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from review where review_regdate like '%'||#{key}||'%'
+    </select>
 
 	<insert id="add" parameterType="map">
 		insert into review values (
