@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
@@ -26,7 +27,6 @@ const drawStar = (target) => {
 	document.getElementById("pointView").innerHTML = i;
 
 }
-
 function readURL(input) {
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
@@ -38,9 +38,31 @@ function readURL(input) {
 	    document.getElementById('preview').src = "";
 	  }
 	}
+	
+/* 식당정보 불러오기  */
+function load(){
+	console.log(${id})
+	const id=${id};
+
+	$.ajax({
+		url : "${rootPath}/api/review/"+id,
+		type : "get",
+		// data :{},
+		dataType : "JSON",
+		contentType : "application/json; charset=utf-8",
+		
+		success:function(response){
+			console.log(response);
+		}
+	});
+	
+	
+}
+
+	
 	</script>
 </head>
-<body>
+<body onload=load()>
 	<div class="container"
 		style="float: none; margin: 0 auto; margin-bottom: 100px;">
 		<div class="row"
@@ -51,16 +73,16 @@ function readURL(input) {
 				style="width: 150px; margin: 10px;" /> <input type="reset"
 				class="btn btn-info" value="취소" style="width: 150px; margin: 10px;" />
 
-			<div class="col" style="float:left;">
+			<div class="col" style="float: left;">
 				<div class="row"
 					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
 					<div
 						style="background-color: #50C785; width: 200px; height: 50px; float: left;'">
 						<h2 class="form-label"
-							style="text-align: center; color: #fff; line-height: 50px;">제목</h2>
+							style="text-align: center; color: #fff; line-height: 50px;">식당명</h2>
 					</div>
-					<input type="text" id="title" style="float: left; width: 500px;"
-						placeholder="리뷰 제목을 작성해주세요" />
+					<h4 id="title"
+						style="float: left; width: 500px; hieght: 50px; line-height: 50px; margin-bottom: 0;">식당명</h4>
 				</div>
 				<div class="row"
 					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
@@ -97,16 +119,9 @@ function readURL(input) {
 					</div>
 				</div>
 			</div>
-			
-				<img class= "col" alt="음식사진을 추가해 주세요" id="preview"  style="width:350px; height:350px;"/>
-		
+			<img class="col" alt="음식사진을 추가해 주세요" id="preview"
+				style="width: 350px; height: 350px;" />
 		</div>
-
 	</div>
-
-
-
-
 </body>
-
 </html>

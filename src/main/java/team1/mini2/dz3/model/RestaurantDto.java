@@ -1,5 +1,7 @@
 package team1.mini2.dz3.model;
 
+import javax.validation.constraints.Null;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,8 @@ public class RestaurantDto {
 	private String restaurantAddress;
 	private double restaurantLatitude;
 	private double restaurantLongtitude;
+	
+	@Null
+	private RestaurantPageVo pageVo;
+	
 }

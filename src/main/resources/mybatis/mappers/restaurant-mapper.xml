@@ -34,117 +34,53 @@
 
 	</resultMap>
 
-	<select id="getList" parameterType="map"
+	<select id="getList" parameterType="RestaurantDto"
 		resultMap="restaurantMap">
-		select *
-		from
+		select * from
 		(select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		order by restaurant_no) A
-		)
-		where r
-		>= #{start} and r &lt;=
-		#{end}
-	</select>
+		(select * from restaurant where
+		1=1
+		<if test="restaurantName != null">
+			and restaurant_name like '%'||#{restaurantName}||'%'
+		</if>
+		<if test="restaurantCategory != null">
+			and restaurant_category like
+			'%'||#{restaurantCategory}||'%'
+		</if>
+		<if test="restaurantMenu != null">
+			and restaurant_menu like '%'||#{restaurantMenu}||'%'
+		</if>
+		<if test="restaurantSi != null">
+			and restaurant_si like '%'||#{restaurantSi}||'%'
+		</if>
+		<if test="restaurantGu != null">
+			and restaurant_gu like '%'||#{restaurantGu}||'%'
+		</if>
+		<if test="restaurantGu != null">
+			<choose>
+				<when test="restaurant_dong like '%동'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%읍'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%면'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%리'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<otherwise>
+					and restaurant_gu like '%'||#{restaurantDong}||'%'
+				</otherwise>
+			</choose>
+		</if>
 
-	<select id="getListWithName" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where restaurant_name like '%'||#{key}||'%'
 		order by
 		restaurant_no) A
 		)
-		where
-		r >= #{start} and r &lt;= #{end}
-	</select>
-
-	<select id="getListWithCategory" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where restaurant_category like '%'||#{key}||'%'
-		order by
-		restaurant_no) A
-		)
-		where
-		r >= #{start} and r &lt;= #{end}
-	</select>
-
-	<select id="getListWithMenu" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where restaurant_menu like '%'||#{key}||'%'
-		order by
-		restaurant_no) A
-		)
-		where
-		r >= #{start} and r &lt;= #{end}
-	</select>
-
-	<select id="getListWithSi" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where restaurant_si like '%'||#{key}||'%'
-		order by
-		restaurant_no) A
-		)
-		where
-		r >= #{start} and r &lt;= #{end}
-	</select>
-
-	<select id="getListWithGu" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where restaurant_gu like '%'||#{key}||'%'
-		order by
-		restaurant_no) A
-		)
-		where
-		r >= #{start} and r &lt;= #{end}
-	</select>
-	<select id="getListWithDong" parameterType="map"
-		resultMap="restaurantMap">
-		select *
-		from (select A.*, ROWNUM r from
-		(select * from
-		restaurant
-		where
-        case
-        when
-        restaurant_dong like '%동' then
-        restaurant_dong
-        when
-        restaurant_dong like '%읍' then
-        restaurant_dong
-        when
-        restaurant_dong like '%면' then
-        restaurant_dong
-        when
-        restaurant_dong like '%리' then
-        restaurant_dong
-        else
-        restaurant_gu end
-        like '%'||#{key}||'%'
-		order by
-		restaurant_no) A
-		)
-		where
-		r >= #{start} and r &lt;= #{end}
+		where r &gt;= #{pageVo.start} and r &lt;=
+		#{pageVo.end}
 	</select>
 
 	<select id="get" parameterType="int" resultMap="restaurantMap">
@@ -153,79 +89,43 @@
 		where restaurant_no = #{restaurantNo}
 	</select>
 
-	<select id="getCount" resultType="Integer">
-		select count(*) from restaurant
+	<select id="getCount" resultType="Integer"
+		parameterType="RestaurantDto">
+		select count(*) from restaurant where 1=1
+		<if test="restaurantName != null">
+			and restaurant_name like '%'||#{restaurantName}||'%'
+		</if>
+		<if test="restaurantCategory != null">
+			and restaurant_category like
+			'%'||#{restaurantCategory}||'%'
+		</if>
+		<if test="restaurantMenu != null">
+			and restaurant_menu like '%'||#{restaurantMenu}||'%'
+		</if>
+		<if test="restaurantSi != null">
+			and restaurant_si like '%'||#{restaurantSi}||'%'
+		</if>
+		<if test="restaurantGu != null">
+			and restaurant_gu like '%'||#{restaurantGu}||'%'
+		</if>
+		<if test="restaurantGu != null">
+			<choose>
+				<when test="restaurant_dong like '%동'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%읍'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%면'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<when test="restaurant_dong like '%리'">
+					and restaurant_dong like '%'||#{restaurantDong}||'%'
+				</when>
+				<otherwise>
+					and restaurant_gu like '%'||#{restaurantDong}||'%'
+				</otherwise>
+			</choose>
+		</if>
 	</select>
-
-	<select id="getWithNameCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant where restaurant_name like
-		'%'||#{key}||'%'
-	</select>
-
-	<select id="getWithCategoryCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant where restaurant_Category
-		like
-		'%'||#{key}||'%'
-	</select>
-	<select id="getWithMenuCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant where restaurant_menu like
-		'%'||#{key}||'%'
-	</select>
-	<select id="getWithSiCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant where restaurant_si like
-		'%'||#{key}||'%'
-	</select>
-	<select id="getWithGuCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant where restaurant_gu like
-		'%'||#{key}||'%'
-	</select>
-	<select id="getWithDongCount" parameterType="String"
-		resultType="Integer">
-		select count(*) from restaurant  
-		case
-        when
-        restaurant_dong like '%동' then
-        restaurant_dong
-        when
-        restaurant_dong like '%읍' then
-        restaurant_dong
-        when
-        restaurant_dong like '%면' then
-        restaurant_dong
-        when
-        restaurant_dong like '%리' then
-        restaurant_dong
-        else
-        restaurant_gu end
-        like %'||#{key}||'%'
-	</select>
-
-	<insert id="add" parameterType="map">
-		insert into restaurant values (
-		restaurant_seq.nextVal , #{restaurantName},
-		#{restaurantPh},
-		#{restaurantCategory}, #{restaurantSi},
-		#{restaurantGu}, #{restaurantDong}, #{restaurantAddress},
-		#{restaurantLatitude},
-		#{restaurantLongtitude}
-		)
-	</insert>
-
-	<update id="set" parameterType="map">
-		update restaurant set restaurant_name =
-		#{restaurantName}, restaurant_category =
-		#{restaurantCategory}, #{restaurantAddress}
-		where restaurant_no = #{restaurantNo}
-	</update>
-
-	<delete id="remove" parameterType="int">
-		delete from restaurant where
-		restaurant_no = #{restaurantNo}
-	</delete>
-
 </mapper>

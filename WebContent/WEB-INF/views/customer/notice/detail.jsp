@@ -4,8 +4,8 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<c:set var="root" value="${pageContext.request.contextPath}" />
-<script defer="defer" src="${root}/resources/js/jquery-3.6.1.min.js"></script>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<script defer="defer" src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
 
 <head>
 <meta charset="UTF-8">
@@ -13,17 +13,14 @@ pageEncoding="UTF-8"%>
 <script type="text/javascript">
 function load(){
 console.log(${id});
-var id = "";
-
-
-id = ${id};
+const id = ${id};
 
 $.ajax({
-	url : "${root}/api/notice/"+id,
+	url : "${rootPath}/api/notice/"+id,
 	type : "get",
 	//data : {},
 	dataType : "JSON",
-	contentType : "applicaton/json; charset=utf-8",
+	contentType : "application/json; charset=utf-8",
 
 	success: function(response){
 	   console.log(response);
@@ -50,7 +47,7 @@ $.ajax({
 }
 
 function listpage(){
-location.href= "${root}/customer/notice";
+location.href= "${rootPath}/customer/notice";
 }
 </script>
 

@@ -456,8 +456,7 @@
 				console.log(optdata); //제목
 				console.log(keydata); //title11
 
-				$
-						.ajax({
+				$.ajax({
 							url : "${rootPath}/api/qna/page/1",
 							type : "get",
 							data : {
