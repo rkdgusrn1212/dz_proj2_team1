@@ -29,7 +29,9 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public JwtDto login(@Valid @RequestBody(required=true) AuthDto userDto) {
-		return authService.login(userDto);
+		JwtDto dto = authService.login(userDto);
+		System.out.println(dto.toString());
+		return dto;
 	}
 	
 	@PostMapping("/signup")

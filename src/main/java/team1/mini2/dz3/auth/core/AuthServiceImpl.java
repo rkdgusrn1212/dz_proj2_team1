@@ -62,7 +62,6 @@ class AuthServiceImpl implements AuthService{
 
     @Override
     public JwtDto login(AuthDto UserVoDto) {
-
         AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(UserVoDto.getAuthId());
         if(UserVo==null) {
         	throw new AuthException("해당 유저 없음");
@@ -70,7 +69,6 @@ class AuthServiceImpl implements AuthService{
         if (!passwordEncoder.matches(UserVoDto.getAuthPwd(), UserVo.getAuthPwd())) {
             throw new AuthException("비밀번호가 맞지 않음");
         }
-
         return createJwtDto(UserVo);
     }
 

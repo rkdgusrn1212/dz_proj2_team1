@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
 <script src="${rootPage}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
-const sendRequest = (elem)=>{
+const sendRequest = ()=>{
 	$.ajax({
         url : "${rootPage}/auth/login",
         type : "post",
@@ -23,8 +23,9 @@ const sendRequest = (elem)=>{
         }),
         dataType : "json",
         success: (response)=> {
-
-            console.log(response);
+        	console.log("성공");
+        	console.log(response);
+            console.log(JSON.stringify(response));
         },
         error: (error)=>{
         	console.log(error);
@@ -56,11 +57,10 @@ const sendRequest = (elem)=>{
 								type="password" class="form-control" id="pwd-input"
 								placeholder="비밀번호 입력">
 						</div>
-
 						<hr>
 						<div class="form-group row">
 							<div class="col">
-								<button type="submit" class="btn btn-primary w-100"
+								<button type="button" class="btn btn-primary w-100"
 									onclick="sendRequest()">로그인</button>
 							</div>
 						</div>
