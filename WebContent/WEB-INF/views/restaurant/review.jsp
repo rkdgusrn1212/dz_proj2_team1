@@ -44,7 +44,7 @@ function readURL(input) {
 //검색창을 누르면!! 값넘겨라 제발
 
 function search(){
-let reviewRestaurant =$("#title").val(); //title에 입력한 값 저장
+let reviewRestaurant = "33"; //레스토랑 No값 받아오기
 let reviewContent = $("#content").val(); //content에 입력한 값 저장
 let star = $("#ran").val(); // 평점
 let reviewStar = "2";
@@ -95,30 +95,15 @@ let idList = [];
 	<div class="container"
 		style="float: none; margin: 0 auto; margin-bottom: 100px;">
 		<div class="row"
-			style="float: none; margin: 0 auto; justify-content: center; margin-top: 100px;">
-			<h1 style="justify-content: center; width: 700px; float: left;">리뷰
+			style="float: none; margin: 0 auto; margin-top: 100px;">
+			<h1 style="width: 700px; float: left;">리뷰
 				작성</h1>
 			<input type="submit" class="btn btn-info" value="등록"
 				style="width: 150px; margin: 10px;" onclick="search()"/> <input type="reset"
 				class="btn btn-info" value="취소" style="width: 150px; margin: 10px;" />
 
 			<div class="col" style="float:left;">
-				<div class="row"
-					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
-					<div
-						style="background-color: #50C785; width: 200px; height: 50px; float: left;'">
-						<h2 class="form-label"
-							style="text-align: center; color: #fff; line-height: 50px;">제목</h2>
-					</div>
-					<input type="text" id="title" style="float: left; width: 500px;"
-						placeholder="리뷰 제목을 작성해주세요" />
-				</div>
-				<div class="row"
-					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
 
-					<input type="file" onchange="readURL(this);" class="form-control "
-						style="width: 700px;">
-				</div>
 				<div class="row"
 					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
 					<div
@@ -146,6 +131,13 @@ let idList = [];
 						<h3
 							style="width: 100px; height: 50px; float: left; text-align: left; margin: 0; line-height: 50px;">점</h3>
 					</div>
+				</div>
+				<br>
+				<div class="row"
+					style="float: none; margin: 0; justify-content: center; margin-bottom: 10px;">
+
+					<input type="file" onchange="readURL(this);" class="form-control "
+						style="width: 700px;">
 				</div>
 			</div>
 			
