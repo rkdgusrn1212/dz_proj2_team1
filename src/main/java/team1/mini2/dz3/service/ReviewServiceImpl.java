@@ -94,7 +94,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return sqlSession.getMapper(ReviewDao.class).getWithRegDateCount(key);
 	}
 	public Map<String, String> getPageMap(int page) {
-		int rowSize = 10;
+		int rowSize = 3;
 		int start = (page*rowSize)-(rowSize -1);
 		int end = page*rowSize;
 		HashMap<String, String> map = new HashMap<>();
