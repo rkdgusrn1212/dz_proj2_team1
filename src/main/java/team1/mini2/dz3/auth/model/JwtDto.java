@@ -12,7 +12,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class JwtDto {
+	
+	public static final int SUCCESS = 0;
+	public static final int CLAIM_ERROR = 1;
+	public static final int GRANT_ERROR = 2;
+	public static final int USER_ERROR = 3;
+	public static final int PWD_ERROR = 4;
+	
     private String grantType;
     private String accessToken;
     private String refreshToken;
+    private int result;
 }

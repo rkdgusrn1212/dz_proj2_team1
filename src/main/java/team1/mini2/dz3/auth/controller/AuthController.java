@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.core.ExpireProperties;
-import team1.mini2.dz3.auth.model.AccessTokenDto;
+import team1.mini2.dz3.auth.model.LoginResultDto;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.EmailCodeDto;
 import team1.mini2.dz3.auth.model.EmailValidDto;
@@ -33,17 +33,28 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/login")
-	public AccessTokenDto login(@Valid @RequestBody(required=true) AuthDto userDto, HttpServletResponse response) {
-		JwtDto dto = authService.login(userDto);
-		ResponseCookie cookie = ResponseCookie.from("refreshToken", dto.getRefreshToken())
-				.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
-				.path("/")
-				.secure(true)
-				.sameSite("None")
-				.httpOnly(true)
-				.build();
-		response.setHeader("Set-Cookie", cookie.toString());
-		return new AccessTokenDto(dto.getGrantType(), dto.getAccessToken());
+	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletResponse response) {
+		JwtDto dto = authService.login(authDto);
+		int result;
+		switch(dto.getResult()) {
+		case JwtDto.USER_ERROR : 
+			result = LoginResultDto.NO_USER;
+			break;
+		case JwtDto.PWD_ERROR :
+			result = LoginResultDto.PWD_NOT_MATCH;
+			break;
+		default : 
+			result = LoginResultDto.SUCCESS;
+			ResponseCookie cookie = ResponseCookie.from("refreshToken", dto.getRefreshToken())
+					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
+					.path("/")
+					.secure(true)
+					.sameSite("None")
+					.httpOnly(true)
+					.build();
+			response.setHeader("Set-Cookie", cookie.toString());
+		}
+		return new LoginResultDto(dto.getGrantType(), dto.getAccessToken(), result);
 	}
 
 	@PostMapping("/signup")

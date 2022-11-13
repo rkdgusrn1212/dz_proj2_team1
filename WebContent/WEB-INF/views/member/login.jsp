@@ -8,9 +8,7 @@
 <c:set var="rootPage" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
 <title>Tasty Way : 로그인 페이지</title>
-<link rel="stylesheet" href="${rootPage}/resources/css/reset.css">
-<link rel="stylesheet" href="${rootPage}/resources/css/bootstrap.min.css">
-<script src="${rootPage}/resources/js/jquery-3.6.1.min.js"></script>
+<%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 <script>
 const sendRequest = ()=>{
 	$.ajax({
@@ -23,11 +21,16 @@ const sendRequest = ()=>{
         }),
         dataType : "json",
         success: (response)=> {
-        	console.log("성공");
+            showToast("로그인 성공", "now", "환영합니다.");
             console.log(JSON.stringify(response));
         },
         error: (error)=>{
-        	console.log(error);
+        	if(error.status==422){
+                showToast("로그인 실패", "now", "요청 양식이 맞지 않습니다.");
+                return;
+        	}else{
+                showToast("접속 오류", "now", "인터넷 연결을 확인하세요.");	
+        	}
         }
     })
 }

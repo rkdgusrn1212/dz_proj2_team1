@@ -10,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
-
 import team1.mini2.dz3.auth.model.AuthDao;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.AuthVo;
@@ -57,17 +55,18 @@ class AuthServiceImpl implements AuthService{
                 .grantType(JwtProperties.TOKEN_PREFIX)
                 .accessToken(jwtIssuer.createAccessToken(userId, authority))
                 .refreshToken(jwtIssuer.createRefreshToken(userId, authority))
+                .result(JwtDto.SUCCESS)
                 .build();
     }
 
     @Override
-    public JwtDto login(AuthDto UserVoDto) {
-        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(UserVoDto.getAuthId());
+    public JwtDto login(AuthDto authDto) {
+        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(authDto.getAuthId());
         if(UserVo==null) {
-        	throw new AuthException("해당 유저 없음");
+        	return new JwtDto(null, null, null, JwtDto.USER_ERROR);
         }
-        if (!passwordEncoder.matches(UserVoDto.getAuthPwd(), UserVo.getAuthPwd())) {
-            throw new AuthException("비밀번호가 맞지 않음");
+        if (!passwordEncoder.matches(authDto.getAuthPwd(), UserVo.getAuthPwd())) {
+        	return new JwtDto(null, null, null, JwtDto.PWD_ERROR);
         }
         return createJwtDto(UserVo);
     }
@@ -77,17 +76,17 @@ class AuthServiceImpl implements AuthService{
 
         String refreshToken = resolveToken(bearerToken);
         if (!StringUtils.hasText(refreshToken)) {
-            throw new AuthException("grant type 오류");
+            new JwtDto(null, null, null, JwtDto.GRANT_ERROR);
         }
 
-        DecodedJWT claims = jwtIssuer.parseClaimsFromRefreshToken(refreshToken);
-        if (claims == null) {
-            throw new AuthException("코튼 클래임이 비어있음");
+        String subject = jwtIssuer.parseClaimsFromRefreshToken(refreshToken).getSubject();
+        if (subject == null) {
+            new JwtDto(null, null, null, JwtDto.CLAIM_ERROR);
         }
 
-        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(claims.getSubject());
+        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(subject);
         if(UserVo==null) {
-        	 throw new AuthException("해당 유저 없음");
+        	new JwtDto(null, null, null, JwtDto.USER_ERROR);
         }
 
         return createJwtDto(UserVo);

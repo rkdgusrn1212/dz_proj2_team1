@@ -17,7 +17,12 @@ import team1.mini2.dz3.auth.model.ValidDto;
 
 @Validated
 public interface AuthService {
-	JwtDto login(@Valid AuthDto UserVoDto) ;
+	/**
+	 * 로그인 및 토큰 반환.
+	 * @param authDto
+	 * @return 토큰들 생성 반환하고, 패스워드 미일치 : PWD_ERROR, 유저 없음 : USER_ERROR 가능함.
+	 */
+	JwtDto login(@Valid AuthDto authDto) ;
 	JwtDto reissue(@NotBlank String bearerToken);
 	ValidDto validId(@NotBlank String authId);
 	EmailValidDto validEmail(@NotNull @Email String authEmail);
