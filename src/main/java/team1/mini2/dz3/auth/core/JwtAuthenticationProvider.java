@@ -21,9 +21,10 @@ class JwtAuthenticationProvider implements AuthenticationProvider {
 
 
 	private Collection<? extends GrantedAuthority> createGrantedAuthorities(DecodedJWT jwt) {
-		List<String> roles = (List<String>) jwt.getClaim(JwtProperties.KEY_ROLES);
+		List<String> roles = jwt.getClaim(JwtProperties.KEY_ROLES).asList(String.class);
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		for (String role : roles) {
+			System.out.println(role);
 			grantedAuthorities.add(() -> role);
 		}
 		return grantedAuthorities;

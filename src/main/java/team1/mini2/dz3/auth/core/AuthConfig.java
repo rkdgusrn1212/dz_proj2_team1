@@ -50,7 +50,9 @@ class AuthConfig{
 				.anonymous().disable()
 
 				.authorizeRequests()
-				.anyRequest().denyAll()
+				.antMatchers("/").hasAuthority("member")
+				.anyRequest()
+				.denyAll()
 
 				.and()
 				.apply(new JwtConfigurerAdapter(authenticationManagerBuilder.getOrBuild()))

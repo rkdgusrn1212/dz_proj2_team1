@@ -115,7 +115,7 @@ class AuthServiceImpl implements AuthService{
 		}
 		
 		String code = generator.getRamdomPwd(13);//60자리 난수 id로 Qnique 속성에 대응, 13자리 난수 pwd를 코드로 사용.
-		if(sqlSession.getMapper(AuthDao.class).addEmailCode(new PutEmailCodeDto(generator.getRandomCode(60),passwordEncoder.encode(code), "code", authEmail))<1) {
+		if(sqlSession.getMapper(AuthDao.class).addEmailCode(new PutEmailCodeDto(generator.getRandomCode(60),passwordEncoder.encode(code), "CODE", authEmail))<1) {
 			dto.setSend(false);
 			return dto;
 		}

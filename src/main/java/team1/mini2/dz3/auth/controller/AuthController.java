@@ -1,6 +1,9 @@
 package team1.mini2.dz3.auth.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.core.ExpireProperties;
 import team1.mini2.dz3.auth.model.LoginResultDto;
@@ -33,19 +40,13 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/login")
-	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletResponse response) {
+	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
 		JwtDto dto = authService.login(authDto);
-		int result;
-		switch(dto.getResult()) {
-		case JwtDto.USER_ERROR : 
-			result = LoginResultDto.NO_USER;
-			break;
-		case JwtDto.PWD_ERROR :
-			result = LoginResultDto.PWD_NOT_MATCH;
-			break;
-		default : 
-			result = LoginResultDto.SUCCESS;
-			ResponseCookie cookie = ResponseCookie.from("refreshToken", dto.getRefreshToken())
+		if(dto.getResult()==JwtDto.SUCCESS) {
+			Map<String, String> resultMap = new HashMap<>();
+			resultMap.put("accessToken", dto.getAccessToken());
+			resultMap.put("refreshMap", dto.getRefreshToken());
+			ResponseCookie cookie = ResponseCookie.from("jwtToken", URLEncoder.encode(new ObjectMapper().writeValueAsString(resultMap), "UTF-8"))
 					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
 					.path("/")
 					.secure(true)
@@ -53,8 +54,9 @@ public class AuthController {
 					.httpOnly(true)
 					.build();
 			response.setHeader("Set-Cookie", cookie.toString());
+			return new LoginResultDto(true);
 		}
-		return new LoginResultDto(dto.getGrantType(), dto.getAccessToken(), result);
+		return new LoginResultDto(false);
 	}
 
 	@PostMapping("/signup")

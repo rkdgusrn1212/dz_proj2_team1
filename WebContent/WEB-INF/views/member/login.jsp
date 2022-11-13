@@ -21,13 +21,15 @@ const sendRequest = ()=>{
         }),
         dataType : "json",
         success: (response)=> {
-            showToast("로그인 성공", "now", "환영합니다.");
-            console.log(JSON.stringify(response));
+        	if(!response.success){
+                showToast("로그인 실패", "now", "아이디 또는 비밀번호가 일치하지 않습니다.");
+        		return;
+        	}
+            location.replace("${rootPage}/");
         },
         error: (error)=>{
         	if(error.status==422){
                 showToast("로그인 실패", "now", "요청 양식이 맞지 않습니다.");
-                return;
         	}else{
                 showToast("접속 오류", "now", "인터넷 연결을 확인하세요.");	
         	}

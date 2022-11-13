@@ -19,7 +19,7 @@
        update user_auth set
         auth_id = #{authId}, 
         auth_pwd = #{authPwd}, 
-        auth_authority = 'member',  
+        auth_authority = 'MEMBER',  
         auth_name = #{authName}
         where auth_email = #{authEmail}
     </update>
