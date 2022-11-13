@@ -51,29 +51,14 @@
 			and restaurant_menu like '%'||#{restaurantMenu}||'%'
 		</if>
 		<if test="restaurantSi != null">
-			and restaurant_si like '%'||#{restaurantSi}||'%'
+			and restaurant_si like '%'||#{restaurantSi}
 		</if>
 		<if test="restaurantGu != null">
-			and restaurant_gu like '%'||#{restaurantGu}||'%'
+			and restaurant_gu like '%'||#{restaurantGu}
 		</if>
-		<if test="restaurantGu != null">
-			<choose>
-				<when test="restaurant_dong like '%동'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%읍'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%면'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%리'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<otherwise>
-					and restaurant_gu like '%'||#{restaurantDong}||'%'
-				</otherwise>
-			</choose>
+		<if test="restaurantDong != null">
+			and restaurant_dong like '%'||#{restaurantDong}
+			or restaurant_gu like '%'||#{restaurantDong}
 		</if>
 
 		order by
@@ -96,8 +81,7 @@
 			and restaurant_name like '%'||#{restaurantName}||'%'
 		</if>
 		<if test="restaurantCategory != null">
-			and restaurant_category like
-			'%'||#{restaurantCategory}||'%'
+			and restaurant_category like '%'||#{restaurantCategory}||'%'
 		</if>
 		<if test="restaurantMenu != null">
 			and restaurant_menu like '%'||#{restaurantMenu}||'%'
@@ -108,24 +92,9 @@
 		<if test="restaurantGu != null">
 			and restaurant_gu like '%'||#{restaurantGu}||'%'
 		</if>
-		<if test="restaurantGu != null">
-			<choose>
-				<when test="restaurant_dong like '%동'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%읍'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%면'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<when test="restaurant_dong like '%리'">
-					and restaurant_dong like '%'||#{restaurantDong}||'%'
-				</when>
-				<otherwise>
-					and restaurant_gu like '%'||#{restaurantDong}||'%'
-				</otherwise>
-			</choose>
+		<if test="restaurantDong != null">
+			and restaurant_dong like '%'||#{restaurantDong}
+			or restaurant_gu like '%'||#{restaurantDong}
 		</if>
 	</select>
 </mapper>

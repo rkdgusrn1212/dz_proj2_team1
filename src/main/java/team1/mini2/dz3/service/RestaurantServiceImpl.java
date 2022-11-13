@@ -1,8 +1,6 @@
 package team1.mini2.dz3.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +25,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public List<RestaurantDto> getRestaurantPage(int page, RestaurantDto dto) {
+		
 		if(dto == null) {
 			dto = new RestaurantDto();
 		}
 		dto.setPageVo(new RestaurantPageVo(page));
 		return sqlSession.getMapper(RestaurantDao.class).getList(dto);
 	}
-
 	@Override
 	public int getRestaurantCount(RestaurantDto dto) {
 			return sqlSession.getMapper(RestaurantDao.class).getCount(dto);

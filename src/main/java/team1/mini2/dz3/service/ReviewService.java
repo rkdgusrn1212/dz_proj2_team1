@@ -27,7 +27,7 @@ public interface ReviewService {
 	void addReview(Map<String, String> map);
 	void removeReview(int reviewNo);
 	void setReview(Map<String, String> map);
-	
+	public double getReviewAvg(int id);
 	int getReviewCount();
 	int getReviewPageCount();
 }
