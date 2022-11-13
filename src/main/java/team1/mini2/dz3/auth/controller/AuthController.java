@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -40,7 +41,8 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/login")
-	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletRequest request,
+			HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
 		JwtDto dto = authService.login(authDto);
 		if(dto.getResult()==JwtDto.SUCCESS) {
 			Map<String, String> resultMap = new HashMap<>();
@@ -48,7 +50,7 @@ public class AuthController {
 			resultMap.put("refreshMap", dto.getRefreshToken());
 			ResponseCookie cookie = ResponseCookie.from("jwtToken", URLEncoder.encode(new ObjectMapper().writeValueAsString(resultMap), "UTF-8"))
 					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
-					.path("/")
+					.path(request.getContextPath())
 					.secure(true)
 					.sameSite("None")
 					.httpOnly(true)

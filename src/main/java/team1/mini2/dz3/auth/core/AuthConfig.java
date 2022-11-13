@@ -1,15 +1,24 @@
 package team1.mini2.dz3.auth.core;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 
@@ -32,12 +41,6 @@ class AuthConfig{
 	}
 
 	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers(
-				"/**/login", "/**/signup", "/resources/**", "/auth/valid/**");
-	}
-
-	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		System.out.println("filterChain");
 		return http.csrf().disable()//세션 안쓰니 csrf도 필요없다.
@@ -47,16 +50,21 @@ class AuthConfig{
 				.and()
 				.formLogin().disable()//Spring Security에서 제공하는 formLogin방식 안씀.
 				.httpBasic().disable()//대신 bearer방식(haeder에 authentication)
-				.anonymous().disable()
 
 				.authorizeRequests()
-				.antMatchers("/").hasAuthority("member")
-				.anyRequest()
-				.denyAll()
+				.antMatchers("member").hasAuthority("MEMBER")
 
 				.and()
 				.apply(new JwtConfigurerAdapter(authenticationManagerBuilder.getOrBuild()))
 
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
+				.deleteCookies("jwtToken", "JSESSIONID")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+				
 				.and()
 				.build();
 	}

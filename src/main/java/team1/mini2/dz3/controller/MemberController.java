@@ -1,5 +1,7 @@
 package team1.mini2.dz3.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	
 	@GetMapping("/login")
-	public String forwardLoginPage(Model model) {
-		model.addAttribute("innerPage", "member/login");
+	public String forwardLoginPage(Model model, Principal principal) {
+		if(principal!=null) {
+			return "redirect:/";
+		}else {
+			model.addAttribute("innerPage", "member/login");
+		}
 		return "pageContainer";
 	}
 	
