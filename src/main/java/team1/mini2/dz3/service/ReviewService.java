@@ -20,14 +20,14 @@ public interface ReviewService {
 	int getReviewWithRestaurantCount(String key);
 	int getReviewWithWriterCount(String key);
 	int getReviewWithStarCount(String key);
-	int getReviewWithRegDateCount(String key)
-	;
+	int getReviewWithRegDateCount(String key);
 	ReviewDto getReview(int reviewNo);
 	
 	void addReview(Map<String, String> map);
 	void removeReview(int reviewNo);
 	void setReview(Map<String, String> map);
-	public double getReviewAvg(int id);
+	
 	int getReviewCount();
 	int getReviewPageCount();
+	double getReviewAvg(int id);
 }

@@ -399,65 +399,67 @@
 
 
 <script>
-	var map;
-	var markerPosition;
-	var marker;
-	var markers = [];
-	var container;
-	var options;
-	var infowindow;
-	/* --------------------------------------------------------------mapview---------------------------------------------------------- */
-
-	function storeinfo(title) {
-
-		infowindow = new kakao.maps.InfoWindow(
-				{
-					content : "<div style ='width:250px;height: 50px; border-color:orange; border: 2px;'><p style='color: orange; font-size: 17px; font-weight: bold; text-align: center; width:250px; line-height: 50px; vertical-align: middle; '>"
-							+ title + "</p></div>"
-				});
-
-		infowindow.open(map, marker);
-	}
-
-	function mapgeneration() {
-		container = document.getElementById('map');
-	}
-	function mapoption(latitude, longitude) {
-		options = {
-			center : new kakao.maps.LatLng(latitude, longitude),
-			level : 3
-		};
-		map = new kakao.maps.Map(container, options);
-	}
-	function markerinput(latitude, longitude) {
-
-		markerPosition = new kakao.maps.LatLng(latitude, longitude);
-
-		// 마커를 생성합니다
-		marker = new kakao.maps.Marker({
-			position : markerPosition,
-			//  content:'<div> </div> '
-			clickable : true
-		// 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-
-		// 생성된 마커를 배열에 추가합니다
-		markers.push(marker);
-	}
-
-	//"마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-	function showMarkers() {
-		setMarkers(map);
-	}
-	//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-	function setMarkers(map) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(map);
-		}
-	}
+   var map;
+   var markerPosition;
+   //var marker;
+   var markers =[];
+   var container;
+   var options;
+   //var infowindow;
+   /* --------------------------------------------------------------mapview---------------------------------------------------------- */
+    
+   
+   function mapgeneration(){
+       container = document.getElementById('map');
+   }
+   function mapoption(latitude,longitude){
+      options = {
+            center: new kakao.maps.LatLng(latitude, longitude),
+            level: 3
+         };
+      map = new kakao.maps.Map(container, options);
+   }
+   function markerinput(latitude,longitude,title){
+      
+      markerPosition  = new kakao.maps.LatLng(latitude, longitude); 
+      
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+          position: markerPosition,
+          clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+      });
+      var infowindow = new kakao.maps.InfoWindow({
+          content: "<div style ='width:250px;height: 50px; border-color:orange; border: 2px;'><p style='color: orange; font-size: 17px; font-weight: bold; text-align: center; width:250px; line-height: 50px; vertical-align: middle; '>"+title+"</p></div>"
+      });
+      
+      // 마커에 마우스오버 이벤트를 등록합니다
+       kakao.maps.event.addListener(marker, 'mouseover', function() {
+         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+           infowindow.open(map, marker);
+       });
+   
+       // 마커에 마우스아웃 이벤트를 등록합니다
+       kakao.maps.event.addListener(marker, 'mouseout', function() {
+           // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+           infowindow.close();
+       });
+      
+       
+      // 생성된 마커를 배열에 추가합니다
+       markers.push(marker);
+   
+   }
+   
+   //"마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+   function showMarkers() {
+       setMarkers(map) ;   
+   }
+   //배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+   function setMarkers(map) {
+       for (var i = 0; i < markers.length; i++) {
+           markers[i].setMap(map);
+       }            
+   }
 
 	/* --------------------------------------------------------------load---------------------------------------------------------- */
 
@@ -487,33 +489,33 @@
 				         if (count <= 5) {
 				            $("#button").append(
 				                        "<li class='page-item disabled' id='left'><a class='page-link' >&laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+                              
+				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+                              
 				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
 				            );
 				         } else if (count > 5 && count <= 10) {
 
 				            $("#button").append(
 				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"+
+				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
+				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
 				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
 				            );
 				         } else if (count > 10 && count <= 15) {
 
 				            $("#button").append(
 				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"+
+				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'> 1</a></li>"+
+				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
+				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
 				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
 				            );
 				         } else if (count > 15 && count <= 20) {
 				            $("#button").append(
 				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                        "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"+
-				                        "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"+
+				                        "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
+				                        "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"+
+				                        "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
+				                        "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"+
 				                        
 				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
 				            );
@@ -521,11 +523,11 @@
 
 				            $("#button").append(
 				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"+
-				                        "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"+
-				                        "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"+
+				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
+				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
+				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
+				                        "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'> 4</a></li>"+
+				                        "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"+
 				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
 				            );
 
@@ -533,11 +535,11 @@
 				         else{
 				            $("#button").append(
 				                  "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                  "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"+
-				                  "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"+
-				                  "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"+
-				                  "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"+
-				                  "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"+
+				                  "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
+				                  "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"+
+				                  "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
+				                  "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"+
+				                  "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"+
 				                  "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()';> &raquo;</a></li>"
 				      );
 				         }
@@ -573,8 +575,7 @@
 								response[idx].restaurantLongtitude);
 					}
 					markerinput(response[idx].restaurantLatitude,
-							response[idx].restaurantLongtitude);
-					storeinfo(response[idx].restaurantName);
+							response[idx].restaurantLongtitude,response[idx].restaurantName);
 					//   storepicture1
 					//   storetitle5
 					//   mainmenu1
@@ -708,8 +709,7 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude);
-							storeinfo(response[idx].restaurantName);
+									response[idx].restaurantLongtitude,response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1
@@ -794,7 +794,7 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()'; >&laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'   onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
 													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
@@ -803,10 +803,10 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
-													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 2)
 													+ "</a></li>"
 													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
@@ -815,13 +815,13 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
-													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 2)
 													+ "</a></li>"
-													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 3)
 													+ "</a></li>"
 													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
@@ -829,16 +829,16 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
-													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 2)
 													+ "</a></li>"
-													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 3)
 													+ "</a></li>"
-													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 4)
 													+ "</a></li>"
 													+
@@ -849,19 +849,19 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
-													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 2)
 													+ "</a></li>"
-													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 3)
 													+ "</a></li>"
-													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 4)
 													+ "</a></li>"
-													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' onclick='PageClick(this);'>"
 													+ (btnindex + 5)
 													+ "</a></li>"
 													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
@@ -870,22 +870,22 @@
 							$("#button")
 									.append(
 											"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 1)
 													+ "</a></li>"
-													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 2)
 													+ "</a></li>"
-													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 3)
 													+ "</a></li>"
-													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'>"
 													+ (btnindex + 4)
 													+ "</a></li>"
-													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'>"
 													+ (btnindex + 5)
 													+ "</a></li>"
-													+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()'; > &raquo;</a></li>");
+													+ "<li class='page-item' id='right'><a class='page-link'  onclick='RightPageChange()'; > &raquo;</a></li>");
 						}
 
 					}
@@ -925,8 +925,7 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude);
-							storeinfo(response[idx].restaurantName);
+									response[idx].restaurantLongtitude,response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1
@@ -1024,19 +1023,19 @@
 						$("#button")
 								.append(
 
-										"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+										"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 												+ (btnindex + 1)
 												+ "</a></li>"
-												+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+												+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 												+ (btnindex + 2)
 												+ "</a></li>"
-												+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+												+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 												+ (btnindex + 3)
 												+ "</a></li>"
-												+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+												+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'>"
 												+ (btnindex + 4)
 												+ "</a></li>"
-												+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+												+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'>"
 												+ (btnindex + 5)
 												+ "</a></li>"
 												+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()'; > &raquo;</a></li>");
@@ -1076,8 +1075,7 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude);
-							storeinfo(response[idx].restaurantName);
+									response[idx].restaurantLongtitude,response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1

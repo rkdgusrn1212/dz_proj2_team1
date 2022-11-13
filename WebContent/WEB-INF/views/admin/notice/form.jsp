@@ -65,7 +65,6 @@
 			</div>
 			<!-- output -->
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
-				<div id="multiple-container">s</div>
 			</div>
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<textarea rows="20" cols="1000" class="form-control" id="content"

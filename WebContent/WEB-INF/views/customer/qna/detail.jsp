@@ -1,101 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+   pageEncoding="utf-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/bootstrap.min.css">
+<meta charset="utf-8">
+<title>Q&A detail</title>
+<c:set var="rootPath" value="${pageContext.request.contextPath}"/>
 <!-- css 초기화 -->
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-<link rel="stylesheet" href="${rootPath}/resources/css/lkc.css">
+   href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
-<script
-	src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
-<meta charsageConet="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-function load(){
-   console.log(${id});
-   var val1 = "";
+<!-- css 연결 -->
+<link rel="stylesheet"
+   href="${rootPath}/resources/css/jjh.css">
 
+<!-- 부트스트랩 연결 -->
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+   crossorigin="anonymous">
 
-   val1 = ${id};
-
-    $.ajax({
-        url : "${rootPath}/api/qna/"+val1,
-        type : "get",
-        //data : {},
-        dataType : "JSON",
-        contentType : "applicaton/json; charset=utf-8",
-   
-        success: function(response){
-           console.log(response);
-    	   const date = new Date(response.qnaRegDate);
-    	   const options = {
-    			   year: '2-digit',
-    			   month: '2-digit',
-    			   day: '2-digit'
-    			 
-    			 };
-    	   const americanDateTime = new Intl.DateTimeFormat('en-US', options).format;
-    		 console.log(americanDateTime(date));
-    		   $("#regdate").append('작성일 ' + americanDateTime(date))
-           $("#title").append(response.qnaTitle)
-           $("#content").append(response.qnaContent)
-           console.log(response.qnaWr)
-           if(response.qnaWriter != 0){
-           $("#writer").append(response.qnaWriter)
-           } else{
-        	   $("#writer").append(response.qnaNonMember)
-           }
-        }
-    });
-    
-
-}
-function listpage(){
-	location.href= "${rootPath}/customer/qna";
-	}
-</script>
+<!-- 반응형 웹 연결 -->
+<link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+   integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+   crossorigin="anonymous">
+<script defer="defer" src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
 
 </head>
-<body  onload = "load()">
-  <div class="container" style="float: none; margin: 0 auto;">
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 100px; border-bottom: 1px solid;     justify-content: space-between;">
-			<h3 id="regdate" style="width:300px;;"></h3>
-			<div style="width:500px;">
-			<h3 style="float:left; width:200px; text-align: right;">작성자</h3>
+<body onload="load()">
+
+
+   <div class="container" style="float: none; margin: 60px auto;">
+      <div class="row" style="float: none; margin: 40px auto; width: 800px;">
+
+         <div class="input-group mb-3"
+            style="width: 800px; justify-content: center;">
+            <font size="10" , color="FFA07A" , style="font-weight: bolder;">Tasty way</font>
+
+            <div class="input-group mb-3"
+               style="width: 800px; justify-content: center;">
+               <font size="6" , style="font-weight: bolder;">Q&A</font>
+            </div>
+
+         </div>
+      </div>
+
+      <div class="row" style="float: none; margin: 0 auto; width: 800px;">
+         <div class="input-group mb-3"
+            style="width: 800px; border-bottom: 1px solid;">
+            <div>
+               <span style="font-size: 6"><b>&nbsp;제목</b></span>&nbsp;&nbsp;&nbsp;
+               <span style="font-size: 3" id="qnatitle">로그인이 안돼요.</span>
+            </div>
+         </div>
+
+         <div class="input-group mb-3"
+            style="width: 800px; border-bottom: 1px solid;">
+            <div>
+               <span style="font-size: 6"><b>작성자</b></span>&nbsp;&nbsp;&nbsp; 
+               <span style="font-size: 3" id = "qnauser">전지현</span>
+           
+        	 </div>
+
+
+      	</div>
+      	 <!--Read -->
+         <div class="row"
+            style="float: none; margin: 0 auto; width: 800px; margin-bottom: 50px;" id = "contentframe">
+            <!--       <textarea rows="20" cols="1000"  readonly class=" form-control" id="content"
+               style="margin-top: 10px; margin-bottom: 10px;"></textarea> -->
+			<span style="font-size: 20px; color:orange; margin-bottom: 10px;"><b>질문</b></span>
 			
-			<h3 id="writer"style="float:right; width:200px; text-align: center;"></h3>
-			</div>
-		</div>
+            <textarea rows="15" cols="1000" class="form-control-plaintext"
+               id="content" type="textarea"
+               style="background-color: white; font-size: 15px; font-style: oblique;"
+               aria-label="readonly input example" readonly></textarea>
+               
+         </div>
 
-		<div class="row" style="float: none; margin: 0 auto;">
-			<p class="fs-2 fw-bold" id="title"
-				style="margin-top: 50px; text-align: center;" />
-		</div>
+         <div class="row"
+            style="float: none; margin: 0 auto; margin-top: 25px; margin-bottom: 25px; justify-content: center;">
+            <input type="button" class="btn btn-warning" id="listpage"
+               style="margin-top: 10px; color: white; width: 180px; heigh: 40px;"
+               value="목록" onclick="listpage()" />
 
-		<div class="row"
-			style="float: none; margin: 0 auto; border-bottom: 1px solid;">
-			<p id="content" style="margin-top: 50px; margin-bottom: 50px;" />
-		</div>
-		<div class="row"
-			style="float: none; margin: 0 auto; margin-top: 25px; margin-bottom: 25px; justify-content: center;">
-			<input type="button" class="btn btn-warning"
-				style="margin-top: 10px; color: white; width: 180px; heigh: 40px;"
-				value="목록" onclick="listpage()" />
-		</div>
-
-	</div>
+         </div> 
+     </div>
+    </div>
 </body>
 
+<script>
+function load(){
+	const id = "${id}";
+	console.log(id);
+	$.ajax({
+     	  url : "${rootPath}/api/qna/"+id,   /* 수정 */
+        type : "get",
+        dataType : "json",
+        contentType: "application/json", 
+		// data : result,
+        success : function(response) { //값을 받아오면
+        	
+        	$('#qnatitle').text(response.qnaTitle);
+        	$('#qnauser').text(response.qnaNonMember);
+        	$('#content').text(response.qnaContent);
+        	console.log(String(response.qnaReply));
+        	if(String(response.qnaReply)  != "null" )
+        	{
+        		$('#contentframe').append(
+        		"<span style='font-size: 20px; color:orange; margin-bottom: 10px;'><b>답변</b></span>"+
+                "<textarea rows='15' cols='1000' class='form-control-plaintext' id='anscontent' type='textarea'"+
+                 "  style='background-color: white; font-size: 15px; font-style: oblique;'aria-label='readonly input example' readonly>"+response.qnaReply+"</textarea>"
+                );
+        	}
+
+        }
+     }); //end ajax   
+	
+   
+     
+}
+
+function listpage() {
+   location.href = "${rootPath}/customer/qna";
+}
+
+</script>
 </html>
+
+        

@@ -64,8 +64,8 @@
                   class="input-group-text" id="writer"> &nbsp; <font size="3"
                   , style="font-weight: bolder;">작성자</font>
                </span> <input type="text" style="background-color: white;"
-                  class="form-control" name="writerinput"
-                  aria-describedby=" basic-addon3" readonly>
+                  class="form-control" id="writerinput"
+                  aria-describedby=" basic-addon3">
             </div>
          </div>
          <hr>
@@ -126,11 +126,11 @@ function load(){
 	 //document.write("id = " + id);
 	 if(id !="" || id!=null )
 	{
-		 $('input[name=writerinput]').attr('value',id);
-		 document.getElementsByName("writerinput").value = id;
+	//	 $('input[name=writerinput]').attr('value',id);
+	//	 document.getElementsByName("writerinput").value = id;
 	}  
-	 $('input[name=writerinput]').attr('value',"anonymous");
-	 document.getElementsByName("writerinput").value = "anonymous";
+	// $('input[name=writerinput]').attr('value',"anonymous");
+	// document.getElementsByName("writerinput").value = "anonymous";
 	
 	 
 	
@@ -141,9 +141,9 @@ function load(){
 <script>
 function input(){
 	const id = "${id}";
-	const titledata = String($("#titleinput").val());
-	//console.log("title = " + $("#titleinput").val());  // append 
-	const writerdata = String(document.getElementsByName('writerinput').value);
+	const titledata = String($("#titleinput").val());	
+	//const writerdata = String(document.getElementsByName('writerinput').value);
+	const writerdata =String($("#writerinput").val());
 	const contentdata =String($("#content").val());
 	let checkdata =String($("#Checked").val());
 	const passworddata = String($("#passwordinput").val());
@@ -186,8 +186,7 @@ function input(){
 	const result = JSON.stringify(jobj);
 	
 	console.log(result);
-	if(writerdata =="anonymous")
-	{
+	
 	  $.ajax({
        	  url : "${rootPath}/api/qna",   /* 수정 */
           type : "post",
@@ -195,10 +194,10 @@ function input(){
           contentType: "application/json", 
  		  data : result,
           success : function(response) { //값을 받아오면
-          	console.log(response);
+          	listpage();
           }
        }); //end ajax   
-	}
+	
 
 }
 </script>    
@@ -206,7 +205,7 @@ function input(){
 	 
 <script>
    function listpage() {
-      location.href = "${rootPath}/customer/faq";
+      location.href = "${rootPath}/customer/qna";
    }
 </script>
 </html>
