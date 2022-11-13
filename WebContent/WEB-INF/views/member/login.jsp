@@ -24,7 +24,6 @@ const sendRequest = ()=>{
         dataType : "json",
         success: (response)=> {
         	console.log("성공");
-        	console.log(response);
             console.log(JSON.stringify(response));
         },
         error: (error)=>{

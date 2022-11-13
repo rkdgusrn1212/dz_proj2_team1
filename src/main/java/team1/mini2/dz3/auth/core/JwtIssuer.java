@@ -23,8 +23,8 @@ class JwtIssuer {
 	public JwtIssuer() {
 		this.secretKeyBytes = JwtProperties.SECRET_KEY.getBytes();
 		this.refreshSecretKeyBytes = JwtProperties.REFRESH_SECRET_KEY.getBytes();
-		this.expireMin = JwtProperties.EXPIRE_MIN;
-		this.refreshExpireMin = JwtProperties.REFRESH_EXPIRE_MIN;
+		this.expireMin = ExpireProperties.EXPIRE_MIN;
+		this.refreshExpireMin = ExpireProperties.REFRESH_EXPIRE_MIN;
 	}
 
 	private String createToken(String userName, String authority, byte[] secretKeyBytes, int expireMin) {
