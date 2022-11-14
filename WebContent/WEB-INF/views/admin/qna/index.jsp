@@ -81,7 +81,7 @@ const getQnaList = (page)=>{
                             $("#qna-list").append(rowContainer);
                         }
                         for(idx ; idx<10; idx++){
-                            $("#qna-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
+                            $("#qna-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td><td></td></tr>");
                         }
                     },
                     error: ()=>{
@@ -126,9 +126,8 @@ $(document).ready(getQnaList(1));
 		<div class="d-flex justify-content-between mt-5">
 			<h1>Q&amp;A 관리</h1>
 			<div class="align-self-end">
-				<small><span class='badge rounded-pill bg-danger'>삭제</span>
-					버튼을 눌러 해당 Q&amp;A을 삭제합니다.&nbsp;&nbsp;&nbsp;<span
-					class='badge rounded-pill bg-warning'>수정</span> 버튼을 눌러 해당 Q&amp;A를
+				<small><span class='badge rounded-pill bg-success'>답변 추가</span> 버튼을 눌러 해당 질문에 대한 답변을 작성합니다.&nbsp;&nbsp;&nbsp;<span class='badge rounded-pill bg-danger'>답변 삭제</span>
+					버튼을 눌러 해당 질문의 답변을 삭제합니다.&nbsp;&nbsp;&nbsp;<span class='badge rounded-pill bg-warning'>답변 수정</span> 버튼을 눌러 해당 질문의 답변을
 					수정합니다.</small>
 			</div>
 		</div>
