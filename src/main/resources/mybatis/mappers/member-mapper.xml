@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.member.MemberDao">
+    
+    <select id="getList" parameterType="team1.mini2.dz3.model.member.MemberSearchKeyDto"
+        resultType="team1.mini2.dz3.model.member.MemberVo">
+        select id as memberNo , auth_id as memberId, auth_name as memberName, auth_email as memberEmail
+        from
+        (select A.*, ROWNUM r from
+        (select * from user_auth where auth_authority = 'MEMBER' 
+        <if test="nameKey != null">
+            and auth_name like '%'||#{nameKey}||'%'
+        </if>
+        <if test="idKey != null">
+            and auth_id like '%'||#{idKey}||'%'
+        </if>
+        <if test="emailKey != null">
+            and auth_email like '%'||#{emailKey}||'%'
+        </if>
+
+        order by id desc) A
+        )
+        where r >= #{pageVo.start} and r &lt;=
+        #{pageVo.end}
+    </select>
+
+    <select id="get" parameterType="int" resultType="team1.mini2.dz3.model.member.MemberVo">
+        select id as memberNo, auth_id as memberId, auth_name as memberName, auth_email as memberEmail from
+        user_auth
+        where id = #{memberNo}
+    </select>
+    
+    <select id="getCount" parameterType="team1.mini2.dz3.model.member.MemberSearchKeyDto"
+        resultType="int">
+        select count(*)
+        from user_auth where auth_authority = 'MEMBER' 
+        <if test="nameKey != null">
+            and auth_name like '%'||#{nameKey}||'%'
+        </if>
+        <if test="idKey != null">
+            and auth_id like '%'||#{idKey}||'%'
+        </if>
+        <if test="emailKey != null">
+            and auth_email like '%'||#{emailKey}||'%'
+        </if>
+    </select>
+
+
+    <delete id="remove" parameterType="int">
+        delete from user_auth where
+        id =
+        #{memberNo}
+    </delete>
+    
+</mapper>
