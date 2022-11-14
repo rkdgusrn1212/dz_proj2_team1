@@ -81,8 +81,8 @@ const getFaqList = (page)=>{
                                     +faq.faqContent+"</td><td class='text-truncate'>"
                                     +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>"
                                     +"<td class='text-center text-truncate'>"
-                                    +"<a style='text-decoration:none;' type='button' href='javascript:showModal("+faq.faqNo+")'><span class='badge rounded-pill bg-danger'>삭제</span>"
-                                    +"&nbsp;&nbsp; <span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
+                                    +"<a style='text-decoration:none;' type='button' href='javascript:showModal("+faq.faqNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a>"
+                                    +"&nbsp;&nbsp;<a style='text-decoration:none;' type='button' href= '${rootPath}/admin/faq/form?id="+faq.faqNo+"'> <span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
                         }
                         for(idx ; idx<10; idx++){
                             $("#faq-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
@@ -155,7 +155,7 @@ $(document).ready(getFaqList(1));
 				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
 				<ul class="pagination" id="faq-pagination">
 				</ul>
-				<button class="btn btn-sm btn-success" type="button">새 공지
+				<button class="btn btn-sm btn-success" type="button" onclick = "javascript:location.href = '${rootPath}/admin/faq/form'">새 FAQ
 					등록</button>
 			</div>
 		</div>
