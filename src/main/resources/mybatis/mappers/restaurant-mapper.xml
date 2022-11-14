@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.RestaurantDao">
+
+	<resultMap id="restaurantMap" type="RestaurantDto">
+		<result property="restaurantNo" column="restaurant_no"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="restaurantName" column="restaurant_name"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantPh" column="restaurant_ph"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantCategory"
+			column="restaurant_category" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="restaurantMenu" column="restaurant_menu"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantSi" column="restaurant_si"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantGu" column="restaurant_gu"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantDong" column="restaurant_dong"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="restaurantAddress"
+			column="restaurant_address" javaType="java.lang.String"
+			jdbcType="NVARCHAR" />
+		<result property="restaurantLatitude"
+			column="restaurant_latitude" javaType="java.lang.Double"
+			jdbcType="DOUBLE" />
+		<result property="restaurantLongtitude"
+			column="restaurant_longtitude" javaType="java.lang.Double"
+			jdbcType="DOUBLE" />
+
+	</resultMap>
+
+	<select id="getList" parameterType="RestaurantDto"
+		resultMap="restaurantMap">
+		select * from
+		(select A.*, ROWNUM r from
+		(select * from restaurant where
+		1=1
+		<if test="restaurantName != null">
+			and restaurant_name like '%'||#{restaurantName}||'%'
+		</if>
+		<if test="restaurantCategory != null">
+			and restaurant_category like
+			'%'||#{restaurantCategory}||'%'
+		</if>
+		<if test="restaurantMenu != null">
+			and restaurant_menu like '%'||#{restaurantMenu}||'%'
+		</if>
+		<if test="restaurantSi != null">
+			and restaurant_si like '%'||#{restaurantSi}
+		</if>
+		<if test="restaurantGu != null">
+			and restaurant_gu like '%'||#{restaurantGu}
+		</if>
+		<if test="restaurantDong != null">
+			and restaurant_dong like '%'||#{restaurantDong}
+			or restaurant_gu like '%'||#{restaurantDong}
+		</if>
+
+		order by
+		restaurant_no) A
+		)
+		where r &gt;= #{pageVo.start} and r &lt;=
+		#{pageVo.end}
+	</select>
+
+	<select id="get" parameterType="int" resultMap="restaurantMap">
+		select * from
+		restaurant
+		where restaurant_no = #{restaurantNo}
+	</select>
+
+	<select id="getCount" resultType="Integer"
+		parameterType="RestaurantDto">
+		select count(*) from restaurant where 1=1
+		<if test="restaurantName != null">
+			and restaurant_name like '%'||#{restaurantName}||'%'
+		</if>
+		<if test="restaurantCategory != null">
+			and restaurant_category like '%'||#{restaurantCategory}||'%'
+		</if>
+		<if test="restaurantMenu != null">
+			and restaurant_menu like '%'||#{restaurantMenu}||'%'
+		</if>
+		<if test="restaurantSi != null">
+			and restaurant_si like '%'||#{restaurantSi}||'%'
+		</if>
+		<if test="restaurantGu != null">
+			and restaurant_gu like '%'||#{restaurantGu}||'%'
+		</if>
+		<if test="restaurantDong != null">
+			and restaurant_dong like '%'||#{restaurantDong}
+			or restaurant_gu like '%'||#{restaurantDong}
+		</if>
+	</select>
+</mapper>

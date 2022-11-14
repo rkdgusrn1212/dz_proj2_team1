@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<bean
 		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
@@ -32,4 +34,13 @@
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	
+    <bean id="validator"
+    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+	
+	<context:component-scan base-package="team1.mini2.dz3.auth.core">
+	</context:component-scan>
 </beans>

@@ -3,6 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
+=======
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/bootstrap.min.css">
+>>>>>>> refs/remotes/origin/main
 <meta charset="UTF-8">
 <!-- CSS 초기화  -->
 <%-- <script src="${root}/resources/css/reset.css"></script>
@@ -50,10 +57,94 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 
+<<<<<<< HEAD
 <title>Tasty Way : 공지 폼</title>
+=======
+const deleteNotice = (id)=>{
+	 $.ajax({
+	        url : "${rootPath}/api/notice/"+id,
+	        type : "delete",
+	        success: (response)=> {
+                showToast("삭제 성공","방금",id+"번 공지사항이 삭제되었습니다");
+                const page = $('#notice-pagination').find(".active").find(".page-link").text();
+                getNoticeList(page);
+	        },
+	        error: (error)=>{
+	        	showToast("삭제 실패","방금","알수 없는 오류 발생");
+	        }
+	    });
+};
+>>>>>>> refs/remotes/origin/main
 
 
 
+<<<<<<< HEAD
+=======
+const getNoticeList = (page)=>{
+	 $.ajax({
+	        url : "${rootPath}/api/notice/page/count",		
+	        type : "get",
+	        dataType : "JSON",
+	        contentType : "applicaton/json; charset=utf-8",
+	        success: (response)=> {//reponse는 count이다.
+	            page = Math.min(response, page);//page가 전체 count보다 크면 count로 바꿔준다.
+	            page = Math.max(page,1);//1보다 작을순 없다.
+	        	$("#notice-pagination").empty();
+	            const pStart = Math.max(Math.floor((page-1)/5)*5+1,1);//보여지는 pagination 시작점.
+	            $("#notice-pagination").append("<li class='page-item"+(pStart<6?" disabled":"")+"'><a class='page-link' href='javascript:getNoticeList("+(pStart-1)+")'>&laquo;</a>");
+	            for(let i = pStart; i<= Math.min(pStart+4,response) ; i++){
+	                 $("#notice-pagination").append("<li class='page-item"+(i==page?" active":"")+"'><a class='page-link' href='javascript:getNoticeList("+i+")'>"+i+"</a></li>");
+	            }
+	            $("#notice-pagination").append("<li class='page-item"+(pStart+5>response?" disabled":"")+"'><a class='page-link' href='javascript:getNoticeList("+(pStart+5)+")'>&raquo;</a></li>");
+
+	            /* 여기에서 page의 리스트 로드 */
+	            $.ajax({
+	                url : "${rootPath}/api/notice/page/"+page,
+	                type : "get",
+	                dataType : "JSON",
+	                contentType : "applicaton/json; charset=utf-8",
+	                success: (response)=> {
+	                    $("#notice-list").empty();
+	                    let idx = 0;
+	                    for(; idx < response.length; idx++){
+	                        const notice = response[idx];
+	                        const day = ["일", "월", "화", "수", "목", "금", "토"];
+	                        const date = new Date(notice.noticeRegDate)
+	                        $("#notice-list").append(
+	                                "<tr><th scope='row' class='text-center text-truncate'>"
+	                                +notice.noticeNo+"</th><td class='text-truncate'>"
+	                                +notice.noticeTitle+"</td><td class='text-truncate'>"
+	                                +notice.noticeContent+"</td><td class='text-truncate'>"
+	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>"
+	                                +"<td class='text-center text-truncate'><a style='text-decoration: none;' type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a>"+
+	                                "&nbsp;&nbsp; <a style='text-decoration:none;' type='button' href= '${rootPath}/admin/notice/form?id="+notice.noticeNo+"'><span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
+	                    }
+	                    for(idx ; idx<10; idx++){
+	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
+	                    }
+	                },
+	                error: ()=>{
+	                    showToast("공지 목록 로드 실페","방금","알수 없는 오류 발생");
+	                }
+	            });
+	        },
+	        error: ()=>{
+                showToast("공지 페이지네이션 로드 실페","방금","알수 없는 오류 발생");
+	        }
+	    });
+};
+const showModal = (id)=>{
+	const $button = $("#delete-dialog").find("#delete-button");
+	$button.on("click",()=>{
+		$("#delete-dialog").modal("hide");
+	    deleteNotice(id);
+	});
+    $("#delete-dialog").modal("show");
+}
+
+$(document).ready(getNoticeList(1));
+</script>
+>>>>>>> refs/remotes/origin/main
 </head>
 <body>
 	<div class="container" style="float: none; margin: 0 auto; height:1300px;">
@@ -285,7 +376,45 @@
 			
 		</form>
 
+<<<<<<< HEAD
+=======
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="d-flex justify-content-between align-items-baseline">
+				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
+				<ul class="pagination" id="notice-pagination">
+				</ul>
+				<button class="btn btn-sm btn-success" type="button" onclick = "javascript:location.href = '${rootPath}/admin/notice/form'">새 공지 등록</button>
+			</div>
+		</div>
+>>>>>>> refs/remotes/origin/main
 	</div>
+<<<<<<< HEAD
+=======
+	<div class="modal" id="delete-dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">삭제 하시겠습니까?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>한번 삭제한 공지사항은 되돌릴수 없습니다.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="delete-button" type="button" class="btn btn-primary">삭제</button>
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="${rootPath}/resources/js/bootstrap.bundle.min.js"></script>
+>>>>>>> refs/remotes/origin/main
 </body>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7cffb8c56abe7dd1e1df8469cd0acc35"></script>

@@ -7,6 +7,8 @@
     <typeAlias type="team1.mini2.dz3.model.NoticeDto" alias="NoticeDto"/>
     <typeAlias type="team1.mini2.dz3.model.FaqDto" alias="FaqDto"/>
     <typeAlias type="team1.mini2.dz3.model.qna.QnaDto" alias="QnaDto"/>
+     <typeAlias type="team1.mini2.dz3.model.RestaurantDto" alias="RestaurantDto"/>
+     <typeAlias type="team1.mini2.dz3.model.ReviewDto" alias="ReviewDto"/>
     <typeAlias type="team1.mini2.dz3.model.qna.QuestionWithNoAuthDto" alias="QuestionWithNoAuthDto"/>
     <typeAlias type="team1.mini2.dz3.model.qna.QuestionWithAuthDto" alias="QuestionWithAuthDto"/>
     <typeAlias type="team1.mini2.dz3.model.qna.QuestionWithNoAuthWithIdDto" alias="QuestionWithNoAuthWithIdDto"/>
