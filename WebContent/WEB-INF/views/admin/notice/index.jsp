@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${root}/resources/css/reset.css">
-<link rel="stylesheet" href="${root}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${rootPath}/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Tasty Way : 공지 관리</title>
 <script
@@ -24,7 +24,7 @@ const showToast = (title, time, message)=>{
 
 const deleteNotice = (id)=>{
 	 $.ajax({
-	        url : "${root}/api/notice/"+id,
+	        url : "${rootPath}/api/notice/"+id,
 	        type : "delete",
 	        success: (response)=> {
                 showToast("삭제 성공","방금",id+"번 공지사항이 삭제되었습니다");
@@ -48,7 +48,7 @@ $(".delete-notice-anchor").on("click", ()=>{
 
 const getNoticeList = (page)=>{
 	 $.ajax({
-	        url : "${root}/api/notice/page/count",		
+	        url : "${rootPath}/api/notice/page/count",		
 	        type : "get",
 	        dataType : "JSON",
 	        contentType : "applicaton/json; charset=utf-8",
@@ -65,7 +65,7 @@ const getNoticeList = (page)=>{
 
 	            /* 여기에서 page의 리스트 로드 */
 	            $.ajax({
-	                url : "${root}/api/notice/page/"+page,
+	                url : "${rootPath}/api/notice/page/"+page,
 	                type : "get",
 	                dataType : "JSON",
 	                contentType : "applicaton/json; charset=utf-8",
@@ -83,7 +83,7 @@ const getNoticeList = (page)=>{
 	                                +notice.noticeContent+"</td><td class='text-truncate'>"
 	                                +date.getFullYear()+"년 "+padDate(date.getMonth()+1)+"월 "+padDate(date.getDate())+"일 ("+day[date.getDay()]+") "+padDate(date.getHours())+":"+padDate(date.getMinutes())+"</td>"
 	                                +"<td class='text-center text-truncate'><a style='text-decoration: none;' type='button' href='javascript:showModal("+notice.noticeNo+")'><span class='badge rounded-pill bg-danger'>삭제</span></a>"+
-	                                "&nbsp;&nbsp; <a style='text-decoration:none;' type='button' href= 'notice/form?id="+notice.noticeNo+"'><span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
+	                                "&nbsp;&nbsp; <a style='text-decoration:none;' type='button' href= '${rootPath}/admin/notice/form?id="+notice.noticeNo+"'><span class='badge rounded-pill bg-warning'>수정</span></a></td></tr>");
 	                    }
 	                    for(idx ; idx<10; idx++){
 	                    	$("#notice-list").append("<tr rowspan='2'><th scope='row'>&nbsp;</th><td></td><td></td><td></td><td></td></tr>");
@@ -155,7 +155,7 @@ $(document).ready(getNoticeList(1));
 				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
 				<ul class="pagination" id="notice-pagination">
 				</ul>
-				<button class="btn btn-sm btn-success" type="button" onclick = "javascript:location.href = 'notice/form'">새 공지 등록</button>
+				<button class="btn btn-sm btn-success" type="button" onclick = "javascript:location.href = '${rootPath}/admin/notice/form'">새 공지 등록</button>
 			</div>
 		</div>
 	</div>
@@ -180,6 +180,6 @@ $(document).ready(getNoticeList(1));
 			</div>
 		</div>
 	</div>
-	<script src="${root}/resources/js/bootstrap.bundle.min.js"></script>
+	<script src="${rootPath}/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

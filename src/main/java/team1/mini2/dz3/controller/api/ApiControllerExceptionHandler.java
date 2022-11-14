@@ -23,7 +23,7 @@ public class ApiControllerExceptionHandler {
 	public ResponseEntity<String> handleArgumentNotValid(Exception e){
 		Logger.getLogger(this.getClass().getName()).log(Level.INFO, e.getLocalizedMessage());
 		HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.parseMediaType("applicatoin/json;content-type=utf-8"));
+	    headers.setContentType(MediaType.parseMediaType("applicatoin/json;charset=utf-8"));
 	return ResponseEntity.unprocessableEntity().header("content-type","application/json; content-type=utf-8")
 			.body("{ \"exception\":\""+e.getClass().getSimpleName()+"\","
 					+ "\"errorMessage\" : \""+e.getMessage()+"\"}");
