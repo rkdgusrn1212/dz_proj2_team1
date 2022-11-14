@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.ReviewDao">
+	<resultMap id="reviewMap" type="ReviewDto">
+		<result property="reviewNo" column="review_no"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="reviewContent" column="review_content"
+			javaType="java.lang.String" jdbcType="NVARCHAR" />
+		<result property="reviewRestaurant" column="review_restaurant"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="reviewWriter" column="review_writer"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="reviewStar" column="review_star"
+			javaType="java.lang.Double" jdbcType="DOUBLE" />
+		<result property="reviewRegDate" column="review_regdate"
+			javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+
+	<select id="getList" parameterType="map" resultMap="reviewMap">
+		select *
+		from
+		(select A.*, ROWNUM r from
+		(select * from
+		Review
+		order by review_no) A
+		)
+		where r
+		>= #{start} and r &lt;=
+		#{end}
+	</select>
+
+	<select id="getListWithRestaurant" parameterType="map"
+		resultMap="reviewMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		review
+		where review_restaurant like '%'||#{key}||'%'
+		order by
+		review_no) A
+		)
+		where
+		r >=
+		#{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithWriter" parameterType="map"
+		resultMap="reviewMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		review
+		where review_writer like '%'||#{key}||'%'
+		order by
+		review_no) A
+		)
+		where
+		r
+		>= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithStar" parameterType="map"
+		resultMap="reviewMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from
+		review
+		where review_star like '%'||#{key}||'%'
+		order by
+		review_no) A
+		)
+		where
+		r >=
+		#{start} and r &lt;= #{end}
+	</select>
+
+	<select id="getListWithRegDate" parameterType="map"
+		resultMap="reviewMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from review where review_regdate like '%'||#{key}||'%'
+		order by review_no) A
+		)
+		where r >= #{start} and r &lt;= #{end}
+	</select>
+
+	<select id="get" parameterType="int" resultMap="reviewMap">
+		select * from
+		review
+		where review_no = #{reviewNo}
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		select count(*) from review
+	</select>
+
+	<select id="getWithRestaurantCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from review where review_restaurant like
+		'%'||#{key}||'%'
+	</select>
+
+	<select id="getWithWriterCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from review where review_writer
+		like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithStarCount" parameterType="String"
+		resultType="Integer">
+		select count(*) from review where review_star like
+		'%'||#{key}||'%'
+	</select>
+	<select id="getWithRegDateCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from review where review_regdate like '%'||#{key}||'%'
+    </select>
+
+	<insert id="add" parameterType="map">
+		insert into review values (
+		review_seq.nextVal , #{reviewContent},
+		#{reviewRestaurant}, #{reviewWriter},
+		#{reviewStar}, sysdate
+		)
+	</insert>
+
+	<update id="set" parameterType="map">
+		update review set
+		review_content =	#{reviewContent}, 
+		review_star =	#{reviewStar}
+		review_sysdate = sysdate
+		where review_no =
+		#{reviewNo}
+	</update>
+
+	<delete id="remove" parameterType="int">
+		delete from review where
+		review_no = #{reviewNo}
+	</delete>
+	
+	<select id="getAvg" parameterType = "int" resultType="double">
+			select NVL(AVG(review_star),0) from review where review_restaurant like '%'||#{key}||'%'
+	</select>
+
+</mapper>
