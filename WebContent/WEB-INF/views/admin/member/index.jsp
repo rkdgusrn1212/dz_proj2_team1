@@ -142,7 +142,7 @@ $(document).ready(getMemberList(1));
 		</table>
 		<div class="row">
 			<div class="d-flex justify-content-between align-items-baseline">
-				<button class="btn btn-sm btn-outline-primary" type="button">뒤로</button>
+				<button class="btn btn-sm btn-outline-primary" type="button" onclick="javascript:location.replace('${rootPath}/admin/')">관리 메인</button>
 				<ul class="pagination" id="member-pagination">
 				</ul>
 				<button class="btn btn-sm btn-success" type="button"
