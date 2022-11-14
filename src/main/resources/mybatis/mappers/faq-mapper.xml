@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.FaqDao">
+
+	<resultMap id="faqMap" type="FaqDto">
+		<result property="faqNo" column="faq_no" javaType="java.lang.Integer"
+			jdbcType="INTEGER" />
+		<result property="faqTitle" column="faq_title"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="faqContent" column="faq_content"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="faqRegDate" column="faq_regdate"
+			javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+	
+	<select id="getList" parameterType="map" resultMap="faqMap">
+		select *
+		from (select A.*, ROWNUM r from
+		(select * from faq
+		order by faq_no) A
+		)
+		where r >= #{start} and r &lt;= #{end}
+	</select>
+	
+	   <select id="getListWithTitle" parameterType="map"
+        resultMap="faqMap">
+        select *
+        from (select A.*, ROWNUM r from
+        (select * from faq
+        where faq_title like '%'||#{key}||'%'
+        order by faq_no) A
+        )
+        where r >= #{start} and
+        r &lt;= #{end}
+    </select>
+
+    <select id="getListWithContent" parameterType="map"
+        resultMap="faqMap">
+        select *
+        from (select A.*, ROWNUM r from
+        (select * from faq where faq_content like '%'||#{key}||'%'
+        order by faq_no) A
+        )
+        where r >= #{start} and r &lt;= #{end}
+    </select>
+
+    <select id="getListWithRegDate" parameterType="map"
+        resultMap="faqMap">
+        select *
+        from (select A.*, ROWNUM r from
+        (select * from faq where faq_regdate like '%'||#{key}||'%'
+        order by faq_no) A
+        )
+        where r >= #{start} and r &lt;= #{end}
+    </select>
+    
+    <select id="get" parameterType="int" resultMap="faqMap">
+        select * from faq where faq_no = #{faqNo}
+    </select>
+    
+    <select id="getWithTitleCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_title like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithContentCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_content like '%'||#{key}||'%'
+    </select>
+
+    <select id="getWithRegDateCount" parameterType="String"
+        resultType="Integer">
+        select count(*) from faq where faq_regdate like '%'||#{key}||'%'
+    </select>
+
+	<select id="getCount" resultType="Integer">
+		select count(*) from faq
+	</select>
+	
+	<insert id="add" parameterType="map">
+	insert into faq values ( faq_seq.nextVal , #{faqTitle}, #{faqContent}, sysdate)
+	</insert>
+	
+	<update id="set" parameterType="map">
+    update faq set faq_title = #{faqTitle}, faq_content = #{faqContent}, faq_regdate = sysdate 
+    where faq_no = #{faqNo}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+	delete from faq where faq_no = #{faqNo}
+	</delete>
+</mapper>

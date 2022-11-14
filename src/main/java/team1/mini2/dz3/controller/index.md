@@ -6,16 +6,8 @@
 
 - AboutController
     
-    about us 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
+    about/ 경로로 들어오는 요청을 매핑
     
-- FAQController
+- MainController
 
-    FAQ 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
-    
-- QNAController
-    
-    Q&A 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
-    
-- NoticeController
-
-    공지 페이지 및 하위 페이지들을 제어하는 컨트롤러 클래스.
+    / 경로로 들어오는 요청을 매핑
