@@ -143,5 +143,12 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		
 	}
+	
+	@Override
+	public void getReviewUpdate(int id) {
+		sqlSession.getMapper(ReviewDao.class).update(id);
+		//System.out.println(dao.getAvg(id));
+
+	}
 
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team1.mini2.dz3.model.MenuDao">
+   <resultMap id="menuMap" type="MenuDto">
+      <result property="menuNo" column="menu_no"
+         javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result property="menuName" column="menu_name"
+         javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <result property="menuRestaurant" column="menu_restaurant"
+         javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result property="menuPrice" column="menu_price"
+         javaType="java.lang.Integer" jdbcType="INTEGER" />  
+   </resultMap>
+   
+   
+   
+   
+   <select id="getMenuList" parameterType="Integer" resultMap="menuMap">
+      select *
+      from
+      menu
+      where menu_restaurant = #{restaurantNo}
+   </select>
+   <select id="getMenuCount" parameterType="Integer" resultType="Integer">
+      select count(*)
+      from
+      menu
+      where menu_restaurant = #{restaurantNo}
+   </select>
+</mapper>

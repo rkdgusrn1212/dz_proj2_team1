@@ -12,5 +12,6 @@ public class ReviewDto {
 	private int reviewWriter;
 	private double reviewStar;
 	private Date reviewRegDate;
+	private int reviewReport;
 
 }
