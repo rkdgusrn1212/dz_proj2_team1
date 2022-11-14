@@ -20,6 +20,11 @@
 <link rel="stylesheet"
     href="${root}/resources/css/custom.min.css">
     <script>
+
+    const logout=()=>{
+        location.replace("${rootPath}/logout");
+    }
+
     $(document).ready(()=>{
         <sec:authorize access="isAuthenticated()">
             $.ajax({

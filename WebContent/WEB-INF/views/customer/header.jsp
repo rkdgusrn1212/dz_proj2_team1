@@ -10,6 +10,11 @@
 <%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 </head>
 <script>
+
+const logout=()=>{
+    location.replace("${rootPath}/logout");
+}
+
 $(document).ready(()=>{
     <sec:authorize access="isAuthenticated()">
         $.ajax({

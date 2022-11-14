@@ -61,40 +61,9 @@
 						};
 						const americanDateTime = new Intl.DateTimeFormat(
 								'en-US', options).format;
-						if (response[idx].qnaWriter == 0) {
-							if(response[idx].qnaPublic=="T"){
-                                $("#test").append(
-                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                        + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
-                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
-                            }else{
-                                $("#test").append(
-                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                        + "<td><a href ='javascript:showModal("+response[idx].qnaNo+")'>"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
-                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
-                            }
-                                    } else {
-                                        
-                                        if(response[idx].qnaWriter == "${user}"){
-                                            $("#test").append(
-                                                    "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                                    + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                    + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                    + "<td>"+ response[idx].qnaNonMember+ "</td>"
-                                                    + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-                                        }else{
-                                            $("#test").append(
-                                                            "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                                            + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                            + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                            + "<td>"+ response[idx].qnaNonMember+ "</td>"
-                                                            + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-                                                               }
-                                    }
+
+                        appendList(response[idx], americanDateTime(date));
+                          
 					}
 				}
 			}); //end ajax	
@@ -248,40 +217,7 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									if (response[idx].qnaWriter == 0) {
-                            if(response[idx].qnaPublic=="T"){
-                                $("#test").append(
-                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                        + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
-                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
-                            }else{
-                                $("#test").append(
-                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                        + "<td><a href ='javascript:showModal("+response[idx].qnaNo+")'>"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
-                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
-                            }
-                                    } else {
-                                        
-                                        if(response[idx].qnaWriter == "${user}"){
-                                            $("#test").append(
-                                                    "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                                    + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                    + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                    + "<td>"+ response[idx].qnaNonMember+ "</td>"
-                                                    + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-                                        }else{
-                                            $("#test").append(
-                                                            "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-                                                            + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-                                                            + "<td>"+ response[idx].qnaContent+ "</td>"
-                                                            + "<td>"+ response[idx].qnaNonMember+ "</td>"
-                                                            + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-                                                               }
-                                    }
+                                    appendList(response[idx], americanDateTime(date));
 								}
 							}
 						}); //end ajax	
@@ -314,26 +250,56 @@
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
 									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter	+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									}
+                                    appendList(response[idx], americanDateTime(date));
 								}
 							}
 				   }); //end ajax	
 			}
 		}//end pageclick();
+		const appendList = (item, timeStr)=>{
+		if (item.qnaWriter == 0) {
+            if(item.qnaPublic=="T"){
+                $("#test").append(
+                        "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                        + "<td><a href = '${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                + "<td>"+ item.qnaContent+ "</td>"
+                                + "<td>"+ item.qnaNonMember   + "</td>"
+                                + "<td>"+ timeStr+ "</td>"+ "</tr>") 
+            }else{
+                $("#test").append(
+                        "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                        + "<td><a href ='javascript:showModal("+item.qnaNo+")'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                + "<td>"+ item.qnaContent+ "</td>"
+                                + "<td>"+  item.qnaNonMember  + "</td>"
+                                + "<td>"+ timeStr+ "</td>"+ "</tr>") 
+            }            
+
+       } else {
+           $.ajax({
+               url:"${rootPath}/api/member/"+item.qnaWriter,
+               type:"get",
+               async:false,
+               dataType:"json",
+               success:(member)=>{
+                   if(item.qnaWriter == "${user}"){
+                       $("#test").append(
+                               "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                               + "<td><a href = '${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                               + "<td>"+ item.qnaContent+ "</td>"
+                               + "<td>"+ member.memberName+"("+member.memberId+")" + "</td>"
+                               + "<td>"+ timeStr+ "</td>"+ "</tr>")
+                   }else{
+                       $("#test").append(
+                                       "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                                       + "<td><a href ='${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                       + "<td>"+ item.qnaContent+ "</td>"
+                                       + "<td>"+ member.memberName+"("+member.memberId+")" + "</td>"
+                                       + "<td>"+ timeStr+ "</td>"+ "</tr>")
+                  }
+               }
+           }); 
+       }
+		}
 		// --------------- 검색 -------------------	
 		function search() {
 			const optdata = $("#searchopt option:selected").val(); //선택값 저장
@@ -365,21 +331,8 @@
 								const americanDateTime = new Intl.DateTimeFormat(
 										'en-US', options).format;
 								//테이블 생성
-								if (response[idx].qnaWriter == 0) {
-									$("#test").append(
-													"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-													+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-															+ "<td>"+ response[idx].qnaContent+ "</td>"
-															+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-															+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-								} else {
-									$("#test").append(
-													"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-													+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-															+ "<td>"+ response[idx].qnaContent	+ "</td>"
-															+ "<td>"+ response[idx].qnaWriter+ "</td>"
-															+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-								}//end if
+
+                                appendList(response[idx], americanDateTime(date));
 							}//end for
 						}
 					}); //end ajax	
@@ -581,22 +534,7 @@
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
 									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-														+ "<td>"+ response[idx].qnaContent+ "</td>"
-														+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-														+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-										/* console.log("회원 데이터 들어감"); */
-									}//end if
+                                    appendList(response[idx], americanDateTime(date));
 								}//end for
 							},//END SUCCESS
 						})//end ajax
@@ -677,22 +615,7 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo	+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									}//end if
+                                    appendList(response[idx], americanDateTime(date));
 								}//end for
 							},//END SUCCESS
 						});//end ajax
@@ -772,6 +695,7 @@
 							};
 							const americanDateTime = new Intl.DateTimeFormat(
 									'en-US', options).format;
+                            appendList(response[idx], americanDateTime(date));
 						}
 					},
 				}); //end ajax
