@@ -97,8 +97,8 @@
 
 	<!--       --------------------페이지 링크----------------------------------     -->
 
-	<div class="test">
-		<ul class="pagination pagination-lg" id="button">
+	<div class="d-flex justify-content-center">
+		<ul class="pagination pagination-md justify-content-center" id="button">
 
 			
 		</ul>
