@@ -11,7 +11,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function load(){
-	console.log(${id});
 	var id = "";
 
 
@@ -25,7 +24,6 @@ function load(){
         contentType : "applicaton/json; charset=utf-8",
    
         success: function(response){
-        	console.log(response);
         	
         	const date = new Date(response.faqRegDate);
 
@@ -36,7 +34,6 @@ function load(){
 			
 			};
 			const americanDateTime = new Intl.DateTimeFormat('en-US', options).format;
-			console.log(americanDateTime(date));
         	
         	
         	$("#regdate").append('작성일 ' + americanDateTime(date))

@@ -78,8 +78,8 @@
 					style="float: none; margin-top: 10px; margin-bottom: 5px; width: 700px; height: 150px; border-bottom: 1px solid; border-top: 1px solid; border-color: orange; display:;"
 					id="0_div">
 					<div class="row" style="float: left; width: 150px;">
-						<img src="../resources/img/testimg.jpg" width="150" height="140"
-							alt="야옹이" id="storepicture0">
+						<img src="${rootPath }/resources/img/none.png	" width="150"
+							height="140" alt="야옹이" id="storepicture1">
 					</div>
 					<div class="row"
 						style="float: left; width: 500px; margin-left: 20px;">
@@ -136,7 +136,7 @@
 					style="float: none; margin-top: 10px; margin-bottom: 5px; width: 700px; height: 150px; border-bottom: 1px solid; border-top: 1px solid; border-color: orange; display:;"
 					id="1_div">
 					<div class="row" style="float: left; width: 150px;">
-						<img src="../resources/img/testimg.jpg" width="150" height="140"
+						<img src="${rootPath }/resources/img/none.png	" width="150" height="140"
 							alt="야옹이" id="storepicture1">
 					</div>
 					<div class="row"
@@ -196,8 +196,8 @@
 					style="float: none; margin-top: 10px; margin-bottom: 5px; width: 700px; height: 150px; border-bottom: 1px solid; border-top: 1px solid; border-color: orange; display:;"
 					id="2_div">
 					<div class="row" style="float: left; width: 150px;">
-						<img src="../resources/img/testimg.jpg" width="150" height="140"
-							alt="야옹이" id="storepicture2">
+						<img src="${rootPath }/resources/img/none.png	" width="150" height="140"
+							alt="야옹이" id="storepicture1">
 					</div>
 					<div class="row"
 						style="float: left; width: 500px; margin-left: 20px;">
@@ -253,8 +253,8 @@
 					style="float: none; margin-top: 10px; margin-bottom: 5px; width: 700px; height: 150px; border-bottom: 1px solid; border-top: 1px solid; border-color: orange; display:;"
 					id="3_div">
 					<div class="row" style="float: left; width: 150px;">
-						<img src="../resources/img/testimg.jpg" width="150" height="140"
-							alt="야옹이" id="storepicture3">
+						<img src="${rootPath }/resources/img/none.png	" width="150" height="140"
+							alt="야옹이" id="storepicture1">
 					</div>
 					<div class="row"
 						style="float: left; width: 500px; margin-left: 20px;">
@@ -311,8 +311,8 @@
 					style="float: none; margin-top: 10px; margin-bottom: 5px; width: 700px; height: 150px; border-bottom: 1px solid; border-top: 1px solid; border-color: orange; display:;"
 					id="4_div">
 					<div class="row" style="float: left; width: 150px;">
-						<img src="../resources/img/testimg.jpg" width="150" height="140"
-							alt="야옹이" id="storepicture4">
+						<img src="${rootPath }/resources/img/none.png	" width="150" height="140"
+							alt="야옹이" id="storepicture1">
 					</div>
 					<div class="row"
 						style="float: left; width: 500px; margin-left: 20px;">
@@ -399,67 +399,68 @@
 
 
 <script>
-   var map;
-   var markerPosition;
-   //var marker;
-   var markers =[];
-   var container;
-   var options;
-   //var infowindow;
-   /* --------------------------------------------------------------mapview---------------------------------------------------------- */
-    
-   
-   function mapgeneration(){
-       container = document.getElementById('map');
-   }
-   function mapoption(latitude,longitude){
-      options = {
-            center: new kakao.maps.LatLng(latitude, longitude),
-            level: 3
-         };
-      map = new kakao.maps.Map(container, options);
-   }
-   function markerinput(latitude,longitude,title){
-      
-      markerPosition  = new kakao.maps.LatLng(latitude, longitude); 
-      
-      // 마커를 생성합니다
-      var marker = new kakao.maps.Marker({
-          position: markerPosition,
-          clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-      });
-      var infowindow = new kakao.maps.InfoWindow({
-          content: "<div style ='width:250px;height: 50px; border-color:orange; border: 2px;'><p style='color: orange; font-size: 17px; font-weight: bold; text-align: center; width:250px; line-height: 50px; vertical-align: middle; '>"+title+"</p></div>"
-      });
-      
-      // 마커에 마우스오버 이벤트를 등록합니다
-       kakao.maps.event.addListener(marker, 'mouseover', function() {
-         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-           infowindow.open(map, marker);
-       });
-   
-       // 마커에 마우스아웃 이벤트를 등록합니다
-       kakao.maps.event.addListener(marker, 'mouseout', function() {
-           // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-           infowindow.close();
-       });
-      
-       
-      // 생성된 마커를 배열에 추가합니다
-       markers.push(marker);
-   
-   }
-   
-   //"마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-   function showMarkers() {
-       setMarkers(map) ;   
-   }
-   //배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-   function setMarkers(map) {
-       for (var i = 0; i < markers.length; i++) {
-           markers[i].setMap(map);
-       }            
-   }
+	var map;
+	var markerPosition;
+	//var marker;
+	var markers = [];
+	var container;
+	var options;
+	//var infowindow;
+	/* --------------------------------------------------------------mapview---------------------------------------------------------- */
+
+	function mapgeneration() {
+		container = document.getElementById('map');
+	}
+	function mapoption(latitude, longitude) {
+		options = {
+			center : new kakao.maps.LatLng(latitude, longitude),
+			level : 3
+		};
+		map = new kakao.maps.Map(container, options);
+	}
+	function markerinput(latitude, longitude, title) {
+
+		markerPosition = new kakao.maps.LatLng(latitude, longitude);
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position : markerPosition,
+			clickable : true
+		// 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+		});
+		var infowindow = new kakao.maps.InfoWindow(
+				{
+					content : "<div style ='width:250px;height: 50px; border-color:orange; border: 2px;'><p style='color: orange; font-size: 17px; font-weight: bold; text-align: center; width:250px; line-height: 50px; vertical-align: middle; '>"
+							+ title + "</p></div>"
+				});
+
+		// 마커에 마우스오버 이벤트를 등록합니다
+		kakao.maps.event.addListener(marker, 'mouseover', function() {
+			// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+			infowindow.open(map, marker);
+		});
+
+		// 마커에 마우스아웃 이벤트를 등록합니다
+		kakao.maps.event.addListener(marker, 'mouseout', function() {
+			// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+			infowindow.close();
+		});
+
+		// 생성된 마커를 배열에 추가합니다
+		markers.push(marker);
+
+	}
+
+	//"마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+	function showMarkers() {
+		setMarkers(map);
+	}
+	//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+	function setMarkers(map) {
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	}
 
 	/* --------------------------------------------------------------load---------------------------------------------------------- */
 
@@ -481,71 +482,68 @@
 					dataType : "JSON",
 					contentType : "applicaton/json; charset=utf-8",
 					success : function(response) {
-				         //console.log(response)
-						console.log(response.count);
 
-				         var count = parseInt(response.count); //문자를 정수형 숫자로 변환해줌
-				         $("#button").empty();
-				         if (count <= 5) {
-				            $("#button").append(
-				                        "<li class='page-item disabled' id='left'><a class='page-link' >&laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+                              
-				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
-				            );
-				         } else if (count > 5 && count <= 10) {
+						var count = parseInt(response.count); //문자를 정수형 숫자로 변환해줌
+						$("#button").empty();
+						if (count <= 5) {
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' >&laquo;</a></li>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
+						} else if (count > 5 && count <= 10) {
 
-				            $("#button").append(
-				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
-				            );
-				         } else if (count > 10 && count <= 15) {
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
+						} else if (count > 10 && count <= 15) {
 
-				            $("#button").append(
-				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+                                 
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
-				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
-				            );
-				         } else if (count > 15 && count <= 20) {
-				            $("#button").append(
-				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                        "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
-				                        "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"+
-				                        
-				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
-				            );
-				         } else if (count > 20 && count <= 25) {
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
+						} else if (count > 15 && count <= 20) {
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
+													+ "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+													+ "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+													+ "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
+													+
 
-				            $("#button").append(
-				                        "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                        "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
-				                        "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"+
-				                        "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
-				                        "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'> 4</a></li>"+
-				                        "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"+
-				                        "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>"
-				            );
+													"<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
+						} else if (count > 20 && count <= 25) {
 
-				         }
-				         else{
-				            $("#button").append(
-				                  "<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"+
-				                  "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"+
-				                  "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"+
-				                  "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"+
-				                  "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"+
-				                  "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"+
-				                  "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()';> &raquo;</a></li>"
-				      );
-				         }
-				      }
-				   });
-				   
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'> 4</a></li>"
+													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"
+													+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
+
+						} else {
+							$("#button")
+									.append(
+											"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
+													+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+													+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+													+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+													+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
+													+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"
+													+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()';> &raquo;</a></li>");
+						}
+					}
+				});
 
 		$.ajax({
 			url : "${rootPath}/api/restaurant/page/1",
@@ -569,13 +567,13 @@
 
 				for (idx in response) {
 
-					//   console.log(idx);
 					if (idx == 0) {
 						mapoption(response[idx].restaurantLatitude,
 								response[idx].restaurantLongtitude);
 					}
 					markerinput(response[idx].restaurantLatitude,
-							response[idx].restaurantLongtitude,response[idx].restaurantName);
+							response[idx].restaurantLongtitude,
+							response[idx].restaurantName);
 					//   storepicture1
 					//   storetitle5
 					//   mainmenu1
@@ -589,7 +587,7 @@
 									+ response[idx].restaurantNo) // a 태그 href 변경
 					$('#mainmenu' + idx).text(response[idx].restaurantMenu);
 					$('#juso' + idx).text(response[idx].restaurantAddress);
-		            reviewavg(response[idx].restaurantNo,idx);
+					reviewavg(response[idx].restaurantNo, idx);
 
 				}
 				setMarkers(map);
@@ -608,10 +606,8 @@
 		const select = $("#select option:selected").val();
 		const value2 = $("#value2").val();
 		var strText = $(pagebtn).text();
-		console.log(strText);
 
 		var getId = $(pagebtn).attr("id");
-		console.log(getId);
 
 		//--------------active  toggle---------------------------
 
@@ -673,7 +669,6 @@
 		}
 
 		var strText = $(pagebtn).text();
-		console.log(strText);
 
 		$
 				.ajax({
@@ -709,7 +704,8 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude,response[idx].restaurantName);
+									response[idx].restaurantLongtitude,
+									response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1
@@ -726,13 +722,13 @@
 									response[idx].restaurantMenu);
 							$('#juso' + idx).text(
 									response[idx].restaurantAddress);
-				            reviewavg(response[idx].restaurantNo,idx);
+							reviewavg(response[idx].restaurantNo, idx);
 
 						}
 						idxcount = Number(idxcount);
 						if (idxcount < 4) {
 							for (var i = idxcount + 1; i <= 4; i++) {
-								console.log(i);
+
 								document.getElementById(i + "_div").style.display = "none";
 							}
 						} else {
@@ -757,9 +753,7 @@
 		const select = $("#select option:selected").val();
 		const value2 = $("#value2").val();
 		var tb = document.getElementById("firstbtn");
-		console.log(tb);
 		var start = parseInt(parseInt(tb.innerText) / 5);
-		console.log(tb.innerText);
 		var count;
 		var btnindex;
 
@@ -779,16 +773,10 @@
 					contentType : "applicaton/json; charset=utf-8",
 
 					success : function(response) {
-						console.log(response);
 
 						count = parseInt(response); //문자를 정수형 숫자로 변환해줌
-
 						count -= parseInt((start + 1) * 25);
-						console.log(count);
-						console.log(start);
 						btnindex = (start + 1) * 5;
-
-						console.log((start + 1) * 5);
 						$("#button").empty();
 						if (count <= 5) {
 							$("#button")
@@ -894,8 +882,6 @@
 
 		var start = parseInt(parseInt(tb.innerText) / 5);
 		btnindex = (start + 1) * 5;
-		console.log(tb.innerText);
-		console.log(btnindex);
 		$
 				.ajax({
 					url : "${rootPath}/api/restaurant/page/" + (btnindex + 1),
@@ -925,7 +911,8 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude,response[idx].restaurantName);
+									response[idx].restaurantLongtitude,
+									response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1
@@ -942,13 +929,12 @@
 									response[idx].restaurantMenu);
 							$('#juso' + idx).text(
 									response[idx].restaurantAddress);
-				            reviewavg(response[idx].restaurantNo,idx);
+							reviewavg(response[idx].restaurantNo, idx);
 
 						}
 						idxcount = Number(idxcount);
 						if (idxcount < 4) {
 							for (var i = idxcount + 1; i <= 4; i++) {
-								console.log(i);
 								document.getElementById(i + "_div").style.display = "none";
 							}
 						} else {
@@ -974,7 +960,6 @@
 		const value2 = $("#value2").val();
 		var optdata = $("#searchopt option:selected").val();
 		var keydata = $("#searchdata").val();
-		console.log(keydata);
 
 		var tb = document.getElementById("firstbtn");
 		var start = parseInt(parseInt(tb.innerText) / 5);
@@ -996,21 +981,14 @@
 					contentType : "applicaton/json; charset=utf-8",
 
 					success : function(response) {
-						console.log(response);
-
 						count = parseInt(response); //문자를 정수형 숫자로 변환해줌
-
 						count -= parseInt((start + 1) * 50);
-						console.log(start);
 						btnindex = ((start - 1) * 5);
-						console.log(btnindex);
 						if (btnindex < 0) {
 							btnindex = 0;
 						}
-						console.log((start - 1) * 5);
 						$("#button").empty();
 
-						console.log(btnindex);
 						if (btnindex == 0) {
 							$("#button")
 									.append(
@@ -1046,8 +1024,6 @@
 
 		var start = parseInt(parseInt(tb.innerText) / 5);
 		btnindex = ((start - 1) * 5) + 5;
-		console.log(tb.innerText);
-		console.log(btnindex);
 		$
 				.ajax({
 					url : "${rootPath}/api/restaurant/page/" + btnindex,
@@ -1075,7 +1051,8 @@
 										response[idx].restaurantLongtitude);
 							}
 							markerinput(response[idx].restaurantLatitude,
-									response[idx].restaurantLongtitude,response[idx].restaurantName);
+									response[idx].restaurantLongtitude,
+									response[idx].restaurantName);
 							//   storepicture1
 							//   storetitle5
 							//   mainmenu1
@@ -1092,13 +1069,12 @@
 									response[idx].restaurantMenu);
 							$('#juso' + idx).text(
 									response[idx].restaurantAddress);
-				            reviewavg(response[idx].restaurantNo,idx);
+							reviewavg(response[idx].restaurantNo, idx);
 
 						}
 						idxcount = Number(idxcount);
 						if (idxcount < 4) {
 							for (var i = idxcount + 1; i <= 4; i++) {
-								console.log(i);
 								document.getElementById(i + "_div").style.display = "none";
 							}
 						} else {
@@ -1113,7 +1089,7 @@
 
 				});
 	}
-	
+
 	function reviewavg(id, idx) {
 		var restuarantid = id;
 
@@ -1125,7 +1101,6 @@
 
 			success : function(response) {
 				var value = String(response.toFixed(1));
-				console.log(value);
 				$('#avgvalue' + idx).text(value);
 
 			}

@@ -96,7 +96,6 @@
 <script>
 function load(){
 	const id = "${id}";
-	console.log(id);
 	$.ajax({
      	  url : "${rootPath}/api/qna/"+id,   /* 수정 */
         type : "get",
@@ -108,7 +107,6 @@ function load(){
         	$('#qnatitle').text(response.qnaTitle);
         	$('#qnauser').text(response.qnaNonMember);
         	$('#content').text(response.qnaContent);
-        	console.log(String(response.qnaReply));
         	if(String(response.qnaReply)  != "null" )
         	{
         		$('#contentframe').append(
