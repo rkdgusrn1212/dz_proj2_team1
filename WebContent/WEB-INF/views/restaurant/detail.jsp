@@ -120,7 +120,7 @@ const drawStar = (target) => {
 			<div class="col" style="float: none; margin: 0 auto; width: 800px;"
 				id="storeinfo">
 				<div class="row"
-					style="float: left; margin: 20px auto; width: 500px; height: 500px; border-bottom: 1px solid;">
+					style="float: left; margin: 20px auto; width: 500px; height: 500px; border-bottom: 1px solid;" id = "info">
 					<span id="title"
 						style="height: 30px; font-size: 20px; color: orange;"><b>점포정보</b></span>
 					<div class="row"
@@ -149,7 +149,7 @@ const drawStar = (target) => {
 					</div>
 
 					<div class="row"
-						style="float: left; margin: 20px auto; width: 150px; height: 345px;">
+						style="float: left; margin: 20px auto; width: 150px; height: 345px;" id="storeinfosubtitle">
 						<div style="text-align: center;">
 							<span class="badge bg-primary"
 								style="text-align: center; width: 110px;">주소</span>
@@ -215,13 +215,13 @@ const drawStar = (target) => {
 								aria-describedby=" basic-addon3" readonly>
 						</div>
 						<div class="row"
-							style="float: left; margin: 0px auto; width: 350px;">
+							style="float: left; margin: 0px auto; width: 350px;" id="menuinfo">
 							<input type="text"
 								style="background-color: white; height: 30px; width: 120px; font-weight: bold; font-size: 15px;"
-								class="form-control" id="menu" aria-describedby=" basic-addon3"
+								class="form-control" id="menu0" aria-describedby=" basic-addon3"
 								readonly> <input type="text"
 								style="background-color: white; height: 30px; width: 182px; font-weight: bold; font-size: 15px;"
-								class="form-control" id="menuprice"
+								class="form-control" id="menuprice0"
 								aria-describedby=" basic-addon3" readonly>
 						</div>
 
@@ -405,6 +405,85 @@ const drawStar = (target) => {
 
 
 <script>
+
+function menucount(){
+	$.ajax({
+	      url : "${rootPath}/api/menu/"+${id},
+	      type : "post",
+	      dataType : "JSON",
+	      contentType : "applicaton/json; charset=utf-8",
+	      success : function(response) {
+	    	  
+	    	
+	            for(var i=1;i<response;i++)
+	            {
+	            	var height_1; // 변수선언
+		            height_1 = document.getElementById("maincontainer").offsetHeight;
+		            height_1 = height_1 +100;
+		            height_1 = height_1 + 'px';
+		            document.getElementById("maincontainer").style.height = height_1;
+		            height_1 = document.getElementById("maincontainer").offsetHeight;
+		            
+		            var height_2; // 변수선언
+			           height_2 = document.getElementById("info").offsetHeight;
+			           height_2 = height_2 +100;
+			           height_2 = height_2 + 'px';
+			           document.getElementById("info").style.height = height_2;
+			           height_2 = document.getElementById("info").offsetHeight;
+			        
+			           var height_4; // 변수선언
+			           height_4 = document.getElementById("storeinfo").offsetHeight;
+			        height_4 = height_4 +50;
+			          height_4 = height_4 + 'px';
+			           document.getElementById("storeinfo").style.height = height_4;
+			           height_4 = document.getElementById("storeinfo").offsetHeight;
+			           
+			           var height_3; // 변수선언
+			           height_3 = document.getElementById("storeinfoimg").offsetHeight;
+			           height_3 = height_3 +100;
+			           height_3 = height_3 + 'px';
+			           document.getElementById("storeinfoimg").style.height = height_3;
+			           height_3 = document.getElementById("storeinfoimg").offsetHeight;
+			           
+			           var height_5; // 변수선언
+			           height_5 = document.getElementById("storeinfodetail").offsetHeight;
+			           height_5 = height_5 +50;
+			           height_5 = height_5 + 'px';
+			           document.getElementById("storeinfodetail").style.height = height_5;
+			           height_5 = document.getElementById("storeinfodetail").offsetHeight;
+			           
+			           var height_6; // 변수선언
+			           height_6 = document.getElementById("storeinfosubtitle").offsetHeight;
+			           height_6 = height_6 +20;
+			           height_6 = height_6 + 'px';
+			           document.getElementById("storeinfosubtitle").style.height = height_6;
+			           height_6 = document.getElementById("storeinfosubtitle").offsetHeight;
+		            $("#menuinfo").append(
+		            		"<input type='text' style='background-color: white; height: 30px; width: 120px; font-weight: bold; font-size: 15px;' class='form-control' id='menu"+ i +"'aria-describedby='basic-addon3' readonly>" +
+		            		"<input type='text' style='background-color: white; height: 30px; width: 182px; font-weight: bold; font-size: 15px;' class='form-control' id='menuprice"+ i +"'aria-describedby='basic-addon3'readonly>"       
+	                  ); 
+	            }
+	           
+	               
+	      }
+	});
+}
+function menuinput(){
+	$.ajax({
+	      url : "${rootPath}/api/menu/"+${id},
+	      type : "get",
+	      dataType : "JSON",
+	      contentType : "applicaton/json; charset=utf-8",
+	      success : function(response) {
+	    	for(idx in response){
+	    	  $('#menu'+idx).val(response[idx].menuName);
+	          $('#menuprice'+idx).val(response[idx].menuPrice);
+	      	}
+	      }
+	});
+	
+}
+
 function reviewwritebtn() {
     location.href = "${rootPath}/restaurant/review/?id="+${id};
 }
@@ -442,7 +521,8 @@ function load(){
          map(Latitude,Longtitude,response.restaurantName);
       }
    });
-   
+   menucount();
+   menuinput();
    reviewavg();
    
    review();
