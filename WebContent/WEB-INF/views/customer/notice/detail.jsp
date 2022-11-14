@@ -12,7 +12,6 @@ pageEncoding="UTF-8"%>
 <title>Notice 상세페이지</title>
 <script type="text/javascript">
 function load(){
-console.log(${id});
 const id = ${id};
 
 $.ajax({
@@ -23,7 +22,6 @@ $.ajax({
 	contentType : "application/json; charset=utf-8",
 
 	success: function(response){
-	   console.log(response);
 	   
 	   const date = new Date(response.noticeRegDate);
 
@@ -34,8 +32,6 @@ $.ajax({
 	 
 	 };
 	 const americanDateTime = new Intl.DateTimeFormat('en-US', options).format;
-	 console.log(americanDateTime(date));
-	   
 	   
 	   $("#regdate").append('작성일 ' + americanDateTime(date))
 	   $("#title").append(response.noticeTitle)

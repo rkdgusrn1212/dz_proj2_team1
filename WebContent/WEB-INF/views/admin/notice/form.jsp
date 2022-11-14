@@ -181,16 +181,14 @@ function load(){
 	   {
 	      $("#adnoticetitle").text("공지사항 등록");
 	       $("#areaBtn").append("<input type='Button' value='등록' id='submitBtn' onclick = 'addNoticeList()' class='btn btn-light submit' style='background-color: #5F5F5F; width: 70px; float: right; color: white;' />");
-
 	   }
-	    
 	}
 
 
 function addNoticeList(){		
 		const jobj = new Object();
 		jobj.noticeTitle = $('#title').val();
-		jobj.noticeContent = $('#content').val();
+		jobj.noticeContent = $('#content').val().replace(/\n/g,"<br>");
 
 		const jArray = new Array();
 		jArray.push(jobj);
