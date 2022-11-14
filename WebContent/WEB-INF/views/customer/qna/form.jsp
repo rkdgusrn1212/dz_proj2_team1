@@ -57,12 +57,12 @@
          <div class="row" style="float: none; margin: 0 auto; width: 800px;">
             <div class="input-group mb-3" style="width: 800px;">
                <span class="input-group-text" id="title"> &nbsp; <font
-                  size="3" , style="font-weight: bolder;">제목</font>
+                  size="3" style="font-weight: bolder;">제목</font>
                </span> <input type="text" style="background-color: white; width: 230px"
                   class="form-control" id="titleinput"
                   aria-describedby=" basic-addon3" > <span
                   class="input-group-text" id="writer"> &nbsp; <font size="3"
-                  , style="font-weight: bolder;">작성자</font>
+                   style="font-weight: bolder;">작성자</font>
                </span> <input type="text" style="background-color: white;"
                   class="form-control" id="writerinput"
                   aria-describedby=" basic-addon3">
@@ -81,7 +81,7 @@
          <div class="row" style="float: none; margin: 0 auto; width: 800px;">
             <div class="input-group mb-3" style="width: 800px;">
                <span class="input-group-text" id="title"> &nbsp;<font
-                  size="3" , style="font-weight: bolder;">비밀번호</font>
+                  size="3" style="font-weight: bolder;">비밀번호</font>
                </span> <input type="text" class="form-control" id="passwordinput"
                   aria-describedby="basic-addon3">
             </div>
