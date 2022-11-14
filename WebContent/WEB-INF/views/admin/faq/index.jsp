@@ -1,25 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<meta charset="UTF-8">
 <title>Tasty Way : FAQ 관리</title>
 </head>
 <body>
-	<script src="${rootPath}/resources/js/jquery-3.6.1.min.js"></script>
 	<script>
-const showToast = (title, time, message)=>{
-    const toastElem = $('#liveToast');
-    $(toastElem).find("#toast-title").text(title);
-    $(toastElem).find("#toast-time").text(time);
-    $(toastElem).find(".toast-body").text(message);
-    const toast = new bootstrap.Toast($('#liveToast'));
-    toast.show();
-}
-
 const deleteFaq = (id)=>{
      $.ajax({
             url : "${rootPath}/api/faq/"+id,
@@ -181,6 +170,5 @@ $(document).ready(getFaqList(1));
 			</div>
 		</div>
 	</div>
-	<script src="${rootPath}/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

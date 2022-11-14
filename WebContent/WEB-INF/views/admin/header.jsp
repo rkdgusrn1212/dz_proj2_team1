@@ -4,17 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-    href="${root}/resources/css/reset.css">
-<link rel="stylesheet"
-    href="${root}/resources/css/bootstrap.min.css">
+<%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-lg">
-			<a class="navbar-brand" href="#"><img width="60px" height="40px" src="${root}/resources/img/white_logo_trans.png"></a>
+			<a class="navbar-brand" href="${rootPath}/admin/"><img width="60px" height="40px" src="${rootPath}/resources/img/blue_icon_trans.png"></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarColor01"
 				aria-controls="navbarColor01" aria-expanded="false"
@@ -23,25 +18,24 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="${root}/admin/restaurant">식당 관리</a>
+					<li class="nav-item"><a class="nav-link" href="${rootPath}/admin/restaurant">식당 관리</a>
 					</li>
-                    <li class="nav-item"><a class="nav-link" href="${root}/admin/member">회원 관리</a>
+                    <li class="nav-item"><a class="nav-link" href="${rootPath}/admin/member">회원 관리</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="${root}/admin/report">신고 관리</a>
+                    <li class="nav-item"><a class="nav-link" href="${rootPath}/admin/report">신고 관리</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="${root}/admin/notice">공지 관리</a>
+                    <li class="nav-item"><a class="nav-link" href="${rootPath}/admin/notice">공지 관리</a>
                     </li>
-					<li class="nav-item"><a class="nav-link" href="${root}/admin/qna">Q&amp;A 관리</a>
+					<li class="nav-item"><a class="nav-link" href="${rootPath}/admin/qna">Q&amp;A 관리</a>
 					</li>
-                    <li class="nav-item"><a class="nav-link" href="${root}/admin/faq">FAQ 관리</a>
+                    <li class="nav-item"><a class="nav-link" href="${rootPath}/admin/faq">FAQ 관리</a>
                     </li>
 				</ul>
                <ul class="navbar-nav">
-                    <li class="nav-item"><a  class="nav-link" href="${root}/admin/root">관리자 설정</a></li>    
+                    <li class="nav-item"><a  class="nav-link" href="${rootPath}/admin/root">관리자 설정</a></li>    
                 </ul>
 			</div>
 		</div>
 	</nav>
-    <script src="${root}/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

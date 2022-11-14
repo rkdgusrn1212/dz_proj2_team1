@@ -1,27 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${rootPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${rootPath}/resources/css/bootstrap.min.css">
-<meta charset="UTF-8">
 <title>Tasty Way : 공지 관리</title>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
-const showToast = (title, time, message)=>{
-    const toastElem = $('#liveToast');
-    $(toastElem).find("#toast-title").text(title);
-    $(toastElem).find("#toast-time").text(time);
-    $(toastElem).find(".toast-body").text(message);
-    const toast = new bootstrap.Toast($('#liveToast'));
-    toast.show();
-}
-
 const deleteNotice = (id)=>{
 	 $.ajax({
 	        url : "${rootPath}/api/notice/"+id,

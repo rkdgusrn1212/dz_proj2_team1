@@ -1,10 +1,12 @@
 package team1.mini2.dz3.auth.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -29,7 +31,6 @@ import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.EmailCodeDto;
 import team1.mini2.dz3.auth.model.EmailValidDto;
 import team1.mini2.dz3.auth.model.JwtDto;
-import team1.mini2.dz3.auth.model.ReissueDto;
 import team1.mini2.dz3.auth.model.SignUpDto;
 import team1.mini2.dz3.auth.model.SignUpResultDto;
 import team1.mini2.dz3.auth.model.ValidDto;
@@ -88,10 +89,24 @@ public class AuthController {
 		return authService.validCode(dto);
 	}
 	
-	@PostMapping("/reissue")
-	public BasicResultDto reissue(@Valid @RequestBody(required=true) ReissueDto reissueDto, HttpServletRequest request,
+	@GetMapping("/reissue")
+	public BasicResultDto reissue(HttpServletRequest request,
 			HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
-		JwtDto dto = authService.reissue(reissueDto.getRefreshToken());
+		Cookie[] cookies = request.getCookies();
+		if(cookies==null) {
+			return new BasicResultDto(false);
+		}
+		String refreshToken = null;
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getName().equals("jwtToken")) {
+				Map<String, String> map = new ObjectMapper().readValue(URLDecoder.decode(cookies[i].getValue(), "UTF-8"), HashMap.class);
+				refreshToken = map.get("refreshToken"); 
+			}
+		}
+		if(refreshToken==null) {
+			return new BasicResultDto(false);
+		}
+		JwtDto dto = authService.reissue(refreshToken);
 		if(dto.getResult()==JwtDto.SUCCESS) {
 			Map<String, String> resultMap = new HashMap<>();
 			resultMap.put("accessToken", dto.getAccessToken());
