@@ -91,17 +91,6 @@ const drawStar = (target) => {
 
 
 
-		<!-- ------------------------backbutton-------------------------------->
-		<div>
-			<div class="row" style="margin: 0 auto; width: 800px">
-				<button
-					style="background-color: transparent; width: 100px; border: none;"
-					id="backbutton">
-					<span class="material-symbols-outlined" style="font-size: 40px;">reply</span>
-				</button>
-			</div>
-
-
 
 
 
