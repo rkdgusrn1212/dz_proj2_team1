@@ -166,10 +166,7 @@ const drawStar = (target) => {
 							<span class="badge bg-primary"
 								style="text-align: center; width: 110px;">대표 메뉴</span>
 						</div>
-						<div style="text-align: center;">
-							<span class="badge bg-primary"
-								style="text-align: center; width: 110px;">영업시간</span>
-						</div>
+						
 						<div style="text-align: center;">
 							<span class="badge bg-primary"
 								style="text-align: center; width: 110px;">메뉴</span>
@@ -200,20 +197,11 @@ const drawStar = (target) => {
 						<div class="row"
 							style="float: left; margin: 0px auto; width: 350px;">
 							<input type="text"
-								style="background-color: white; height: 30px; width: 120px; font-weight: bold; font-size: 15px;"
+								style="background-color: white; width: 350px;height: 30px;  font-weight: bold; font-size: 15px;"
 								class="form-control" id="representativemenu"
-								aria-describedby=" basic-addon3" readonly> <input
-								type="text"
-								style="background-color: white; height: 30px; width: 182px; font-weight: bold; font-size: 15px;"
-								class="form-control" id="representativeprice"
-								aria-describedby=" basic-addon3" readonly>
+								aria-describedby=" basic-addon3" readonly> 
 						</div>
-						<div>
-							<input type="text"
-								style="background-color: white; height: 30px; font-weight: bold; font-size: 15px;"
-								class="form-control" id="Openinghours"
-								aria-describedby=" basic-addon3" readonly>
-						</div>
+						
 						<div class="row"
 							style="float: left; margin: 0px auto; width: 350px;" id="menuinfo">
 							<input type="text"
@@ -506,12 +494,9 @@ function load(){
          $('#storetitle').text(response.restaurantName);
          $('#juso').val(response.restaurantAddress);
          $('#tel').val(response.restaurantPh);
+         $('#representativemenu').val(response.restaurantMenu);
          $('#category').val(response.restaurantCategory);
-         $('#representativemenu').val('원하는 값');
-         $('#representativeprice').val('원하는 값');
-         $('#Openinghours').val('원하는 값');
-         $('#menu').val('원하는 값');
-         $('#menuprice').val('원하는 값');
+       
          //
           var Latitude = eval(response.restaurantLatitude);
           var Longtitude = eval(response.restaurantLongtitude);
