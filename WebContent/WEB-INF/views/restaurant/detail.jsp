@@ -509,7 +509,7 @@ function review(){
          {
             var height_1; // 변수선언
             height_1 = document.getElementById("maincontainer").offsetHeight;
-            height_1 = height_1 +144;
+            height_1 = height_1 +155;
             height_1 = height_1 + 'px';
             document.getElementById("maincontainer").style.height = height_1;
             height_1 = document.getElementById("maincontainer").offsetHeight;
@@ -520,7 +520,7 @@ function review(){
             {
                case 1:
                   $("#reviewcontainer").append(
-                         "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                         "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                            "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                            "<div style='text-align: center; '>"+
                            "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -534,15 +534,16 @@ function review(){
                            "</span>"+
                            "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                            "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                           "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                            "</div>"+            
                            "</div>"+
-                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                     <!-- output -->
-                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                            " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px; background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                            " </div>"+
                            "</div>"+
-                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                            "</div>"+
                            "</div>"
@@ -552,7 +553,7 @@ function review(){
                   break;
                case 2:
                   $("#reviewcontainer").append(
-                         "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                         "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                            "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                            "<div style='text-align: center; '>"+
                            "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -566,15 +567,16 @@ function review(){
                            "</span>"+
                            "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                            "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                           "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                            "</div>"+            
                            "</div>"+
-                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                     <!-- output -->
-                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                            " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                            " </div>"+
                            "</div>"+
-                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                            "</div>"+
                            "</div>"
@@ -584,7 +586,7 @@ function review(){
                   break;
                case 3:
                    $("#reviewcontainer").append(
-                          "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                          "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                             "<div style='text-align: center; '>"+
                             "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -598,15 +600,16 @@ function review(){
                             "</span>"+
                             "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                             "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                            "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                             "</div>"+            
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                      <!-- output -->
-                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                             " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                             " </div>"+
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                             "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
@@ -616,7 +619,7 @@ function review(){
                    break;
                case 4:
                    $("#reviewcontainer").append(
-                          "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                          "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                             "<div style='text-align: center; '>"+
                             "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -630,15 +633,16 @@ function review(){
                             "</span>"+
                             "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                             "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                            "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                             "</div>"+            
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                      <!-- output -->
-                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                             " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                             " </div>"+
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                             "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
@@ -648,7 +652,7 @@ function review(){
                    break;
                case 5:
                    $("#reviewcontainer").append(
-                          "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                          "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                             "<div style='text-align: center; '>"+
                             "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -657,20 +661,22 @@ function review(){
                             '<div style="float: left; width: 200px;">'+
                             '<span class="star"> ★★★★★ <span id="after5">★★★★★</span>'+ 
                             '<input type="range" id="ran" oninput="drawStar(this)" value="5" step="1"   min="5" max="5">'+
+                            
                             '</span>'+
                             "</div>"+
                             "</span>"+
                             "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                             "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                            "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                             "</div>"+            
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                      <!-- output -->
-                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                            " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                             " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                             " </div>"+
                             "</div>"+
-                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                             "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
@@ -681,7 +687,7 @@ function review(){
              
                         case 6:
                             $("#reviewcontainer").append(
-                                    "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                                    "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                                       "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                                       "<div style='text-align: center; '>"+
                                       "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -695,15 +701,16 @@ function review(){
                                       "</span>"+
                                       "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                                       "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                      "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                                       "</div>"+            
                                       "</div>"+
-                                      "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                                      "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                                <!-- output -->
-                                      " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                                      " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                                       " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                                       " </div>"+
                                       "</div>"+
-                                      "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                                      "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                                       "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                       "</div>"+
                                       "</div>"
@@ -713,7 +720,7 @@ function review(){
                              break;
                              case 7:
                                  $("#reviewcontainer").append(
-                                         "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                                         "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                                            "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                                            "<div style='text-align: center; '>"+
                                            "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -727,15 +734,16 @@ function review(){
                                            "</span>"+
                                            "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                                            "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                           "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                                            "</div>"+            
                                            "</div>"+
-                                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                                           "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                                     <!-- output -->
-                                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                                           " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                                            " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                                            " </div>"+
                                            "</div>"+
-                                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                                           "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                            "</div>"+
                                            "</div>"
@@ -745,7 +753,7 @@ function review(){
                                   break;
                                   case 8:
                                       $("#reviewcontainer").append(
-                                              "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                                              "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                                                 "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                                                 "<div style='text-align: center; '>"+
                                                 "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -759,15 +767,16 @@ function review(){
                                                 "</span>"+
                                                 "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                                                 "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                                "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                                                 "</div>"+            
                                                 "</div>"+
-                                                "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                                                "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                                          <!-- output -->
-                                                " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                                                " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                                                 " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                                                 " </div>"+
                                                 "</div>"+
-                                                "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                                                "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                                                 "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                 "</div>"+
                                                 "</div>"
@@ -777,29 +786,30 @@ function review(){
                                        break;
                                   case 9:
                                       $("#reviewcontainer").append(
-                                             "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                                             "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                                                "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                                                "<div style='text-align: center; '>"+
                                                "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
                                                "</div>"+
                                                "<span id='title' style=' height: 40px;line-height: 50px; font-size: 20px; ' >"+
-                                               '<div style="float: left; width: 200px;">'+
+                                               '<div style="float: left; width: 200px; height:45px;">'+
                                                '<span class="star"> ★★★★★ <span id="after9">★★★★★</span>'+ 
                                                '<input type="range" id="ran" oninput="drawStar(this)" value="9" step="1"   min="9" max="9">'+
                                                '</span>'+
                                                "</div>"+
                                                "</span>"+
                                                "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
-                                               "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                               "<a id='title' style=' height: 20px;line-height: 5px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                               "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                                                "</div>"+            
                                                "</div>"+
-                                               "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                                               "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                                         <!-- output -->
-                                               " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                                               " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                                                " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                                                " </div>"+
                                                "</div>"+
-                                               "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                                               "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                                                "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                "</div>"+
                                                "</div>"
@@ -809,7 +819,7 @@ function review(){
                                       break;
                                       case 10:
                                           $("#reviewcontainer").append(
-                                                  "<div class='row' style='width: 780px;height: 124px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
+                                                  "<div class='row' style='width: 780px;height: 135px; margin: 20px 20px 20px 5px; border: 1px solid; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-color: orange; border-top-left-radius: 5px; border-top-right-radius: 5px; '>"+
                                                     "<div class='row' style='float: left; margin: 0 auto; width:170px' >"+
                                                     "<div style='text-align: center; '>"+
                                                     "<span class='badge bg-primary' id='title' style='text-align:center; width:100px; height: 20px;'>"+response[idx].reviewWriter +"</span>"+
@@ -823,15 +833,16 @@ function review(){
                                                     "</span>"+
                                                     "<div class='row' style=' margin: 20px auto; width: 190px; height: 20px;'>"+
                                                     "<a id='title' style=' height: 20px;line-height: 10px; font-size: 20px; text-align: center;'>"+response[idx].reviewStar +"</a>"+
+                                                    "<button	style='height: 20px; border: none; color: white; background-color: red; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; font-size:15px; font-weight: bold; width:150px;' name='"+response[idx].reviewNo+"'onclick='report(this)'>신고</button>"+
                                                     "</div>"+            
                                                     "</div>"+
-                                                    "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 120px;' >"+
+                                                    "<div class='row' style='float: left; margin: 0 auto; width:360px;height: 131px;' >"+
                                                              <!-- output -->
-                                                    " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 120px;'>"+
+                                                    " <div class='row' style='float: none; margin: 0 auto; width:360px;height: 131px;'>"+
                                                     " <textarea class='form-control' id='content' style='margin-top: 10px; margin-bottom: 10px;background: transparent;' readonly>"+response[idx].reviewContent +"</textarea>"+           
                                                     " </div>"+
                                                     "</div>"+
-                                                    "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
+                                                    "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 131px;' >"+
                                                     "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                     "</div>"+
                                                     "</div>"
@@ -853,6 +864,19 @@ function review(){
    
 }
 
+function report(btn){
+	
+	 $.ajax({
+	      url : "${rootPath}/api/review/update/"+btn.name,
+	      type : "get",
+	      dataType : "JSON",
+	      contentType : "applicaton/json; charset=utf-8",
+	      success : function(response) {
+	      	console.log("success");
+	      }
+	            
+	 });                  
+}
 
 
 

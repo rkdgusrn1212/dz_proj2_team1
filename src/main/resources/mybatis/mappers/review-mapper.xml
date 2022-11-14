@@ -122,7 +122,7 @@
       insert into review values (
       review_seq.nextVal , #{reviewContent},
       #{reviewRestaurant}, #{reviewWriter},
-      #{reviewStar}, sysdate
+      #{reviewStar}, sysdate, 0
       )
    </insert>
 
@@ -133,6 +133,13 @@
       review_sysdate = sysdate
       where review_no =
       #{reviewNo}
+ 
+   </update>
+
+ <update id="update" parameterType="int">
+      update review set
+      review_report = 1
+      where review_no = #{reviewNo}
    </update>
 
    <delete id="remove" parameterType="int">
