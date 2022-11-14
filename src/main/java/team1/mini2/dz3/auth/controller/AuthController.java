@@ -24,11 +24,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.auth.core.ExpireProperties;
-import team1.mini2.dz3.auth.model.LoginResultDto;
+import team1.mini2.dz3.auth.model.BasicResultDto;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.EmailCodeDto;
 import team1.mini2.dz3.auth.model.EmailValidDto;
 import team1.mini2.dz3.auth.model.JwtDto;
+import team1.mini2.dz3.auth.model.ReissueDto;
 import team1.mini2.dz3.auth.model.SignUpDto;
 import team1.mini2.dz3.auth.model.SignUpResultDto;
 import team1.mini2.dz3.auth.model.ValidDto;
@@ -41,7 +42,7 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/login")
-	public LoginResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletRequest request,
+	public BasicResultDto login(@Valid @RequestBody(required=true) AuthDto authDto, HttpServletRequest request,
 			HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
 		JwtDto dto = authService.login(authDto);
 		if(dto.getResult()==JwtDto.SUCCESS) {
@@ -56,9 +57,9 @@ public class AuthController {
 					.httpOnly(true)
 					.build();
 			response.setHeader("Set-Cookie", cookie.toString());
-			return new LoginResultDto(true);
+			return new BasicResultDto(true);
 		}
-		return new LoginResultDto(false);
+		return new BasicResultDto(false);
 	}
 
 	@PostMapping("/signup")
@@ -85,5 +86,26 @@ public class AuthController {
 	@PostMapping("valid/code")
 	public ValidDto validCode(@Valid @RequestBody(required=true) EmailCodeDto dto) {
 		return authService.validCode(dto);
+	}
+	
+	@PostMapping("/reissue")
+	public BasicResultDto reissue(@Valid @RequestBody(required=true) ReissueDto reissueDto, HttpServletRequest request,
+			HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+		JwtDto dto = authService.reissue(reissueDto.getRefreshToken());
+		if(dto.getResult()==JwtDto.SUCCESS) {
+			Map<String, String> resultMap = new HashMap<>();
+			resultMap.put("accessToken", dto.getAccessToken());
+			resultMap.put("refreshMap", dto.getRefreshToken());
+			ResponseCookie cookie = ResponseCookie.from("jwtToken", URLEncoder.encode(new ObjectMapper().writeValueAsString(resultMap), "UTF-8"))
+					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
+					.path(request.getContextPath())
+					.secure(true)
+					.sameSite("None")
+					.httpOnly(true)
+					.build();
+			response.setHeader("Set-Cookie", cookie.toString());
+			return new BasicResultDto(true);
+		}
+		return new BasicResultDto(false);
 	}
 }

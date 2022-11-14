@@ -13,7 +13,7 @@
 	   delete from user_auth where auth_email = #{authEmail}
 	</delete>
 	<insert id="addEmailCode" parameterType="team1.mini2.dz3.auth.model.PutEmailCodeDto">
-	   insert into user_auth values(auth_seq.nextVal, #{authId}, #{authPwd}, #{authAuthority}, #{authEmail}, 'please change your name')
+	   insert into user_auth values(auth_seq.nextVal, #{authId}, #{authPwd}, #{authAuthority}, #{authEmail}, 'please change your name', null)
 	</insert>
 	<update id="putAuthUser" parameterType="team1.mini2.dz3.auth.model.SignUpDto">
        update user_auth set
@@ -23,4 +23,12 @@
         auth_name = #{authName}
         where auth_email = #{authEmail}
     </update>
+    <update id="putRefreshToken" parameterType="team1.mini2.dz3.auth.model.PutRefreshTokenDto">
+        update user_auth set
+        refresh_token = #{refreshToken}
+        where auth_id = #{authId}
+    </update>
+    <select id="getRefreshToken" parameterType="String" resultType="String">
+        select refresh_token from user_auth where auth_id = #{authId}
+    </select>
 </mapper>

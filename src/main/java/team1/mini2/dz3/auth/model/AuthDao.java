@@ -6,4 +6,6 @@ public interface AuthDao {
 	int deleteEmailCode(String authEmail);
 	int addEmailCode(PutEmailCodeDto codeDto);
 	int putAuthUser(SignUpDto signUpDto);
+	int putRefreshToken(PutRefreshTokenDto updateRefreshTokenDto);
+	String getRefreshToken(String authId);
 }

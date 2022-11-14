@@ -12,13 +12,13 @@ import com.auth0.jwt.interfaces.JWTVerifier;
 
 @Component
 class JwtIssuer {
-	private final int ONE_SECONDS = 1000;
-	private final int ONE_MINUTE = 60 * ONE_SECONDS;
+	private final long ONE_SECONDS = 1000;
+	private final long ONE_MINUTE = 60 * ONE_SECONDS;
 
 	private final byte[] secretKeyBytes;
 	private final byte[] refreshSecretKeyBytes;
-	private final int expireMin;
-	private final int refreshExpireMin;
+	private final long expireMin;
+	private final long refreshExpireMin;
 
 	public JwtIssuer() {
 		this.secretKeyBytes = JwtProperties.SECRET_KEY.getBytes();
@@ -27,8 +27,9 @@ class JwtIssuer {
 		this.refreshExpireMin = ExpireProperties.REFRESH_EXPIRE_MIN;
 	}
 
-	private String createToken(String userName, String authority, byte[] secretKeyBytes, int expireMin) {
+	private String createToken(String userName, String authority, byte[] secretKeyBytes, long expireMin) {
 		Date now = new Date();
+		System.out.println(new Date(now.getTime() + ONE_MINUTE * expireMin));
 		return JWT.create().withSubject(userName)
 				.withClaim(JwtProperties.KEY_ROLES, Collections.singletonList(authority))
 				.withIssuedAt(now)

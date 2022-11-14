@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class LoginResultDto {
+public class BasicResultDto {
 	private boolean success;
 }

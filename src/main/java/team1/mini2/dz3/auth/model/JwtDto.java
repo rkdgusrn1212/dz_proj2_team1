@@ -18,6 +18,7 @@ public class JwtDto {
 	public static final int GRANT_ERROR = 2;
 	public static final int USER_ERROR = 3;
 	public static final int PWD_ERROR = 4;
+	public static final int SAVE_REFRESH_ERROR = 5;
 	
     private String grantType;
     private String accessToken;

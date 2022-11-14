@@ -1,5 +1,7 @@
 package team1.mini2.dz3.auth.core;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+
 import team1.mini2.dz3.auth.model.AuthDao;
 import team1.mini2.dz3.auth.model.AuthDto;
 import team1.mini2.dz3.auth.model.AuthVo;
@@ -17,6 +21,7 @@ import team1.mini2.dz3.auth.model.EmailCodeDto;
 import team1.mini2.dz3.auth.model.EmailValidDto;
 import team1.mini2.dz3.auth.model.JwtDto;
 import team1.mini2.dz3.auth.model.PutEmailCodeDto;
+import team1.mini2.dz3.auth.model.PutRefreshTokenDto;
 import team1.mini2.dz3.auth.model.SignUpDto;
 import team1.mini2.dz3.auth.model.SignUpResultDto;
 import team1.mini2.dz3.auth.model.ValidDto;
@@ -68,27 +73,28 @@ class AuthServiceImpl implements AuthService{
         if (!passwordEncoder.matches(authDto.getAuthPwd(), UserVo.getAuthPwd())) {
         	return new JwtDto(null, null, null, JwtDto.PWD_ERROR);
         }
-        return createJwtDto(UserVo);
+        JwtDto jwtDto = createJwtDto(UserVo);
+    	if(sqlSession.getMapper(AuthDao.class).putRefreshToken(new PutRefreshTokenDto(authDto.getAuthId(), passwordEncoder.encode(jwtDto.getRefreshToken())))<1) {
+        	return new JwtDto(null, null, null, JwtDto.SAVE_REFRESH_ERROR);
+    	}
+        return jwtDto;
     }
 
     @Override
-    public JwtDto reissue(String bearerToken) {
-
-        String refreshToken = resolveToken(bearerToken);
-        if (!StringUtils.hasText(refreshToken)) {
-            new JwtDto(null, null, null, JwtDto.GRANT_ERROR);
+    public JwtDto reissue(@NotBlank String refreshToken) {
+    	DecodedJWT claims = jwtIssuer.parseClaimsFromRefreshToken(refreshToken);
+        String subject = claims.getSubject();
+        if (subject == null||claims.getExpiresAt().before(new Date())) {//subject가 없거나, 만료된 토큰일때.
+        	return new JwtDto(null, null, null, JwtDto.CLAIM_ERROR);
         }
-
-        String subject = jwtIssuer.parseClaimsFromRefreshToken(refreshToken).getSubject();
-        if (subject == null) {
-            new JwtDto(null, null, null, JwtDto.CLAIM_ERROR);
-        }
-
         AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(subject);
         if(UserVo==null) {
-        	new JwtDto(null, null, null, JwtDto.USER_ERROR);
+        	return new JwtDto(null, null, null, JwtDto.USER_ERROR);
         }
-
+        String savedToken = UserVo.getRefreshToken();
+        if(savedToken==null||passwordEncoder.matches(refreshToken, savedToken)) {//저장된 refresh토큰이 없거나 저장값과 일치하지 않음(이미 갱신된 토큰)
+        	return new JwtDto(null, null, null, JwtDto.SAVE_REFRESH_ERROR);
+        }
         return createJwtDto(UserVo);
     }
 

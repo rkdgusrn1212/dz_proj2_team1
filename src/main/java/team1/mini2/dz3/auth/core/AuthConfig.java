@@ -32,7 +32,6 @@ class AuthConfig{
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		System.out.println("filterChain");
 		return http.csrf().disable()//세션 안쓰니 csrf도 필요없다.
 				.cors().and()
 				.sessionManagement()

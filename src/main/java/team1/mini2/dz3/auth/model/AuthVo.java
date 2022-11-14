@@ -11,4 +11,5 @@ public class AuthVo {
     private String authPwd;
     private String authAuthority;
     private String authEmail;//본인 인증된 email.
+    private String refreshToken;
 }
