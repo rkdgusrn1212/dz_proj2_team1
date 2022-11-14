@@ -36,6 +36,10 @@ $(document).ready(()=>{
 
 		</sec:authorize>
 });
+
+const search = (keywork)=>{
+	location.href="${rootPath}/restaurant";
+}
 </script>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -53,7 +57,7 @@ $(document).ready(()=>{
 				<form class="d-flex">
 					<input class="form-control me-sm-2" type="text"
 						placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+					<button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="search()">Search</button>
 				</form>
 
 				<ul class="navbar-nav me-auto">
@@ -101,7 +105,9 @@ $(document).ready(()=>{
 										</div>
 									</div>
 								</div>
-							</div></li>
+							</div>
+							</div>
+						</li>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item"><sec:authorize access="isAnonymous()">
