@@ -246,8 +246,8 @@ const drawStar = (target) => {
 
 					<div class="row"
 						style="float: left; margin: 20px auto; width: 300px; height: 200px;">
-						<img src="../resources/img/testimg.jpg" width="270" height="180"
-							alt="야옹이">
+						<img src="${rootPath }/resources/img/none.png	" width="270" height="180"
+							alt="야옹이" id="storepicture1">
 					</div>
 
 					<!-- --------------------------------------storeimgmodal------------------------------------------- -->
@@ -421,15 +421,9 @@ function load(){
       type : "get",
       dataType : "JSON",
       contentType : "applicaton/json; charset=utf-8",
-      /* success: function(response) {
-         $("#result-text").html(JSON.stringify(response));                    
-      }, */
 
       success : function(response) {
-      //   console.log(response)
-         //var count = parseInt(response); //문자를 정수형 숫자로 변환해줌
-         //console.log(count)
-         
+
          $('#storetitle').text(response.restaurantName);
          $('#juso').val(response.restaurantAddress);
          $('#tel').val(response.restaurantPh);
@@ -444,8 +438,7 @@ function load(){
           var Longtitude = eval(response.restaurantLongtitude);
          //restaurantLatitude: 37.6576893
          //restaurantLongtitude: 126.7713555
-         console.log(Latitude);
-         console.log(Longtitude);
+         
          map(Latitude,Longtitude,response.restaurantName);
       }
    });
@@ -491,7 +484,7 @@ function review(){
          {
             // 토글 할 버튼 선택 (btn1)
             const btn = document.getElementById("reviewaddbtn");
-            console.log("여기까지")              
+               
             btn.style.display = 'none';
 
          }
@@ -516,16 +509,13 @@ function review(){
          {
             var height_1; // 변수선언
             height_1 = document.getElementById("maincontainer").offsetHeight;
-            console.log(height_1);
             height_1 = height_1 +144;
             height_1 = height_1 + 'px';
             document.getElementById("maincontainer").style.height = height_1;
             height_1 = document.getElementById("maincontainer").offsetHeight;
-            console.log(height_1);
             
             
             var star= Number(response[idx].reviewStar)*2;
-            console.log('평점 : ' + star);
             switch(star)
             {
                case 1:
@@ -553,10 +543,10 @@ function review(){
                            " </div>"+
                            "</div>"+
                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                           "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                           "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                            "</div>"+
                            "</div>"
-                           
+                     
 
                   );   
                   break;
@@ -585,7 +575,7 @@ function review(){
                            " </div>"+
                            "</div>"+
                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                           "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                           "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                            "</div>"+
                            "</div>"
                            
@@ -617,7 +607,7 @@ function review(){
                             " </div>"+
                             "</div>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                            "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
                             
@@ -649,7 +639,7 @@ function review(){
                             " </div>"+
                             "</div>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                            "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
                             
@@ -681,7 +671,7 @@ function review(){
                             " </div>"+
                             "</div>"+
                             "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                            "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                            "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                             "</div>"+
                             "</div>"
                             
@@ -714,7 +704,7 @@ function review(){
                                       " </div>"+
                                       "</div>"+
                                       "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                                      "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                                      "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                       "</div>"+
                                       "</div>"
                                       
@@ -746,7 +736,7 @@ function review(){
                                            " </div>"+
                                            "</div>"+
                                            "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                                           "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                                           "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                            "</div>"+
                                            "</div>"
                                            
@@ -778,7 +768,7 @@ function review(){
                                                 " </div>"+
                                                 "</div>"+
                                                 "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                                                "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                                                "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                 "</div>"+
                                                 "</div>"
                                                 
@@ -810,7 +800,7 @@ function review(){
                                                " </div>"+
                                                "</div>"+
                                                "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                                               "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                                               "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                "</div>"+
                                                "</div>"
                                                
@@ -842,7 +832,7 @@ function review(){
                                                     " </div>"+
                                                     "</div>"+
                                                     "<div class='row' style='float: left; margin: 0 auto; width:180px;height: 120px;' >"+
-                                                    "<img src ='../resources/img/testimg.jpg' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
+                                                    "<img src ='${rootPath}/resources/img/none.png' width='160' height='110' alt ='야옹이' style='border: 1px solid; border-color: orange; margin-top: 5px;'>"+
                                                     "</div>"+
                                                     "</div>"
                                                     
@@ -878,17 +868,13 @@ var mapmodal;
 
 $('#modalmap').on('show.bs.modal', function (e) {   
    mapmodal.relayout();
-   console.log("show.bs.modal");
 });
 $('#modalmap').on('shown.bs.modal', function (e) {
-console.log("shown.bs.modal");
 mapmodal.relayout();
 });
 $('#modalmap').on('hide.bs.modal', function (e) {
-console.log("hide.bs.modal");
 });
 $('#modalmap').on('hidden.bs.modal', function (e) {
-console.log("hidden.bs.modal");
 });
 
 
