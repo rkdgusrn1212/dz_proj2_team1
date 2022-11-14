@@ -2,6 +2,9 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authentication var="user" property="principal" />
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -20,29 +23,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/lkc.css">
 
-<!-- 부트스트랩 연결 -->
-<!-- <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous"> -->
-
-<!-- 반응형 웹 연결 -->
- <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css"
-	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous">
-
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="${rootPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/bootstrap-icons.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/prism-okaidia.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/custom.min.css">
 
 </head>
 
@@ -78,23 +61,40 @@
 						};
 						const americanDateTime = new Intl.DateTimeFormat(
 								'en-US', options).format;
-						//테이블 생성
 						if (response[idx].qnaWriter == 0) {
-							$("#test").append(
-									"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-									
-									+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-									+ "<td>"+ response[idx].qnaContent+ "</td>"
-									+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-									+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-						} else {
-							$("#test").append(
-									"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-									+ "<td><a href = ${root}/tastyway/customer/notice/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-									+ "<td>"+ response[idx].qnaContent+ "</td>"
-									+ "<td>"+ response[idx].qnaWriter+ "</td>"
-									+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-						}
+							if(response[idx].qnaPublic=="T"){
+                                $("#test").append(
+                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                        + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
+                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
+                            }else{
+                                $("#test").append(
+                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                        + "<td><a href ='javascript:showModal("+response[idx].qnaNo+")'>"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
+                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
+                            }
+                                    } else {
+                                        
+                                        if(response[idx].qnaWriter == "${user}"){
+                                            $("#test").append(
+                                                    "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                                    + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                    + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                    + "<td>"+ response[idx].qnaNonMember+ "</td>"
+                                                    + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
+                                        }else{
+                                            $("#test").append(
+                                                            "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                                            + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                            + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                            + "<td>"+ response[idx].qnaNonMember+ "</td>"
+                                                            + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
+                                                               }
+                                    }
 					}
 				}
 			}); //end ajax	
@@ -248,22 +248,40 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									//테이블 생성
 									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-														+ "<td>"+ response[idx].qnaContent+ "</td>"
-														+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-														+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+" onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter	+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									}
+                            if(response[idx].qnaPublic=="T"){
+                                $("#test").append(
+                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                        + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
+                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
+                            }else{
+                                $("#test").append(
+                                        "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                        + "<td><a href ='javascript:showModal("+response[idx].qnaNo+")'>"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                + "<td>"+ response[idx].qnaWriter   + "</td>"
+                                                + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>") 
+                            }
+                                    } else {
+                                        
+                                        if(response[idx].qnaWriter == "${user}"){
+                                            $("#test").append(
+                                                    "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                                    + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                    + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                    + "<td>"+ response[idx].qnaNonMember+ "</td>"
+                                                    + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
+                                        }else{
+                                            $("#test").append(
+                                                            "<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
+                                                            + "<td><a href = ${root}/tastyway/customer/qna/detail?id="+response[idx].qnaNo+">"+ response[idx].qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                                            + "<td>"+ response[idx].qnaContent+ "</td>"
+                                                            + "<td>"+ response[idx].qnaNonMember+ "</td>"
+                                                            + "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
+                                                               }
+                                    }
 								}
 							}
 						}); //end ajax	
@@ -764,7 +782,7 @@
 		
 	
 	</script>
-<script>
+	<script>
 function writetext(){
 	
 	 location.href = "${rootPath}/customer/qna/form?id=";
@@ -779,16 +797,18 @@ function writetext(){
 	<br>
 	<br>
 	<div class="container">
-		<div class="row" style="margin-bottom:  10px; text-align: left; width: 1200px; text-align: left; float: left">
+		<div class="row"
+			style="margin-bottom: 10px; text-align: left; width: 1200px; text-align: left; float: left">
 			<span>&nbsp;</span>
 		</div>
-		<div class="row" style="margin-bottom:  10px; text-align: left; width: 120px; text-align: left;">
-			<button type="button" class="btn btn-primary" onclick = "writetext()" >글쓰기</button>
+		<div class="row"
+			style="margin-bottom: 10px; text-align: left; width: 120px; text-align: left;">
+			<button type="button" class="btn btn-primary" onclick="writetext()">글쓰기</button>
 		</div>
 	</div>
-	
+
 	<!-- 테이블 생성 부트스트랩-->
-	
+
 	<div class="test">
 		<table class="table table-hover" id="test">
 			<thead>
@@ -806,7 +826,7 @@ function writetext(){
 
 	<!-- 페이지 버튼 -->
 	<div>
-		<ul class="pagination" id="button"style="justify-content: center;" >
+		<ul class="pagination" id="button" style="justify-content: center;">
 		</ul>
 	</div>
 	<br>
@@ -815,90 +835,85 @@ function writetext(){
 
 	<form name="searchform" method="GET">
 
-		<div class="form-group" style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
+		<div class="form-group"
+			style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
 			<select class="form-select" id="searchopt"
-				style="width: 100px; float:left;">
+				style="width: 100px; float: left;">
 
 				<option value="titleKey">제목</option>
 				<option value="contentKey">내용</option>
-			</select>
-
-				<input type="text" id="searchdata" style="width: 300px; float: left; height: 37px; margin-left: 15px;">
-				<input type="button" value="검색" class="btn btn-light" style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;" onclick="search()">
-				<!-- search를 누르면! --> <br>
-			</div>
+			</select> <input type="text" id="searchdata"
+				style="width: 300px; float: left; height: 37px; margin-left: 15px;">
+			<input type="button" value="검색" class="btn btn-light"
+				style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;"
+				onclick="search()">
+			<!-- search를 누르면! -->
+			<br>
+		</div>
 
 	</form>
-	
-	
-	
-			
-		<div class="modal modal fade" id="modalimg" tabindex="-1" aria-labelledby="mdalLabelimg" aria-hidden="true" >
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="modalLabelimg">NOTICE</h5>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						      </div>
-						      <div class="modal-body">
-						      	<div class="container" style="float: none; margin: 0 auto; height:200px;width:420px;" >
-						      		<div class = "col" style="float: none; margin: 0 auto; width: 400px; height: 200px;" >
-										<div class="row" style="float: left; margin: 0 auto; width:420px" >	
-											<span style="font-size: 20px; text-align: center; margin-bottom: 30px; margin-top: 60px;  width:420px""><b>비밀글 입니다.</b></span>		
-											<span style="font-size: 15px;" ><b>비밀번호를 입력하세요</b></span>
-											<input type="password" style="background-color: white; width:420px;" class="form-control" id="passwordmatch" aria-describedby=" basic-addon3">		    
-							        		
-							         	</div>
-							         	
-						         	</div>
-						        </div>       
-						      </div>
-						      <div class="modal-footer">
-						      		<button type="button" class="btn btn-primary" onclick="pwmatch()" data-bs-dismiss="modal">제출하기</button>
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-     						 </div>
-						      
-						    </div>
-						  </div>
+
+
+
+
+	<div class="modal fade" tabindex="-1"
+		aria-labelledby="mdalLabelimg" aria-hidden="true" id="pwd-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalLabelimg">Q&amp;A</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="container"
+						style="float: none; margin: 0 auto; height: 200px; width: 420px;">
+						<div class="col"
+							style="float: none; margin: 0 auto; width: 400px; height: 200px;">
+							<div class="row"
+								style="float: left; margin: 0 auto; width: 420px">
+								<span
+									style="font-size: 20px; text-align: center; margin-bottom: 30px; margin-top: 60px; width: 420px""><b>비밀글
+										입니다.</b></span> <span style="font-size: 15px;"><b>비밀번호를 입력하세요</b></span>
+								<input type="password"
+									style="background-color: white; width: 420px;"
+									class="form-control" id="passwordmatch"
+									aria-describedby=" basic-addon3">
+
+							</div>
+
 						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="pwmatch()"
+						data-bs-dismiss="modal">제출하기</button>
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 
 
-<script type="text/javascript">
+<script>
 let qnonotemp;
-
+let clickedId;
 
 function qnanosubmit(qnono){
 	qnonotemp = qnono;
 }
-function pwmatch(){
-	
-	$.ajax({
-     	  url : "${rootPath}/api/qna/"+qnonotemp,   /* 수정 */
-        type : "get",
-        dataType : "json",
-        contentType: "application/json; charset=utf-8", 
-		// data : result,
-        success : function(response) { //값을 받아오면
-        	
-        	
-        	const result = $('#passwordmatch').val();
-        	const qnopwd = response.qnaPwd;
-        	
-        	// 삭제 필요 비밀번호 비교 - 서버 요청-
-        	if(qnopwd.localeCompare(result))
-        	{
-        		location.href = "${rootPath}/customer/qna/detail?id="+qnonotemp;
-        	
-        	}
-        }
-        
-     }); //end ajax 
-	
+const pwmatch = ()=>{
+	location.href = "${rootPath}/customer/qna/detail?id="+clickedId+"&pwd="+$("#passwordmatch").val();
 }
 
-
+const showModal = (id)=>{
+	clickedId = id;
+    $("#pwd-modal").modal("show");
+}
 
 function listpage() {
 	   location.href = "${rootPath}/customer/qna";

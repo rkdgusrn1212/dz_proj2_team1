@@ -9,6 +9,20 @@
 <sec:authentication var="user" property="principal" />
 <%@ include file="/WEB-INF/views/components/khgDefaultSet.jsp"%>
 </head>
+<script>
+$(document).ready(()=>{
+    <sec:authorize access="isAuthenticated()">
+        $.ajax({
+              url: "${rootPath}/api/member/"+${user},
+              type:"get",
+                dataType:"json",
+                success : (member)=>{
+                    $("#header-user-link").text(member.memberName);
+                    }
+                 });
+        </sec:authorize>
+});
+</script>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-lg">
@@ -35,7 +49,7 @@
                             <li class="nav-item dropdown"><a
                                 class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                                 href="#" role="button" aria-haspopup="true"
-                                aria-expanded="false"> ${user}</a>
+                                aria-expanded="false" id="header-user-link"></a>
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" href="#">마이페이지</a>
                                     <div class="dropdown-divider"></div>

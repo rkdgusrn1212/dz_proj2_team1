@@ -120,7 +120,7 @@ $(document).ready(()=>{
 			<div class="row" style="float: none; margin: 0 auto; width: 800px;">
 				<div style="float: right; margin-bottom: 30px;" id="areaBtn">
 					<input type="reset" value="취소" class="btn btn-light reset"
-						onclick="listpage()"
+						onclick="location.replace('${rootPath}/customer/qna')"
 						style="background-color: #D3D3D3; width: 70px; float: right; margin-left: 15px;" />
 					<input type='Button' value='등록' id='submitBtn' onclick='input()'
 						class='btn btn-light submit'
@@ -186,7 +186,7 @@ function input(){
           contentType: "application/json;charset=utf-8", 
  		  data : result,
           success : function(response) {
-        	  //location.replace("${rootPath}/customer/qna/");
+        	  location.replace("${rootPath}/customer/qna/");
           },
           error : function(response){
         	  showToast("등록 실패", "now", "빈칸으로 등록할 순 없습니다. 비회원의 경우 비밀번호를 반드시 입력해주십쇼.")

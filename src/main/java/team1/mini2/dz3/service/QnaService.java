@@ -48,7 +48,7 @@ public interface QnaService {
 	 * @param qnaNo Q&A 게시글 번호
 	 * @return Q&A 게시글, 해당 게시글이 없으면 null
 	 */
-	QnaDto getQna(@Min(1) int qnaNo);
+	QnaDto getQna(@Min(1) int qnaNo, @Size(min=1) String pwd);
 
 	
 	/**
@@ -78,7 +78,7 @@ public interface QnaService {
 	 * @param questionDto 인증 질문 글 내용
 	 * @return 질문 글 작성 성공여부. 알수 없는 이유로 실패할 수 있음.
 	 */
-	boolean addQuestionWtihAuth(@Valid @NotNull QuestionWithAuthDto questionDto);
+	boolean addQuestionWithAuth(@Valid @NotNull QuestionWithAuthDto questionDto);
 	
 	/**
 	 * 미인증 질문 글 수정

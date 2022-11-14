@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="team1.mini2.dz3.auth.model.AuthDao">
-	<select id="get" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
+	<select id="getById" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
 		select * from user_auth where auth_id = #{authId}
 	</select>
 	<select id="getByEmail" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
@@ -30,5 +30,8 @@
     </update>
     <select id="getRefreshToken" parameterType="String" resultType="String">
         select refresh_token from user_auth where auth_id = #{authId}
+    </select>
+    <select id="get" parameterType="String" resultType="team1.mini2.dz3.auth.model.AuthVo">
+        select * from user_auth where id = #{id}
     </select>
 </mapper>
