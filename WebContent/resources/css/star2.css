@@ -1,0 +1,104 @@
+.star {
+	position: relative;
+	font-size: 2rem;
+	color: #ddd;
+}
+
+.star input#ran {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.star span#after1 {
+	width: 10%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after2 {
+	width: 20%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after3 {
+	width: 30%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after4 {
+	width: 40%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after5 {
+	width: 50%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after6 {
+	width: 60%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after7 {
+	width: 70%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after8 {
+	width: 80%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after9 {
+	width: 90%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.star span#after10 {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	color: #ffd400;
+	overflow: hidden;
+	pointer-events: none;
+}

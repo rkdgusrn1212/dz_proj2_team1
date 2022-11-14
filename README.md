@@ -269,3 +269,36 @@ Tomcat v9.0.65 종속 라이브러리
 
 - Method : delete
 
+
+## 4. 인증 서비스
+
+### 4.1. 회원가입
+
+#### 4.1.1. ID 중복 체크
+
+- URL : auth/valid/id
+- method : GET
+- parameter : authId
+- response : JSON 표현식으로 반환.
+
+```
+{
+    valid: [true | false]
+}
+```
+
+#### 4.1.2. 이메일 중복 체크
+
+- URL : auth/valid/email
+- method : GET
+- parameter : authEmail
+- response : JSON 표현식으로 반환.
+
+```
+{
+    valid: [true | false]
+}
+```
+
+
+
