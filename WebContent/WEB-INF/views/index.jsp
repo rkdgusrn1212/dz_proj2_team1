@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="${rootPath}/resources/css/custom.min.css">
 </head>
 
-<body onload="load()">
+<body onload="onload()">
 
 
 	<div class="container"
@@ -268,7 +268,7 @@
 </body>
 
 <script type="text/javascript">
-	function load() {
+	function onload() {
 
 		//------------값 불러오기 -----------
 
@@ -412,7 +412,14 @@
 		});
 
 		//------------검색 기능 미정 -----------
+		
+		
+		
+		
 	}
+	
+
+
 </script>
 
 </html>

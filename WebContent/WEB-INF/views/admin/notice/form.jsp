@@ -45,7 +45,7 @@
 <title>Tasty Way : 공지 폼</title>
 
 </head>
-<body onload=load()>
+<body onload="load()">
 	<div class="container" style="float: none; margin: 0 auto;">
 		<div class="col" style="float: none;">
 			<h1 id="adnoticetitle" class="row"

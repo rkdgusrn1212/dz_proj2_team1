@@ -97,4 +97,20 @@
 			or restaurant_gu like '%'||#{restaurantDong}
 		</if>
 	</select>
+
+	<update id="set" parameterType="map">
+			update restaurant set  
+			restaurant_name = #{restaurantName},
+			restaurant_category =
+			#{restaurantCategory}, restaurant_address =
+			#{restaurantAddress}, restaurant_ph =#{restaurantPh}
+			where restaurant_no = #{restaurantNo}
+	</update>
+
+	<delete id="remove" parameterType="int">
+		delete from restaurant where
+		restaurant_no = #{restaurantNo}
+	</delete>
+	
+	
 </mapper>
