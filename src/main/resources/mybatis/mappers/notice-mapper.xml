@@ -20,7 +20,7 @@
 		from
 		(select A.*, ROWNUM r from
 		(select * from notice
-		order by notice_no) A
+		order by notice_no desc) A
 		)
 		where r >= #{start} and r &lt;= #{end}
 	</select>
@@ -44,7 +44,7 @@
 		from (select A.*, ROWNUM r from
 		(select * from notice
 		where notice_content like '%'||#{key}||'%'
-		order by notice_no) A
+		order by notice_no desc) A
 		)
 		where
 		r >= #{start} and r &lt;= #{end}
@@ -56,7 +56,7 @@
 		from (select A.*, ROWNUM r from
 		(select * from notice
 		where notice_regdate like '%'||#{key}||'%'
-		order by notice_no) A
+		order by notice_no desc) A
 		)
 		where
 		r >= #{start} and r &lt;= #{end}

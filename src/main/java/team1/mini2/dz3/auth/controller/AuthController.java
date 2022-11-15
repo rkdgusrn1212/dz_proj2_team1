@@ -49,7 +49,7 @@ public class AuthController {
 		if(dto.getResult()==JwtDto.SUCCESS) {
 			Map<String, String> resultMap = new HashMap<>();
 			resultMap.put("accessToken", dto.getAccessToken());
-			resultMap.put("refreshMap", dto.getRefreshToken());
+			resultMap.put("refreshToken", dto.getRefreshToken());
 			ResponseCookie cookie = ResponseCookie.from("jwtToken", URLEncoder.encode(new ObjectMapper().writeValueAsString(resultMap), "UTF-8"))
 					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
 					.path(request.getContextPath())
@@ -110,7 +110,7 @@ public class AuthController {
 		if(dto.getResult()==JwtDto.SUCCESS) {
 			Map<String, String> resultMap = new HashMap<>();
 			resultMap.put("accessToken", dto.getAccessToken());
-			resultMap.put("refreshMap", dto.getRefreshToken());
+			resultMap.put("refreshToken", dto.getRefreshToken());
 			ResponseCookie cookie = ResponseCookie.from("jwtToken", URLEncoder.encode(new ObjectMapper().writeValueAsString(resultMap), "UTF-8"))
 					.maxAge(ExpireProperties.REFRESH_EXPIRE_MIN)
 					.path(request.getContextPath())
