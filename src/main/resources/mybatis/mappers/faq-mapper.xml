@@ -19,7 +19,7 @@
 		select *
 		from (select A.*, ROWNUM r from
 		(select * from faq
-		order by faq_no) A
+		order by faq_no desc) A
 		)
 		where r >= #{start} and r &lt;= #{end}
 	</select>
@@ -30,7 +30,7 @@
         from (select A.*, ROWNUM r from
         (select * from faq
         where faq_title like '%'||#{key}||'%'
-        order by faq_no) A
+        order by faq_no desc) A
         )
         where r >= #{start} and
         r &lt;= #{end}
@@ -41,7 +41,7 @@
         select *
         from (select A.*, ROWNUM r from
         (select * from faq where faq_content like '%'||#{key}||'%'
-        order by faq_no) A
+        order by faq_no desc) A
         )
         where r >= #{start} and r &lt;= #{end}
     </select>
@@ -51,7 +51,7 @@
         select *
         from (select A.*, ROWNUM r from
         (select * from faq where faq_regdate like '%'||#{key}||'%'
-        order by faq_no) A
+        order by faq_no desc) A
         )
         where r >= #{start} and r &lt;= #{end}
     </select>
