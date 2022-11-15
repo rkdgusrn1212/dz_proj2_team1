@@ -16,6 +16,7 @@ public interface RestaurantService {
 
 	RestaurantDto getRestaurant(int restaurantNo);
 
-
+	void removeRestaurant(int restaurantNo);
+	void setRestaurant(Map<String, String> map);
 	
 }

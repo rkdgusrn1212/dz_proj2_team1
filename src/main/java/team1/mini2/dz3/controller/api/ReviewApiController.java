@@ -106,4 +106,10 @@ public class ReviewApiController {
 		
 		return reviewService.getReviewAvg(restaurantid);
 	}
+	
+	@GetMapping("/update/{reviewNo}")
+	public void getReviewUpdate(@PathVariable(required = true) int reviewNo) {
+		System.out.println("dsad");
+		reviewService.getReviewUpdate(reviewNo);
+	}
 }

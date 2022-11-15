@@ -8,5 +8,6 @@ public interface RestaurantDao {
 	int getCount(RestaurantDto dto);
 	RestaurantDto get(int restaurantNo);
 	void set(Map<String, String> map);
+	void remove(int restaurantNo);
 
 }

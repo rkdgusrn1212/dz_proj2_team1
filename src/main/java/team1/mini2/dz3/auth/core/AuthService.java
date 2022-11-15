@@ -30,4 +30,6 @@ public interface AuthService {
 	ValidDto validPwd(@NotBlank String authPwd);
 	ValidDto validCode(@NotNull @Valid EmailCodeDto emailCodeDto);
 	SignUpResultDto signUp(@NotNull @Valid SignUpDto signUpDto);
+	String getEncryptedPwd(@NotBlank String pwd);
+	boolean matchEncryptedPwd(@NotBlank String pwd, @NotBlank String encrypted);
 }

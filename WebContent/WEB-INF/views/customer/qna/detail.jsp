@@ -95,20 +95,19 @@
 
 <script>
 function load(){
+	
 	const id = "${id}";
-	console.log(id);
+
+    console.log("load");
 	$.ajax({
-     	  url : "${rootPath}/api/qna/"+id,   /* 수정 */
+     	  url : "${rootPath}/api/qna/"+id+"?pwd=${pwd}",   /* 수정 */
         type : "get",
         dataType : "json",
-        contentType: "application/json", 
-		// data : result,
         success : function(response) { //값을 받아오면
-        	
+        	if(response){
         	$('#qnatitle').text(response.qnaTitle);
         	$('#qnauser').text(response.qnaNonMember);
         	$('#content').text(response.qnaContent);
-        	console.log(String(response.qnaReply));
         	if(String(response.qnaReply)  != "null" )
         	{
         		$('#contentframe').append(
@@ -117,7 +116,13 @@ function load(){
                  "  style='background-color: white; font-size: 15px; font-style: oblique;'aria-label='readonly input example' readonly>"+response.qnaReply+"</textarea>"
                 );
         	}
+        	}else{
+        		location.replace("${rootPath}/customer/qna");
+        	}
 
+        },
+        error:()=>{
+            location.replace("${rootPath}/customer/qna");
         }
      }); //end ajax   
 	

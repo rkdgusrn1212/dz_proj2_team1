@@ -22,4 +22,5 @@ public interface ReviewDao {
 	void remove(int reviewNo);
 	void set(Map<String, String> map);
 	double getAvg(int id);
+	void update(int reviewNo);
 }

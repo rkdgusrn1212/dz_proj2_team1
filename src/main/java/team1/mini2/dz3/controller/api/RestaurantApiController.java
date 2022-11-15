@@ -103,4 +103,14 @@ public class RestaurantApiController {
 		}
 		return restaurantService.getRestaurantPage(page, dto);
 	}
+	
+	@PatchMapping("/{restaurantNo}")
+	public void setRestaurant(@PathVariable(required=true) String restaurantNo, @RequestBody(required=true) Map<String, String> map) {
+		map.put("restaurantNo", restaurantNo);
+		restaurantService.setRestaurant(map);
+	}
+	@DeleteMapping("/{restaurantNo}")
+	public void putRestaurant(@PathVariable(required=true)  int restaurantNo) {
+		restaurantService.removeRestaurant(restaurantNo);
+	}
 }

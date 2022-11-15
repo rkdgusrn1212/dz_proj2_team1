@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import lombok.NonNull;
 import team1.mini2.dz3.model.qna.QuestionWithNoAuthDto;
 import team1.mini2.dz3.model.qna.QuestionWithNoAuthWithIdDto;
+import team1.mini2.dz3.auth.core.AuthService;
 import team1.mini2.dz3.model.qna.PageVo;
 import team1.mini2.dz3.model.qna.QnaDao;
 import team1.mini2.dz3.model.qna.QnaDto;
@@ -29,6 +30,9 @@ public class QnaServiceImpl implements QnaService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private AuthService authService;
 
 
 	@Override
@@ -57,8 +61,14 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public QnaDto getQna(@Min(1) int qnaNo) {
-		return sqlSession.getMapper(QnaDao.class).get(qnaNo);
+	public QnaDto getQna(@Min(1) int qnaNo,@Size(min=1) String pwd) {
+		QnaDto dto = sqlSession.getMapper(QnaDao.class).get(qnaNo);
+		if(dto.getQnaPwd()!=null) {
+			if(!authService.matchEncryptedPwd(pwd, dto.getQnaPwd())) {
+				return null;
+			}
+		}
+		return dto;
 	}
 
 	
@@ -77,16 +87,18 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public boolean addQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthDto questionDto){
+		questionDto.setQnaPwd(authService.getEncryptedPwd(questionDto.getQnaPwd()));
 		return sqlSession.getMapper(QnaDao.class).addWithoutAuth(questionDto)>0;
 	}
 
 	@Override
-	public boolean addQuestionWtihAuth(@Valid @NotNull QuestionWithAuthDto questionDto){
+	public boolean addQuestionWithAuth(@Valid @NotNull QuestionWithAuthDto questionDto){
 		return sqlSession.getMapper(QnaDao.class).addWithAuth(questionDto)>0;
 	}
 
 	@Override
 	public boolean setQuestionWithoutAuth(@Valid @NotNull QuestionWithNoAuthWithIdDto questionDto){
+		questionDto.setQnaPwd(authService.getEncryptedPwd(questionDto.getQnaPwd()));
 		return sqlSession.getMapper(QnaDao.class).setQuestionWithoutAuth(questionDto)>0;
 	}
 	
@@ -95,7 +107,6 @@ public class QnaServiceImpl implements QnaService {
 		return sqlSession.getMapper(QnaDao.class).setQuestionWithAuth(questionDto)>0;
 	}
 
-	
 	@Override
 	public boolean removeQna(@Min(1) int qnaNo) {
 		return sqlSession.getMapper(QnaDao.class).remove(qnaNo)>0;

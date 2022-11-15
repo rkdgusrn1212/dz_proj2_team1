@@ -22,6 +22,24 @@
 const logout=()=>{
 	location.replace("${rootPath}/logout");
 }
+
+$(document).ready(()=>{
+	<sec:authorize access="isAuthenticated()">
+		$.ajax({
+			  url: "${rootPath}/api/member/"+${user},
+			  type:"get",
+			    dataType:"json",
+			    success : (member)=>{
+			        $("#header-user-link").text(member.memberName);
+			        }
+			     });
+
+		</sec:authorize>
+});
+
+const search = (keywork)=>{
+	location.href="${rootPath}/restaurant";
+}
 </script>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -39,21 +57,57 @@ const logout=()=>{
 				<form class="d-flex">
 					<input class="form-control me-sm-2" type="text"
 						placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+					<button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="search()">Search</button>
 				</form>
 
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item dropdown"><a class="nav-link"
 						id="search-adjust" data-bs-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> <img width="30px" height="30px"
-							src="${rootPath}/resources/img/search_tune.svg" /></a>
+							src="${root}/resources/img/search_tune.svg" /></a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a> <a
-								class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div></li>
+
+							<div class="container"
+								style="float: none; margin: 0 auto; width: 500px;">
+								<br>
+								<div class="row" style="float: none; margin: 0 auto;">
+									<div class="form-group" style="max-width: 1300px;">
+										<select class="form-select" id="location"
+											style="width: 100px; float: left; text-align: center;">
+											<option value="restaurantDong">동</option>
+											<option value="restaurantGu">구</option>
+											<option value="restaurantSi">시</option>
+										</select> <input type="text" id="value1"
+											style="width: 250px; float: left; margin-left: 15px;"
+											class="form-control" placeholder="다산동">
+									</div>
+								</div>
+								<hr>
+
+								<div class="row"
+									style="float: none; margin: 0 auto; width: 500px;">
+									<div class="form-group" style="max-width: 1300px;">
+										<select class="form-select" id="select"
+											style="width: 100px; float: left;">
+											<option value="restaurantCategory">분류</option>
+											<option value="restaurantName">식당명</option>
+											<option value="restaurantMenu">메뉴명</option>
+										</select>
+
+										<div
+											style="margin: auto; align-content: center; margin-bottom: 10px; text-align: center;">
+											<input type="text" id="value2"
+												style="width: 250px; float: left; margin-left: 15px;"
+												class="form-control"> <input type="button"
+												value="검색" class="btn btn-light"
+												style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;"
+												onclick="load()">
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</li>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item"><sec:authorize access="isAnonymous()">
@@ -62,7 +116,7 @@ const logout=()=>{
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
 								href="#" role="button" aria-haspopup="true"
-								aria-expanded="false"> ${user}</a>
+								aria-expanded="false" id="header-user-link"></a>
 								<div class="dropdown-menu" style="">
 									<a class="dropdown-item" href="#">마이페이지</a>
 									<div class="dropdown-divider"></div>

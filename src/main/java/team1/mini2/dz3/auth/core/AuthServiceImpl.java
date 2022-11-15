@@ -54,19 +54,19 @@ class AuthServiceImpl implements AuthService{
     }
 
     private JwtDto createJwtDto(AuthVo UserVo) { 
-        String userId = UserVo.getAuthId();
+        String id = Integer.toString(UserVo.getId());
         String authority = UserVo.getAuthAuthority();
         return JwtDto.builder()
                 .grantType(JwtProperties.TOKEN_PREFIX)
-                .accessToken(jwtIssuer.createAccessToken(userId, authority))
-                .refreshToken(jwtIssuer.createRefreshToken(userId, authority))
+                .accessToken(jwtIssuer.createAccessToken(id, authority))
+                .refreshToken(jwtIssuer.createRefreshToken(id, authority))
                 .result(JwtDto.SUCCESS)
                 .build();
     }
 
     @Override
     public JwtDto login(AuthDto authDto) {
-        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).get(authDto.getAuthId());
+        AuthVo UserVo = sqlSession.getMapper(AuthDao.class).getById(authDto.getAuthId());
         if(UserVo==null) {
         	return new JwtDto(null, null, null, JwtDto.USER_ERROR);
         }
@@ -100,7 +100,7 @@ class AuthServiceImpl implements AuthService{
 
 	@Override
 	public ValidDto validId(@NotBlank String authId) {
-		return new ValidDto(sqlSession.getMapper(AuthDao.class).get(authId)==null);
+		return new ValidDto(sqlSession.getMapper(AuthDao.class).getById(authId)==null);
 	}
 
 	@Override
@@ -162,5 +162,15 @@ class AuthServiceImpl implements AuthService{
 		}else {
 			return new SignUpResultDto(SignUpResultDto.FAIL);	
 		}
+	}
+
+	@Override
+	public String getEncryptedPwd(@NotBlank String pwd) {
+		return passwordEncoder.encode(pwd);
+	}
+
+	@Override
+	public boolean matchEncryptedPwd(@NotBlank String pwd, @NotBlank String encrypted) {
+		return passwordEncoder.matches(pwd, encrypted);
 	}
 }		

@@ -19,7 +19,6 @@ import com.auth0.jwt.interfaces.JWTVerifier;
 @Component
 class JwtAuthenticationProvider implements AuthenticationProvider {
 
-
 	private Collection<? extends GrantedAuthority> createGrantedAuthorities(DecodedJWT jwt) {
 		List<String> roles = jwt.getClaim(JwtProperties.KEY_ROLES).asList(String.class);
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

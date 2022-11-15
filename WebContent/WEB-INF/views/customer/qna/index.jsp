@@ -2,6 +2,9 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authentication var="user" property="principal" />
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -20,29 +23,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/lkc.css">
 
-<!-- 부트스트랩 연결 -->
-<!-- <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous"> -->
-
-<!-- 반응형 웹 연결 -->
- <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css"
-	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous">
-
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="${rootPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/bootstrap-icons.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/prism-okaidia.css">
-<link rel="stylesheet"
-	href="${rootPath}/resources/css/custom.min.css">
 
 </head>
 
@@ -78,26 +61,9 @@
 						};
 						const americanDateTime = new Intl.DateTimeFormat(
 								'en-US', options).format;
-						console.log(americanDateTime(date));
-						//테이블 생성
-						if (response[idx].qnaWriter == 0) {
-							$("#test").append(
-									"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-									
-									+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-									+ "<td>"+ response[idx].qnaContent+ "</td>"
-									+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-									+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-							/* console.log("비회원 데이터 들어감"); */
-						} else {
-							$("#test").append(
-									"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-									+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-									+ "<td>"+ response[idx].qnaContent+ "</td>"
-									+ "<td>"+ response[idx].qnaWriter+ "</td>"
-									+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-							/* console.log("회원 데이터 들어감"); */
-						}
+
+                        appendList(response[idx], americanDateTime(date));
+                          
 					}
 				}
 			}); //end ajax	
@@ -117,47 +83,47 @@
 							if (count <= 10) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' >&laquo;</a></li>"
-														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'> 1</a></li>"
 														+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 10 && count <= 20) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
 														+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 20 && count <= 30) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'> 3</a></li>"
 														+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 30 && count <= 40) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item active'id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item'id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item'id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item'id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
 														+"<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 40 && count <= 50) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
-														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"
+														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"
 														+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
-														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"
-														+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()';> &raquo;</a></li>");
+														+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' onclick='PageClick(this);'> 5</a></li>"
+														+ "<li class='page-item' id='right'><a class='page-link' onclick='RightPageChange()';> &raquo;</a></li>");
 							}
 						}
 					}); //end ajax
@@ -251,23 +217,7 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									console.log(americanDateTime(date));
-									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-														+ "<td>"+ response[idx].qnaContent+ "</td>"
-														+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-														+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter	+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									}
+                                    appendList(response[idx], americanDateTime(date));
 								}
 							}
 						}); //end ajax	
@@ -299,34 +249,61 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									console.log(americanDateTime(date));
 									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter	+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-									}
+                                    appendList(response[idx], americanDateTime(date));
 								}
 							}
 				   }); //end ajax	
 			}
 		}//end pageclick();
+		const appendList = (item, timeStr)=>{
+		if (item.qnaWriter == 0) {
+            if(item.qnaPublic=="T"){
+                $("#test").append(
+                        "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                        + "<td><a href = '${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                + "<td>"+ item.qnaContent+ "</td>"
+                                + "<td>"+ item.qnaNonMember   + "</td>"
+                                + "<td>"+ timeStr+ "</td>"+ "</tr>") 
+            }else{
+                $("#test").append(
+                        "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                        + "<td><a href ='javascript:showModal("+item.qnaNo+")'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                + "<td>"+ item.qnaContent+ "</td>"
+                                + "<td>"+  item.qnaNonMember  + "</td>"
+                                + "<td>"+ timeStr+ "</td>"+ "</tr>") 
+            }            
+
+       } else {
+           $.ajax({
+               url:"${rootPath}/api/member/"+item.qnaWriter,
+               type:"get",
+               async:false,
+               dataType:"json",
+               success:(member)=>{
+                   if(item.qnaWriter == "${user}"){
+                       $("#test").append(
+                               "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                               + "<td><a href = '${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                               + "<td>"+ item.qnaContent+ "</td>"
+                               + "<td>"+ member.memberName+"("+member.memberId+")" + "</td>"
+                               + "<td>"+ timeStr+ "</td>"+ "</tr>")
+                   }else{
+                       $("#test").append(
+                                       "<tr>"+ "<td scope='row'>"+ item.qnaNo+ "</td>"
+                                       + "<td><a href ='${rootPath}/customer/qna/detail?id="+item.qnaNo+"'>"+ item.qnaTitle+  "</td>" /* 번호와 제목에 하이퍼링크 */
+                                       + "<td>"+ item.qnaContent+ "</td>"
+                                       + "<td>"+ member.memberName+"("+member.memberId+")" + "</td>"
+                                       + "<td>"+ timeStr+ "</td>"+ "</tr>")
+                  }
+               }
+           }); 
+       }
+		}
 		// --------------- 검색 -------------------	
 		function search() {
 			const optdata = $("#searchopt option:selected").val(); //선택값 저장
 			const keydata = $("#searchdata").val(); //텍스트칸에 입력한 값 저장
-			//console.log(optdata); //제목
-			//console.log(keydata); //title11
 			$.ajax({
 						url : "${rootPath}/api/qna/page/1",
 						type : "get",
@@ -337,7 +314,6 @@
 						dataType : "JSON",
 						contentType : "applicaton/json; charset=utf-8",
 						success : function(response) { //값을 받아오면
-							/* console.log(contentKey); */
 							$("#test > tbody").empty(); //일단 비워줌.
 							$("#test").append(
 											"<tr class='table-primary'><th scope='col'>번호</th>"
@@ -354,25 +330,9 @@
 								};
 								const americanDateTime = new Intl.DateTimeFormat(
 										'en-US', options).format;
-								/* console.log(americanDateTime(date)); */
 								//테이블 생성
-								if (response[idx].qnaWriter == 0) {
-									$("#test").append(
-													"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-													+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-															+ "<td>"+ response[idx].qnaContent+ "</td>"
-															+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-															+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-									/* console.log("비회원 데이터 들어감"); */
-								} else {
-									$("#test").append(
-													"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-													+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-															+ "<td>"+ response[idx].qnaContent	+ "</td>"
-															+ "<td>"+ response[idx].qnaWriter+ "</td>"
-															+ "<td>"+ americanDateTime(date)+ "</td>" + "</tr>")
-									/* console.log("회원 데이터 들어감"); */
-								}//end if
+
+                                appendList(response[idx], americanDateTime(date));
 							}//end for
 						}
 					}); //end ajax	
@@ -386,55 +346,53 @@
 						dataType : "JSON",
 						contentType : "applicaton/json; charset=utf-8",
 						success : function(response) {
-							console.log("count값 받아옴");
 							const count = parseInt(response);
-							console.log(count);
 							$("#button").empty(); //비운다
 							if (count <= 10) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link'>&laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
 														+ "<li class='page-item' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 10 && count <= 20) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
 														+ "<li class='page-item' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 20 && count <= 30) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
 														+ "<li class='page-item' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 30 && count <= 40) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
 														+
 														"<li class='page-item' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else if (count > 40 && count <= 50) {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
-														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'> 5</a></li>"
 														+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 							} else {
 								$("#button").append(
 												"<li class='page-item disabled' id='left'><a class='page-link' > &laquo;</a></li>"
-														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'> 1</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'> 2</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'> 3</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'> 4</a></li>"
-														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'> 5</a></li>"
-														+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()';> &raquo;</a></li>");
+														+ "<li class='page-item' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'> 1</a></li>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'> 2</a></li>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'> 3</a></li>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'> 4</a></li>"
+														+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' onclick='PageClick(this);'> 5</a></li>"
+														+ "<li class='page-item' id='right'><a class='page-link'  onclick='RightPageChange()';> &raquo;</a></li>");
 								}
 					  	}
 				})
@@ -443,7 +401,6 @@
 		function RightPageChange() {
 			const optdata = $("#searchopt option:selected").val();
 			const keydata = $("searchdata").val();
-			//console.log(keydata);
 			const tb = document.getElementById("firstbtn"); //page 1
 			var start = parseInt(parseInt(tb.innerText) / 5); // 0
 			var count;
@@ -459,102 +416,95 @@
 													
 								count = parseInt(response.count); //문자를 정수형 숫자로 변환해줌
 								
-								
-								//console.log("여기입니다.");
-								//console.log(count);
-				
-								
 								count -= parseInt((start + 1) * 50);
-								console.log(count);
-								console.log(start);
+								
 								btnindex = (start + 1) * 5;
-								console.log((start + 1) * 5);
 								$("#button").empty();
 								if (count <= 10) {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()'; >&laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link' onclick='LeftPageChange()'; >&laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
 															+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 								} else if (count > 10 && count <= 20) {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link'onclick='LeftPageChange()';  > &laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
-															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 2)
 															+ "</a></li>"
 															+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 								} else if (count > 20 && count <= 30) {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link' onclick='LeftPageChange()';  > &laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
-															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 2)
 															+ "</a></li>"
-															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 3)
 															+ "</a></li>"
 															+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 								} else if (count > 30 && count <= 40) {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link'  onclick='LeftPageChange()';  > &laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
-															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 2)
 															+ "</a></li>"
-															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 3)
 															+ "</a></li>"
-															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 4)
 															+ "</a></li>"
 															+
 															"<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 								} else if (count > 40 && count <= 50) {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link'  onclick='LeftPageChange()';  > &laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
-															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 2)
 															+ "</a></li>"
-															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 3)
 															+ "</a></li>"
-															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 4)
 															+ "</a></li>"
-															+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' onclick='PageClick(this);'>"
 															+ (btnindex + 5)
 															+ "</a></li>"
 															+ "<li class='page-item disabled' id='right'><a class='page-link' > &raquo;</a></li>");
 								} else {
 									$("#button").append(
-													"<li class='page-item' id='left'><a class='page-link' href ='#' onclick='LeftPageChange()';  > &laquo;</a></li>"
-															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+													"<li class='page-item' id='left'><a class='page-link' onclick='LeftPageChange()';  > &laquo;</a></li>"
+															+ "<li class='page-item active' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 1)
 															+ "</a></li>"
-															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 2)
 															+ "</a></li>"
-															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'>"
 															+ (btnindex + 3)
 															+ "</a></li>"
-															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 4)
 															+ "</a></li>"
-															+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+															+ "<li class='page-item' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'>"
 															+ (btnindex + 5)
 															+ "</a></li>"
-															+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()'; > &raquo;</a></li>");
+															+ "<li class='page-item' id='right'><a class='page-link' onclick='RightPageChange()'; > &raquo;</a></li>");
 								}//end if
 							}
 						})//end ajax
@@ -566,7 +516,6 @@
 							dataType : "JSON",
 							contentType : "applicaton/json; charset=utf-8",
 							success : function(response) { //값을 받아오면
-								/* console.log(contentKey); */
 								$("#test > tbody").empty(); //일단 비워줌.
 								$("#test").append(
 												"<tr class='table-primary'><th scope='col'>번호</th>"
@@ -584,25 +533,8 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									/* console.log(americanDateTime(date)); */
 									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-														+ "<td>"+ response[idx].qnaContent+ "</td>"
-														+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-														+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-										/* console.log("비회원 데이터 들어감"); */
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-										/* console.log("회원 데이터 들어감"); */
-									}//end if
+                                    appendList(response[idx], americanDateTime(date));
 								}//end for
 							},//END SUCCESS
 						})//end ajax
@@ -612,7 +544,6 @@
 		function LeftPageChange() {
 			const optdata = $("#searchopt option:selected").val();
 			const keydata = $("searchdata").val();
-			//console.log(keydata);
 			const tb = document.getElementById("firstbtn");
 			var start = parseInt(parseInt(tb.innerText) / 5);
 			var count;
@@ -624,16 +555,12 @@
 							dataType : "JSON",
 							contentType : "applicaton/json; charset=utf-8",
 							success : function(response) {
-								console.log(response);
 								count = parseInt(response); //문자를 정수형 숫자로 변환해줌
 								count -= parseInt((start + 1) * 50);
-								console.log(count);
-								console.log(start);
 								btnindex = (start - 1) * 5;
 								if (btnindex < 0) {
 									btnindex = 0;
 								}
-								console.log((start - 1) * 5);
 								$("#button").empty();
 								//
 								if (btnindex == 0) {
@@ -644,22 +571,22 @@
 													"<li class='page-item' id='left'><a class='page-link' onclick='LeftPageChange()';> &laquo;</a></li>");
 								}
 								$("#button").append(
-												"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+												"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'>"
 														+ (btnindex + 1)
 														+ "</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 2)
 														+ "</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' onclick='PageClick(this);'>"
 														+ (btnindex + 3)
 														+ "</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' onclick='PageClick(this);'>"
 														+ (btnindex + 4)
 														+ "</a></li>"
-														+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 5)
 														+ "</a></li>"
-														+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()'; > &raquo;</a></li>");
+														+ "<li class='page-item' id='right'><a class='page-link' onclick='RightPageChange()'; > &raquo;</a></li>");
 							}//end success
 						});//end ajax
 				var start = parseInt(parseInt(tb.innerText) / 5);
@@ -670,7 +597,6 @@
 							dataType : "JSON",
 							contentType : "applicaton/json; charset=utf-8",
 							success : function(response) { //값을 받아오면
-								/* console.log(contentKey); */
 								$("#test > tbody").empty(); //일단 비워줌.
 								$("#test")
 										.append(
@@ -689,25 +615,7 @@
 									};
 									const americanDateTime = new Intl.DateTimeFormat(
 											'en-US', options).format;
-									/* console.log(americanDateTime(date)); */
-									//테이블 생성
-									if (response[idx].qnaWriter == 0) {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaNonMember+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-										/* console.log("비회원 데이터 들어감"); */
-									} else {
-										$("#test").append(
-														"<tr>"+ "<td scope='row'>"+ response[idx].qnaNo	+ "</td>"
-														+ "<td><button class='' style='height: 30px;width: 100px;background-color:transparent; color:orange;font-size:20px; border: none;' data-bs-toggle='modal' data-bs-target='#modalimg' data-bs-whatever='@mdo' id='"+response[idx].qnaNo+"' onclick = 'qnanosubmit(this.id)' >"+ response[idx].qnaTitle+  "</button></td>" /* 번호와 제목에 하이퍼링크 */
-																+ "<td>"+ response[idx].qnaContent+ "</td>"
-																+ "<td>"+ response[idx].qnaWriter+ "</td>"
-																+ "<td>"+ americanDateTime(date)+ "</td>"+ "</tr>")
-										/* console.log("회원 데이터 들어감"); */
-									}//end if
+                                    appendList(response[idx], americanDateTime(date));
 								}//end for
 							},//END SUCCESS
 						});//end ajax
@@ -723,7 +631,6 @@
 							contentType : "applicaton/json; charset=utf-8",
 							//success
 							success : function(response) {
-								console.log(response);
 								count = parseInt(response); //문자를 정수형 숫자로 변환해줌
 								count -= parseInt((start + 1) * 50);
 								/* console.log(count);
@@ -732,7 +639,6 @@
 								if (btnindex < 0) {
 									btnindex = 0;
 								}
-								console.log((start - 1) * 5);
 								$("#button").empty(); //비운다
 								//
 								if (btnindex == 0) {
@@ -743,22 +649,22 @@
 													"<li class='page-item' id='left'><a class='page-link' onclick='LeftPageChange()';> &laquo;</a></li>");
 								}
 								$("#button").append(
-												"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn' href ='#' onclick='PageClick(this);'>"
+												"<li class='page-item ' id='firstli'><a class='page-link' id = 'firstbtn' onclick='PageClick(this);'>"
 														+ (btnindex + 1)
 														+ "</a></li>"
-														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='secondli'><a class='page-link' id = 'secondbtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 2)
 														+ "</a></li>"
-														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='thirdli'><a class='page-link' id = 'thirdbtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 3)
 														+ "</a></li>"
-														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item' id='fourthli'><a class='page-link' id = 'fourthbtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 4)
 														+ "</a></li>"
-														+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn' href ='#' onclick='PageClick(this);'>"
+														+ "<li class='page-item active' id='quinaryli'><a class='page-link' id = 'quinarybtn'  onclick='PageClick(this);'>"
 														+ (btnindex + 5)
 														+ "</a></li>"
-														+ "<li class='page-item' id='right'><a class='page-link' href ='#' onclick='RightPageChange()'; > &raquo;</a></li>");
+														+ "<li class='page-item' id='right'><a class='page-link' onclick='RightPageChange()'; > &raquo;</a></li>");
 							}//end success
 						}); //end ajax
 				var start = parseInt(parseInt(tb.innerText) / 5);
@@ -773,7 +679,6 @@
 					dataType : "JSON",
 					contentType : "applicaton/json; charset=utf-8",
 					success : function(response) { //값을 받아오면
-						/* console.log(contentKey); */
 						$("#test > tbody").empty(); //일단 비워줌.
 						$("#test").append(
 								"<tr class='table-primary'><th scope='col'>번호</th>"
@@ -790,6 +695,7 @@
 							};
 							const americanDateTime = new Intl.DateTimeFormat(
 									'en-US', options).format;
+                            appendList(response[idx], americanDateTime(date));
 						}
 					},
 				}); //end ajax
@@ -800,7 +706,7 @@
 		
 	
 	</script>
-<script>
+	<script>
 function writetext(){
 	
 	 location.href = "${rootPath}/customer/qna/form?id=";
@@ -815,16 +721,18 @@ function writetext(){
 	<br>
 	<br>
 	<div class="container">
-		<div class="row" style="margin-bottom:  10px; text-align: left; width: 1200px; text-align: left; float: left">
+		<div class="row"
+			style="margin-bottom: 10px; text-align: left; width: 1200px; text-align: left; float: left">
 			<span>&nbsp;</span>
 		</div>
-		<div class="row" style="margin-bottom:  10px; text-align: left; width: 120px; text-align: left;">
-			<button type="button" class="btn btn-primary" onclick = "writetext()" >글쓰기</button>
+		<div class="row"
+			style="margin-bottom: 10px; text-align: left; width: 120px; text-align: left;">
+			<button type="button" class="btn btn-primary" onclick="writetext()">글쓰기</button>
 		</div>
 	</div>
-	
+
 	<!-- 테이블 생성 부트스트랩-->
-	
+
 	<div class="test">
 		<table class="table table-hover" id="test">
 			<thead>
@@ -842,7 +750,7 @@ function writetext(){
 
 	<!-- 페이지 버튼 -->
 	<div>
-		<ul class="pagination" id="button"style="justify-content: center;" >
+		<ul class="pagination" id="button" style="justify-content: center;">
 		</ul>
 	</div>
 	<br>
@@ -851,95 +759,85 @@ function writetext(){
 
 	<form name="searchform" method="GET">
 
-		<div class="form-group" style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
+		<div class="form-group"
+			style="float: none; margin: 0 auto; width: 525px; margin-bottom: 50px;">
 			<select class="form-select" id="searchopt"
-				style="width: 100px; float:left;">
+				style="width: 100px; float: left;">
 
 				<option value="titleKey">제목</option>
 				<option value="contentKey">내용</option>
-			</select>
-
-				<input type="text" id="searchdata" style="width: 300px; float: left; height: 37px; margin-left: 15px;">
-				<input type="button" value="검색" class="btn btn-light" style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;" onclick="search()">
-				<!-- search를 누르면! --> <br>
-			</div>
+			</select> <input type="text" id="searchdata"
+				style="width: 300px; float: left; height: 37px; margin-left: 15px;">
+			<input type="button" value="검색" class="btn btn-light"
+				style="background-color: #d3d3d3; width: 70px; float: left; margin-left: 15px;"
+				onclick="search()">
+			<!-- search를 누르면! -->
+			<br>
+		</div>
 
 	</form>
-	
-	
-	
-			
-		<div class="modal modal fade" id="modalimg" tabindex="-1" aria-labelledby="mdalLabelimg" aria-hidden="true" >
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="modalLabelimg">NOTICE</h5>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						      </div>
-						      <div class="modal-body">
-						      	<div class="container" style="float: none; margin: 0 auto; height:200px;width:420px;" >
-						      		<div class = "col" style="float: none; margin: 0 auto; width: 400px; height: 200px;" >
-										<div class="row" style="float: left; margin: 0 auto; width:420px" >	
-											<span style="font-size: 20px; text-align: center; margin-bottom: 30px; margin-top: 60px;  width:420px""><b>비밀글 입니다.</b></span>		
-											<span style="font-size: 15px;" ><b>비밀번호를 입력하세요</b></span>
-											<input type="password" style="background-color: white; width:420px;" class="form-control" id="passwordmatch" aria-describedby=" basic-addon3">		    
-							        		
-							         	</div>
-							         	
-						         	</div>
-						        </div>       
-						      </div>
-						      <div class="modal-footer">
-						      		<button type="button" class="btn btn-primary" onclick="pwmatch()" data-bs-dismiss="modal">제출하기</button>
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-     						 </div>
-						      
-						    </div>
-						  </div>
+
+
+
+
+	<div class="modal fade" tabindex="-1"
+		aria-labelledby="mdalLabelimg" aria-hidden="true" id="pwd-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalLabelimg">Q&amp;A</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="container"
+						style="float: none; margin: 0 auto; height: 200px; width: 420px;">
+						<div class="col"
+							style="float: none; margin: 0 auto; width: 400px; height: 200px;">
+							<div class="row"
+								style="float: left; margin: 0 auto; width: 420px">
+								<span
+									style="font-size: 20px; text-align: center; margin-bottom: 30px; margin-top: 60px; width: 420px""><b>비밀글
+										입니다.</b></span> <span style="font-size: 15px;"><b>비밀번호를 입력하세요</b></span>
+								<input type="password"
+									style="background-color: white; width: 420px;"
+									class="form-control" id="passwordmatch"
+									aria-describedby=" basic-addon3">
+
+							</div>
+
 						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="pwmatch()"
+						data-bs-dismiss="modal">제출하기</button>
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 
 
-<script type="text/javascript">
+<script>
 let qnonotemp;
-
+let clickedId;
 
 function qnanosubmit(qnono){
 	qnonotemp = qnono;
-	console.log(qnonotemp);
 }
-function pwmatch(){
-	
-	$.ajax({
-     	  url : "${rootPath}/api/qna/"+qnonotemp,   /* 수정 */
-        type : "get",
-        dataType : "json",
-        contentType: "application/json; charset=utf-8", 
-		// data : result,
-        success : function(response) { //값을 받아오면
-        	
-        	
-        	const result = $('#passwordmatch').val();
-        	const qnopwd = response.qnaPwd;
-        	
-        	console.log(result);
-        	console.log(qnopwd);
-        	console.log(qnonotemp);
-	
-        	// 삭제 필요 비밀번호 비교 - 서버 요청-
-        	if(qnopwd.localeCompare(result))
-        	{
-        		location.href = "${rootPath}/customer/qna/detail?id="+qnonotemp;
-        	
-        	}
-        }
-        
-     }); //end ajax 
-	
+const pwmatch = ()=>{
+	location.href = "${rootPath}/customer/qna/detail?id="+clickedId+"&pwd="+$("#passwordmatch").val();
 }
 
-
+const showModal = (id)=>{
+	clickedId = id;
+    $("#pwd-modal").modal("show");
+}
 
 function listpage() {
 	   location.href = "${rootPath}/customer/qna";
